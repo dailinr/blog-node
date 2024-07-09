@@ -1,0 +1,121 @@
+.header{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    /* border: 2px solid #fafafa10;  */
+}
+/* .glass-efecto{
+    background-color: #7c7c7c1c;
+    backdrop-filter: blur(0.4rem);
+    -webkit-backdrop-filter: blur(0.4rem);
+} */
+
+.encabezado{
+    width: 100%;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 30px;
+}
+.logo{
+    width: 200px;
+}
+.image-logo{
+    background: url('../../../public/TecnoPulse-removebg-preview.png');
+    width: 100%;
+    height: 60px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    image-rendering: -webkit-optimize-contrast;
+}
+.iconos{
+    display: flex;
+    column-gap: 15px;
+}
+.iconos > div{
+    border-radius: 50%;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    -ms-border-radius: 50%;
+    -o-border-radius: 50%;
+    width: 35px;
+    height: 35px;
+    border: 1px solid rgba(155, 155, 155, 0.767);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.iconos .bx{
+    font-size: large;
+    color: rgb(71, 71, 71)
+}
+.iconos-izq{
+    width: 100px
+}
+.iconos-izq .bx{
+    font-size: larger;
+    font-weight: bold;
+    color: rgb(71, 71, 71)
+}
+.icon-perfil{
+    background: url(../../../public/icon-perfil.jpg) no-repeat center;
+    background-size: cover;
+    border: none !important;
+}
+
+.header > div p{
+    font-size: medium;
+    font-weight: 500;
+    /* color: white; */
+    transition: all 500ms;
+    transition:  transform 200ms;
+    -webkit-transition:  transform 200ms;
+    -moz-transition:  transform 200ms;
+    -ms-transition:  transform 200ms;
+    -o-transition:  transform 200ms;
+}
+
+
+.navegacion{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    column-gap: 25px;
+    background-color: #ebebeb;
+    width: 100%;
+}
+.navegacion > section{
+    padding: 10px;
+}
+.navegacion > section:hover p,
+.navegacion > section:active p{
+    font-weight: 500;
+    transform: scale(1.03);
+    cursor: pointer;
+    -webkit-transform: scale(1.03);
+    -moz-transform: scale(1.03);
+    -ms-transform: scale(1.03);
+    -o-transform: scale(1.03);
+}
+
+.buscador input{
+    border: 0;
+    outline: 0;
+    background-color: #61616181;
+    padding: 5px;
+    border-radius: 8px;
+    -webkit-border-radius: 8px;
+    -moz-border-radius: 8px;
+    -ms-border-radius: 8px;
+    -o-border-radius: 8px;
+    cursor: text;
+    margin-right: 15px;
+}
+
+.buscador input::placeholder {
+    color: #bbb7b7; /* Cambia este valor al color deseado */
+    opacity: 1; /* Asegura que el color del placeholder sea completamente opaco */
+}
