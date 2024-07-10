@@ -2,12 +2,12 @@
 import React, { useEffect, useState } from 'react';
 import './vista.css';
 
-const dataCover = [
+const dataArticle = [
   {
     id: 1,
     etiqueta: 'trabajo',
     titulo: 'El impacto de la tecnología actual en el trabajo.',
-    texto: 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Deleniti esse possimus quibusdam mollitia. Maiores provident, sunt quo ipsa, sit quae iure explicabo in officiis, adipisci nam ducimus voluptatem perspiciatis molestiae!',
+    texto: 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Deleniti esse possimus quibusdam mollitia. Maiores provident.',
     nombre_autor: 'Arturo Vidal',
     fecha_edicion: 'Agosto 20, 2023',
     imagen: '../../../public/pexels-photo-5052875.jpeg'
@@ -16,9 +16,17 @@ const dataCover = [
     id: 2,
     etiqueta: 'tecnología',
     titulo: 'Facebook enfrenta demanda por violación a la privacidad de sus usuarios.',
-    texto: 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Deleniti esse possimus quibusdam mollitia. Maiores provident, sunt quo ipsa, sit quae iure explicabo in officiis, adipisci nam ducimus voluptatem perspiciatis molestiae!',
+    texto: 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Deleniti esse possimus quibusdam mollitia. Maiores provident.',
     nombre_autor: 'James Rodriguez',
     fecha_edicion: 'Julio 20, 2023',
+  },
+  {
+    id: 3,
+    etiqueta: 'internacional',
+    titulo: 'Palestina es nuevamente bombardeado por Israel.',
+    texto: 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Deleniti esse possimus quibusdam mollitia. Maiores provident.',
+    nombre_autor: 'Falcao Garcia',
+    fecha_edicion: 'Marzo 20, 2024',
   },
 ];
 
@@ -27,18 +35,18 @@ const Vista = () => {
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setActualSlide((prevSlide) => (prevSlide === dataCover.length - 1 ? 0 : prevSlide + 1));
+      setActualSlide((prevSlide) => (prevSlide === dataArticle.length - 1 ? 0 : prevSlide + 1));
     }, 5000); // cambia cada 3 segundos
 
     return () => clearInterval(interval);
   }, []);
 
   const nextSlide = () => {
-    setActualSlide((prevSlide) => (prevSlide === dataCover.length - 1 ? 0 : prevSlide + 1));
+    setActualSlide((prevSlide) => (prevSlide === dataArticle.length - 1 ? 0 : prevSlide + 1));
   };
 
   const prevSlide = () => {
-    setActualSlide((prevSlide) => (prevSlide === 0 ? dataCover.length - 1 : prevSlide - 1));
+    setActualSlide((prevSlide) => (prevSlide === 0 ? dataArticle.length - 1 : prevSlide - 1));
   };
 
   return (
@@ -46,8 +54,10 @@ const Vista = () => {
 
       <div className='slider'>
         <div className="slides-container" style={{ transform: `translateX(-${actualSlide * 100}%)` }}>
-          {dataCover.map((portadas) => (
+
+          {dataArticle.map((portadas) => (
             <div key={portadas.id} className="portada">
+
               <div className="contenido-portada">
                 
                 <div className="etiqueta">
@@ -65,15 +75,17 @@ const Vista = () => {
                   </div>
                   <div className="fecha-edicion">{portadas.fecha_edicion}</div>
                 </div>
+
               </div>
             </div>
           ))}
         </div>
+
         <button className='prev' onClick={prevSlide}>&#10094;</button>
         <button className='next' onClick={nextSlide}>&#10095;</button>
       
         <div className="indicators">
-          {dataCover.map((_, index) => (
+          {dataArticle.map((_, index) => (
             <span
               key={index}
               className={`indicator ${index === actualSlide ? 'active' : ''}`}
@@ -94,109 +106,36 @@ const Vista = () => {
         </div>
 
         <div className="content-tendencias">
-          <div className="card">
-            {/* <div className="content-image"> */}
+        {dataArticle.map((cards) => (
+        
+        
+          <div key={cards.id} className="card">
+
               <div className="image-card">
-                <div className="label-card">Biblioteca</div>
+                <div className="label-card">{cards.etiqueta}</div>
               </div>
-            {/* </div> */}
+
               <div className="contenido-card">
                 <div className="time-update"></div>
                 <div className="titulo-card">
-                  <h4>5 simple keys to healping your partner feel heard</h4>
+                  <h4>{cards.titulo}</h4>
                 </div>
                 <div className="text-card">
-                  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Necessitatibus, aperiam veritatis.
+                  {cards.texto}
                 </div>
 
                 <div className="datos-autor">
                   <div className="icon-autor icon-card"></div>
                   <div >
-                    <p className="nombre-card">Dailin Romero</p> 
-                    <p className="fecha-card">Agosto 2, 2024</p>
+                    <p className="nombre-card">{cards.nombre_autor}</p> 
+                    <p className="fecha-card">{cards.fecha_edicion}</p>
                   </div>
                 </div>
               </div>
             
           </div>
 
-          <div className="card">
-            {/* <div className="content-image"> */}
-              <div className="image-card">
-                <div className="label-card">Biblioteca</div>
-              </div>
-            {/* </div> */}
-              <div className="contenido-card">
-                <div className="time-update"></div>
-                <div className="titulo-card">
-                  <h4>5 simple keys to healping your partner feel heard</h4>
-                </div>
-                <div className="text-card">
-                  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Necessitatibus, aperiam veritatis.
-                </div>
-
-                <div className="datos-autor">
-                  <div className="icon-autor icon-card"></div>
-                  <div >
-                    <p className="nombre-card">Dailin Romero</p> 
-                    <p className="fecha-card">Agosto 2, 2024</p>
-                  </div>
-                </div>
-              </div>
-            
-          </div>
-
-          <div className="card">
-            {/* <div className="content-image"> */}
-              <div className="image-card">
-                <div className="label-card">Biblioteca</div>
-              </div>
-            {/* </div> */}
-              <div className="contenido-card">
-                <div className="time-update"></div>
-                <div className="titulo-card">
-                  <h4>5 simple keys to healping your partner feel heard</h4>
-                </div>
-                <div className="text-card">
-                  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Necessitatibus, aperiam veritatis.
-                </div>
-
-                <div className="datos-autor">
-                  <div className="icon-autor icon-card"></div>
-                  <div >
-                    <p className="nombre-card">Dailin Romero</p> 
-                    <p className="fecha-card">Agosto 2, 2024</p>
-                  </div>
-                </div>
-              </div>
-            
-          </div>
-
-          <div className="card">
-            {/* <div className="content-image"> */}
-              <div className="image-card">
-                <div className="label-card">Biblioteca</div>
-              </div>
-            {/* </div> */}
-              <div className="contenido-card">
-                <div className="time-update"></div>
-                <div className="titulo-card">
-                  <h4>5 simple keys to healping your partner feel heard</h4>
-                </div>
-                <div className="text-card">
-                  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Necessitatibus, aperiam veritatis.
-                </div>
-
-                <div className="datos-autor">
-                  <div className="icon-autor icon-card"></div>
-                  <div >
-                    <p className="nombre-card">Dailin Romero</p> 
-                    <p className="fecha-card">Agosto 2, 2024</p>
-                  </div>
-                </div>
-              </div>
-            
-          </div>
+        ))}
 
         </div>
       </div>

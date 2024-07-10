@@ -4,6 +4,7 @@
     justify-content: space-between;
     align-items: center;
     /* border: 2px solid #fafafa10;  */
+    position: relative;
 }
 /* .glass-efecto{
     background-color: #7c7c7c1c;
@@ -64,6 +65,7 @@
     background: url(../../../public/icon-perfil.jpg) no-repeat center;
     background-size: cover;
     border: none !important;
+    position: relative;
 }
 
 .header > div p{
@@ -118,4 +120,8 @@
 .buscador input::placeholder {
     color: #bbb7b7; /* Cambia este valor al color deseado */
     opacity: 1; /* Asegura que el color del placeholder sea completamente opaco */
+}
+
+.iconos > div, .iconos-izq .bx{
+    cursor: pointer;
 }

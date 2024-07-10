@@ -1,7 +1,17 @@
-import React from 'react'
+import React, { useState } from 'react'
 import './header.css'
+import MenuUser from '../modals/MenuUser'
 
 const Header = () => {
+    const [menuUsuario, setMenuUsuario] = useState(false);
+
+    const mostrarOpcUser = () => {
+        setMenuUsuario(!menuUsuario);
+        console.log("menu usuario: " + menuUsuario);
+    };
+
+    
+
   return (
     <div className='header '>
 
@@ -20,7 +30,10 @@ const Header = () => {
                 <div className="icon-noti">
                     <i class='bx bxs-bell'></i>
                 </div>
-                <div className='icon-perfil'></div>
+                <div className='icon-perfil'
+                    onClick={mostrarOpcUser} >        
+                    {menuUsuario && <MenuUser/>}
+                </div>
             </div>
             
         </div>

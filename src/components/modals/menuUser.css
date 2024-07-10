@@ -1,0 +1,60 @@
+.menuUser{
+    min-width: 180px;
+    height: auto;
+    position: absolute;
+    background-color: #FFFFFF;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 8px;
+    border-radius: 10px;
+    top: 130%;
+    left: 0%;
+    transform: translateX(-70%);
+    z-index: 1000;
+    -webkit-transform: translateX(-70%);
+    -moz-transform: translateX(-70%);
+    -ms-transform: translateX(-70%);
+    -o-transform: translateX(-70%);
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    -ms-border-radius: 10px;
+    -o-border-radius: 10px;
+}
+
+.datosUser{
+    padding: 10px 15px;
+}
+.datosUser .user, .nombre_usuario{
+    color:  #383838;
+    font-size: 15px;
+}
+.nombre_usuario{
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 2px;
+}
+
+.lista{
+    display: flex;
+    flex-direction: column;
+    
+    padding: 10px 10px;
+}
+.lista li{
+    align-items: center;
+    list-style: none;
+    padding: 5px 8px;
+    border-radius: 8px;
+    font-size: 15px;
+    color:  #383838;
+    -webkit-border-radius: 8px;
+    -moz-border-radius: 8px;
+    -ms-border-radius: 8px;
+    -o-border-radius: 8px;
+}
+.lista li:hover, 
+.lista li:active{
+    background-color: #F5F5F5;
+}
+
+.lista .bx{
+    color:rgba(0, 0, 0, 0.35)
+}
