@@ -10,6 +10,7 @@ const dataCover = [
     texto: 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Deleniti esse possimus quibusdam mollitia. Maiores provident, sunt quo ipsa, sit quae iure explicabo in officiis, adipisci nam ducimus voluptatem perspiciatis molestiae!',
     nombre_autor: 'Arturo Vidal',
     fecha_edicion: 'Agosto 20, 2023',
+    imagen: '../../../public/pexels-photo-5052875.jpeg'
   },
   {
     id: 2,
@@ -42,16 +43,19 @@ const Vista = () => {
 
   return (
     <div className='vista'>
+
       <div className='slider'>
         <div className="slides-container" style={{ transform: `translateX(-${actualSlide * 100}%)` }}>
           {dataCover.map((portadas) => (
             <div key={portadas.id} className="portada">
               <div className="contenido-portada">
+                
                 <div className="etiqueta">
                   <p>{portadas.etiqueta}</p>
                 </div>
+              
                 <div className="titulo-portada">
-                  <h1>{portadas.titulo}</h1>
+                  <h2>{portadas.titulo}</h2>
                 </div>
                 <div className="text-portada">{portadas.texto}</div>
                 <div className="autor-portada">
@@ -88,19 +92,112 @@ const Vista = () => {
             <i className='bx bx-right-arrow-alt' style={{fontSize: 'medium'}}></i>
           </button>
         </div>
+
         <div className="content-tendencias">
           <div className="card">
-            <div className="card-content">
-              <div className="image-card"></div>
-              <div className="contenido-card">
-                <div className="titulo-card"></div>
-                <div className="text-card"></div>
+            {/* <div className="content-image"> */}
+              <div className="image-card">
+                <div className="label-card">Biblioteca</div>
               </div>
-            </div>
+            {/* </div> */}
+              <div className="contenido-card">
+                <div className="time-update"></div>
+                <div className="titulo-card">
+                  <h4>5 simple keys to healping your partner feel heard</h4>
+                </div>
+                <div className="text-card">
+                  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Necessitatibus, aperiam veritatis.
+                </div>
+
+                <div className="datos-autor">
+                  <div className="icon-autor icon-card"></div>
+                  <div >
+                    <p className="nombre-card">Dailin Romero</p> 
+                    <p className="fecha-card">Agosto 2, 2024</p>
+                  </div>
+                </div>
+              </div>
+            
           </div>
-          <div className="card"></div>
-          <div className="card"></div>
-          <div className="card"></div>
+
+          <div className="card">
+            {/* <div className="content-image"> */}
+              <div className="image-card">
+                <div className="label-card">Biblioteca</div>
+              </div>
+            {/* </div> */}
+              <div className="contenido-card">
+                <div className="time-update"></div>
+                <div className="titulo-card">
+                  <h4>5 simple keys to healping your partner feel heard</h4>
+                </div>
+                <div className="text-card">
+                  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Necessitatibus, aperiam veritatis.
+                </div>
+
+                <div className="datos-autor">
+                  <div className="icon-autor icon-card"></div>
+                  <div >
+                    <p className="nombre-card">Dailin Romero</p> 
+                    <p className="fecha-card">Agosto 2, 2024</p>
+                  </div>
+                </div>
+              </div>
+            
+          </div>
+
+          <div className="card">
+            {/* <div className="content-image"> */}
+              <div className="image-card">
+                <div className="label-card">Biblioteca</div>
+              </div>
+            {/* </div> */}
+              <div className="contenido-card">
+                <div className="time-update"></div>
+                <div className="titulo-card">
+                  <h4>5 simple keys to healping your partner feel heard</h4>
+                </div>
+                <div className="text-card">
+                  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Necessitatibus, aperiam veritatis.
+                </div>
+
+                <div className="datos-autor">
+                  <div className="icon-autor icon-card"></div>
+                  <div >
+                    <p className="nombre-card">Dailin Romero</p> 
+                    <p className="fecha-card">Agosto 2, 2024</p>
+                  </div>
+                </div>
+              </div>
+            
+          </div>
+
+          <div className="card">
+            {/* <div className="content-image"> */}
+              <div className="image-card">
+                <div className="label-card">Biblioteca</div>
+              </div>
+            {/* </div> */}
+              <div className="contenido-card">
+                <div className="time-update"></div>
+                <div className="titulo-card">
+                  <h4>5 simple keys to healping your partner feel heard</h4>
+                </div>
+                <div className="text-card">
+                  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Necessitatibus, aperiam veritatis.
+                </div>
+
+                <div className="datos-autor">
+                  <div className="icon-autor icon-card"></div>
+                  <div >
+                    <p className="nombre-card">Dailin Romero</p> 
+                    <p className="fecha-card">Agosto 2, 2024</p>
+                  </div>
+                </div>
+              </div>
+            
+          </div>
+
         </div>
       </div>
 

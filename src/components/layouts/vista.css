@@ -8,7 +8,7 @@
         "recientes";
     row-gap: 30px;
     margin-top: 30px;
-    padding: 0 50px;
+    padding: 0 80px;
 }
 
 .slider{
@@ -33,7 +33,7 @@
     height: 300px;
     background: linear-gradient(to top, rgba(0, 0, 0, 0.863), rgba(56, 56, 56, 0.527)), url('../../../public/pexels-photo-5052875.jpeg') no-repeat center;
     background-size: cover;
-    padding: 30px 40px;
+    padding: 30px 50px ;
 }
 
 .prev, .next {
@@ -87,19 +87,28 @@
 .contenido-portada > *:first-child {
     margin-top: auto;
 }
-
 .etiqueta{
-    padding: 2px 5px;
-    background-color: #623cea;
-    width: 65px;
+    min-width: 65px;
+    max-width: 80px; 
+    background-color: transparent;
+    bottom: 10px;
+    left: 15px;
+}
+.etiqueta p{
+    padding: 2px 0px;
+    background-color: darkblue;
+    color:  #fbfbfb;
+    font-weight: 500;
     border-radius: 5px;
     -webkit-border-radius: 5px;
     -moz-border-radius: 5px;
     -ms-border-radius: 5px;
     -o-border-radius: 5px;
-    font-size: small;
+    
     display: flex;
+    align-items: center;
     justify-content: center;
+    font-size: small;
 }
 
 .autor-portada{
@@ -132,6 +141,7 @@
 
 .tendencias{
     grid-area: tendencias;
+    /* margin: 0 auto; */
 }
 
 .titulo-tendencias{
@@ -159,27 +169,86 @@
     /* padding: 0 40px; */
     display: flex;
     flex-direction: column;
-    height: 300px;
     flex-flow: row wrap; /* los div se posicionan en filas conforme a su espacio */
     justify-content: flex-start;
     align-items: flex-start;
     flex-grow: 1;
-    column-gap: 30px;
+    gap: 30px;
+    height: auto;
 }
 
 .card{
     flex-grow: 1;
-    height: 300px;
-    border-radius: 16px;
-    -webkit-border-radius: 16px;
-    -moz-border-radius: 16px;
-    -ms-border-radius: 16px;
-    -o-border-radius: 16px;
-    background: linear-gradient(to top, rgba(0, 0, 0, 0.863), rgba(58, 58, 58, 0.432)), url(../../../public/pexels-photo-5052875.jpeg) no-repeat center;
-    background-size: cover;
+    width: 20%;
+    height: auto;
+    border-radius: 14px;
+    -webkit-border-radius: 14px;
+    -moz-border-radius: 14px;
+    -ms-border-radius: 14px;
+    -o-border-radius: 14px;
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+.image-card{
+    width: 100% ;
+    border-radius: inherit;
+    height: 150px;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.199), rgba(58, 58, 58, 0.178)), url(../../../public/pexels-photo-5052875.jpeg) no-repeat center;
+    background-size: cover;
+    -webkit-border-radius: inherit;
+    -moz-border-radius: inherit;
+    -ms-border-radius: inherit;
+    -o-border-radius: inherit;
+    position: relative;
 }
 
+.label-card{
+    position: absolute;
+    padding: 2px 5px;
+    background-color: #fbfbfb;
+    color: darkblue;
+    font-weight: 500;
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    -ms-border-radius: 5px;
+    -o-border-radius: 5px;
+    bottom: 10px;
+    left: 15px;
+    display: flex;
+    align-items: center;
+    font-size: small;
+}
+
+.contenido-card{
+    padding: 0 5px;
+    display: flex;
+    flex-direction: column;
+    row-gap: 10px;
+}
+.datos-autor{
+    padding: 5px 0;
+    display: flex;
+    column-gap: 10px;
+    align-items: center;
+}
+.icon-card{
+    border: 1px solid rgba(155, 155, 155, 0.767);
+    width: 30px;
+    height: 30px;
+}
+.nombre-card{
+    font-weight: 600;
+    font-size: 14px
+}
+.fecha-card{
+    font-style: italic;
+    font-size: 12px;
+    color: rgb(110, 110, 110);
+}
 .recientes{
     grid-area: recientes;
     /* background-color: lightgreen; */
