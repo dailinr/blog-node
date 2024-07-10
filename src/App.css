@@ -10,7 +10,7 @@
   
   background-color: #FFFFFF;
   /* border: 1px solid orange;  */
-  grid-template-rows: 200px 1fr;
+  grid-template-rows: auto 1fr;
   grid-template-areas: 
     "header"
     "cuerpo";
@@ -24,7 +24,7 @@
   
 }
 
-.vista{
+.content{
   grid-area: cuerpo;
   width: 100%;
 }
