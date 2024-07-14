@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import '../../css/Inicio.css';
 import { dataArticle } from '../../Data/dataArticle.js';
+import { Link } from "react-router-dom"
 
 
 const Inicio = () => {
@@ -72,14 +73,15 @@ const Inicio = () => {
       <div className="tendencias">
         <div className="titulo-tendencias">
           <h3>Tendencias</h3>
-          <button className='boton-vermas'>
-            Ver Todos 
-            <i className='bx bx-right-arrow-alt' style={{fontSize: 'medium'}}></i>
+          <button className='boton-vermas' >
+            <Link to="/articulos" className="link"> Ver Todos 
+              <i className='bx bx-right-arrow-alt' style={{fontSize: 'medium'}}></i>
+            </Link>
           </button>
         </div>
 
         <div className="content-tendencias">
-        {dataArticle.map((cards) => (
+        {dataArticle.slice(0, 4).map((cards) => (
         
         
           <div key={cards.id} className="card">

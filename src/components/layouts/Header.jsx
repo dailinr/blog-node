@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import '../../css/header.css';
-import MenuUser from '../modals/MenuUser'
+import MenuUser from '../modals/MenuUser';
+import { NavLink } from "react-router-dom";
 
 const Header = () => {
     const [menuUsuario, setMenuUsuario] = useState(false);
@@ -40,17 +41,12 @@ const Header = () => {
 
         
 
-        <div className='navegacion'>
-            <section className='active'>
-                <p>inicio</p>
-            </section>
-            <section>
-                <p>tendencias</p>
-            </section>
-            <section>
-                <p>comunity</p>
-            </section>
-        </div>
+        
+        <ul className='navegacion'>
+            <li><NavLink to="/inicio" className= "link ">Inicio</NavLink></li>
+            <li><NavLink to="/articulos" className= "link ">Articulos</NavLink></li>
+            <li><NavLink to="/crear-articulo" className= "link ">Crear articulo</NavLink></li>
+        </ul>
 
         {/* <div className='buscador'>
             <input type="search" placeholder='buscar' />

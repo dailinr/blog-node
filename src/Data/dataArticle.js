@@ -24,4 +24,20 @@ export const dataArticle = [
       nombre_autor: 'Falcao Garcia',
       fecha_edicion: 'Marzo 20, 2024',
     },
+    {
+      id: 4,
+      etiqueta: 'internacional',
+      titulo: 'Palestina es nuevamente bombardeado por Israel.',
+      texto: 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Deleniti esse possimus quibusdam mollitia. Maiores provident.',
+      nombre_autor: 'Falcao Garcia',
+      fecha_edicion: 'Marzo 20, 2024',
+    },
+    {
+      id: 5,
+      etiqueta: 'internacional',
+      titulo: 'Palestina es nuevamente bombardeado por Israel.',
+      texto: 'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Deleniti esse possimus quibusdam mollitia. Maiores provident.',
+      nombre_autor: 'Falcao Garcia',
+      fecha_edicion: 'Marzo 20, 2024',
+    },
 ];

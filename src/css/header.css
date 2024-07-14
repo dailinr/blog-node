@@ -89,12 +89,19 @@
     background-color: #ebebeb;
     width: 100%;
 }
-.navegacion > section{
+.navegacion > li{
     padding: 10px;
+    list-style: none;
 }
-.navegacion > section:hover p,
-.navegacion > section:active p{
-    font-weight: 500;
+.navegacion li .link{
+    
+    text-decoration: none;
+    color: #000;
+     font-weight: 500; 
+}
+.navegacion > li:hover .link,
+.navegacion > li:active .link{
+    font-weight: 700;
     transform: scale(1.03);
     cursor: pointer;
     -webkit-transform: scale(1.03);
