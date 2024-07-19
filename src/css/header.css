@@ -99,8 +99,8 @@
     color: #000;
      font-weight: 500; 
 }
-.navegacion > li:hover .link,
-.navegacion > li:active .link{
+.navegacion > li .link:hover,
+.navegacion > li .link:active{
     font-weight: 700;
     transform: scale(1.03);
     cursor: pointer;
