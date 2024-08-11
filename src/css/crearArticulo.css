@@ -1,0 +1,15 @@
+.pageCrear{
+    width: 100%;
+    min-height: 100vh;
+    padding: 0 80px;
+    padding-top: 30px;
+}
+
+.titulo-crear, .pageCrear p{
+    display: flex;
+    justify-content: center;
+}
+
+.pageCrear p{
+    margin-top: 20px;
+}

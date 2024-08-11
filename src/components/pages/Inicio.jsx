@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import '../../css/Inicio.css';
 import { dataArticle } from '../../Data/dataArticle.js';
 import { Link } from "react-router-dom"
+import { Listado } from './Listado.jsx';
 
 
 const Inicio = () => {
@@ -81,36 +82,9 @@ const Inicio = () => {
         </div>
 
         <div className="content-tendencias">
-        {dataArticle.slice(0, 4).map((cards) => (
-        
-        
-          <div key={cards.id} className="card">
 
-              <div className="image-card">
-                <div className="label-card">{cards.etiqueta}</div>
-              </div>
-
-              <div className="contenido-card">
-                <div className="time-update"></div>
-                <div className="titulo-card">
-                  <h4>{cards.titulo}</h4>
-                </div>
-                <div className="text-card">
-                  {cards.texto}
-                </div>
-
-                <div className="datos-autor">
-                  <div className="icon-autor icon-card"></div>
-                  <div >
-                    <p className="nombre-card">{cards.nombre_autor}</p> 
-                    <p className="fecha-card">{cards.fecha_edicion}</p>
-                  </div>
-                </div>
-              </div>
-            
-          </div>
-
-        ))}
+        {/* {dataArticle.slice(0, 4).map((cards) => (  ))} */}
+          {/* <Listado  /> */}
 
         </div>
       </div>
