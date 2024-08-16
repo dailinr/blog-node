@@ -1,18 +1,26 @@
 import React from 'react'
+import { Global } from '../../helpers/Global'
 
 export const Listado = ( {articulos, setArticulos}) => {
+  
   return (
 
-    articulos.map((cards) => (
-        <div key={cards._id} className="card">
+    articulos.map((cards) => {
 
+      // Condicion para saber el articulo se le ha asignado una imagen
+      let urlImagen = cards.imagen !== "default.png"  ?
+        Global.url + "ver-imagen/" + cards.imagen : cards.imagen;
+
+      return (
+
+        <div key={cards._id} className="card">
+          
           <div className="image-card"
             style={{
               // background: `linear-gradient(to top, rgba(0, 0, 0, 0.199), rgba(58, 58, 58, 0.178)), url("https://images.pexels.com/photos/1619317/pexels-photo-1619317.jpeg?cs=srgb&dl=pexels-souvenirpixels-1619317.jpg&fm=jpg") no-repeat center / cover`
-              background: `linear-gradient(to top, rgba(0, 0, 0, 0.199), rgba(58, 58, 58, 0.178)), url(${cards.imagen}) no-repeat center / cover`
+              background: `linear-gradient(to top, rgba(0, 0, 0, 0.199), rgba(58, 58, 58, 0.178)), url(${urlImagen}) no-repeat center / cover`
             }}>
-              
-            {cards.imagen}
+
             <div className="label-card">{cards.etiqueta}</div>
           </div>
 
@@ -32,6 +40,7 @@ export const Listado = ( {articulos, setArticulos}) => {
             </div>
           </div>
         </div>
-      ))
-  )
+      );
+    })
+  );
 }

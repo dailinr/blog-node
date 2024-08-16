@@ -10,25 +10,44 @@ const CrearArticulo = () => {
 
   // metodos que se cambiaran conforme el usuario ingrese o envie datos
   const {formulario, enviado, cambiado} = useForm({});
-  const [resultado, setResultado] = useState(false);
+  const [resultado, setResultado] = useState("");
 
   const guardarArticulo = async(e) => {
     e.preventDefault();
 
     // Recoger datos del formulario
     let nuevoArticulo = formulario;
-    console.log(nuevoArticulo)
+    // console.log(nuevoArticulo)
 
     // Guardar articulo en backend -- parametros: url, metodo ajax, datos a guardar
     const {datos, cargando} = await PeticionAjax(Global.url + "crear", "POST", nuevoArticulo);
 
     if(datos.status === "success"){
-      setResultado(true);
+      setResultado("guardado");
+      
+      // Subir la imagen
+      const fileInput = document.querySelector("#file");
+
+      const formData = new FormData();
+      // añadimos la imagen subida al formData
+      formData.append("file0", fileInput.files[0]); // se le asigna el archivo con el primero
+
+      // nueva peticion ajax para la ruta de subir imagen
+      const subida = await PeticionAjax(Global.url+"subir-imagen/" + datos.articulo._id, "POST", formData, true);
+      // console.log(subida.datos);
+      
+      if(subida.status === "success"){ // si se sube exitosamente la imagen
+        setResultado("guardado");
+      }
+      else{
+        setResultado("error");
+      }
+
     }else{
-      setResultado(false);
+      setResultado("error");
     }
 
-    console.log(datos);
+    // console.log(datos);
   }
 
   return (
@@ -65,8 +84,8 @@ const CrearArticulo = () => {
       </form>
 
       <strong>
-        {resultado ? 
-          "Articulo guardado con exito!!" : 
+        { (resultado === "guardado") ?
+          "Articulo guardado con exito!!" :
           "Error al guardar el articulo" }
       </strong>
 
