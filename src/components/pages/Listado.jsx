@@ -1,7 +1,13 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Global } from '../../helpers/Global'
+import MenuArticulo from '../modals/MenuArticulo';
 
 export const Listado = ( {articulos, setArticulos}) => {
+  const [menuArticulo, setMenuArticulo] = useState(false);
+
+  const mostrarMenu = (id) => {
+    setMenuArticulo(menuArticulo === id ? !menuArticulo : id);
+  }
   
   return (
 
@@ -25,7 +31,13 @@ export const Listado = ( {articulos, setArticulos}) => {
           </div>
 
           <div className="contenido-card">
+
+            <i className='bx bx-dots-vertical-rounded' onClick={() => mostrarMenu(cards._id)} >
+              {menuArticulo === cards._id && <MenuArticulo/>} 
+            </i>
+
             <div className="time-update"></div>
+            
             <div className="titulo-card">
               <h4>{cards.titulo}</h4>
             </div>

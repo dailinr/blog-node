@@ -20,14 +20,22 @@ const CrearArticulo = () => {
     // console.log(nuevoArticulo)
 
     // Guardar articulo en backend -- parametros: url, metodo ajax, datos a guardar
-    const {datos, cargando} = await PeticionAjax(Global.url + "crear", "POST", nuevoArticulo);
+    const {datos} = await PeticionAjax(Global.url + "crear", "POST", nuevoArticulo);
 
-    if(datos.status === "success"){
+
+    if(datos.status === "success"){ // si se sube exitosamente la imagen
+      setResultado("guardado");
+    }
+    else{
+      setResultado("error");
+    }
+
+    // Subir la imagen
+    const fileInput = document.querySelector("#file");
+    
+    if(datos.status === "success" && fileInput.files[0]){
       setResultado("guardado");
       
-      // Subir la imagen
-      const fileInput = document.querySelector("#file");
-
       const formData = new FormData();
       // añadimos la imagen subida al formData
       formData.append("file0", fileInput.files[0]); // se le asigna el archivo con el primero
@@ -36,15 +44,13 @@ const CrearArticulo = () => {
       const subida = await PeticionAjax(Global.url+"subir-imagen/" + datos.articulo._id, "POST", formData, true);
       // console.log(subida.datos);
       
-      if(subida.status === "success"){ // si se sube exitosamente la imagen
+      if(subida.datos.status === "success"){
         setResultado("guardado");
       }
       else{
         setResultado("error");
       }
 
-    }else{
-      setResultado("error");
     }
 
     // console.log(datos);
@@ -84,9 +90,12 @@ const CrearArticulo = () => {
       </form>
 
       <strong>
-        { (resultado === "guardado") ?
-          "Articulo guardado con exito!!" :
-          "Error al guardar el articulo" }
+        {resultado === "guardado" ?
+          "Articulo guardado con exito!!" : null } 
+      </strong>
+      <strong>
+      {resultado === "error" ?
+          "Error al guardar el articulo"  : null } 
       </strong>
 
     </div>
