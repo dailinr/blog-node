@@ -19,6 +19,7 @@ const Header = () => {
         <div className='encabezado'>
             <div className='iconos-izq'>
                 <i className='bx bx-revision'></i>
+                
             </div>
             <div className='logo'>
                 <div className='image-logo'></div>

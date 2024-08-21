@@ -195,7 +195,7 @@
 }
 
 .card{
-    flex: 1 1 calc(25% - 30px);
+    flex: 1 1 calc(30% - 30px);
     min-width: 250px;
     height: auto;
     border-radius: 12px;
@@ -203,8 +203,8 @@
     -moz-border-radius: 12px;
     -ms-border-radius: 12px;
     -o-border-radius: 12px;
-    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-    padding: 10px;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 10px;
+    padding: 7px;
     display: flex;
     flex-direction: column;
     overflow: hidden;
@@ -213,7 +213,7 @@
 .image-card{
     width: 100% ;
     border-radius: inherit;
-    height: 150px;
+    height: 160px;
     /* background: linear-gradient(to top, rgba(0, 0, 0, 0.199), rgba(58, 58, 58, 0.178)) no-repeat center / cover; */
     -webkit-border-radius: inherit;
     -moz-border-radius: inherit;
@@ -254,6 +254,19 @@
     font-size: larger;
     color: rgb(41, 41, 41);
     cursor: pointer;
+    padding: 5px;
+    background-color: inherit;
+    border-radius: 50%;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    -ms-border-radius: 50%;
+    -o-border-radius: 50%;
+    transition: transform 500ms;
+}
+
+.bx-dots-vertical-rounded:hover,
+.bx-dots-vertical-rounded:active {
+    background-color: rgba(199, 199, 199, 0.767);   
 }
 
 .datos-autor{

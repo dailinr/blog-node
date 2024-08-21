@@ -32,14 +32,16 @@ export const Listado = ( {articulos, setArticulos}) => {
 
           <div className="contenido-card">
 
-            <i className='bx bx-dots-vertical-rounded' onClick={() => mostrarMenu(cards._id)} >
-              {menuArticulo === cards._id && <MenuArticulo/>} 
-            </i>
+            
+              <i className='bx bx-dots-vertical-rounded' onClick={() => mostrarMenu(cards._id)} >
+                {menuArticulo === cards._id && <MenuArticulo/>} 
+              </i>
+            
 
             <div className="time-update"></div>
             
             <div className="titulo-card">
-              <h4>{cards.titulo}</h4>
+              <h4 className="text-xl font-bold text-gray-800">{cards.titulo}</h4>
             </div>
             <div className="text-card">{cards.contenido}</div>
 
