@@ -4,6 +4,8 @@ import { useState } from "react";
 import { useForm } from "../../helpers/hooks/useForm";
 import { PeticionAjax } from "../../helpers/PeticionAjax";
 import { Global } from "../../helpers/Global";
+import Tostada from "../modals/Tostada";
+import ToastError from "../modals/ToastError";
 
 const CrearArticulo = () => {
   // metodos que se cambiaran conforme el usuario ingrese o envie datos
@@ -66,8 +68,9 @@ const CrearArticulo = () => {
       {/* <pre>{JSON.stringify(formulario)}</pre> */}
 
       <form className='formulario' onSubmit={guardarArticulo} >
+      
 
-        <h1 className='titulo-crear'> <i className='bx bx-notepad' /> &nbsp; Crear Articulo </h1>
+        <h1 className='titulo-crear'> <i className='bx bx-notepad'/> &nbsp; Crear Articulo </h1>
 
         <div className='form-group'>
           <label htmlFor='titulo'>Titulo</label> <br/>
@@ -97,62 +100,11 @@ const CrearArticulo = () => {
       </form> 
 
       <strong style={{ width: "100px" }}>
-        {resultado === "guardado" ? (
-          <div className="toast rounded-lg w-48 h-16  bg-[#008000] text-[#ffffff]">
-            <div className="flex flex-row w-full gap-5  items-center px-4 w-full h-full">
-              <div className="my-auto text-sm">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="27"
-                  height="27"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  class="lucide lucide-check-circle"
-                >
-                  <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
-                  <path d="m9 11 3 3L22 4"></path>
-                </svg>
-              </div>
-              <div>
-                <div class="font-bold text-sm">Articulo creado</div>
-              </div>
-            </div>
-          </div>
-        ) : null}
+        {resultado === 'guardado' && <Tostada mensaje={"Articulo guardado"} />}
       </strong>
 
       <strong style={{ width: "100px" }}>
-        {resultado === "error" ? (
-          <div className="toast rounded-lg w-48 h-16  bg-[#e5202a] text-[#ffffff]">
-            <div className="flex flex-row w-full gap-5  items-center px-4 w-full h-full">
-              <div className="my-auto text-sm">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="27"
-                  height="27"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  class="lucide lucide-alert-circle"
-                >
-                  <circle cx="12" cy="12" r="10"></circle>
-                  <line x1="12" x2="12" y1="8" y2="12"></line>
-                  <line x1="12" x2="12.01" y1="16" y2="16"></line>
-                </svg>
-              </div>
-              <div>
-                <div class="font-bold text-sm">Faltan datos </div>
-              </div>
-            </div>
-          </div>
-        ) : null}
+        {resultado === 'error' && <ToastError mensaje={"Faltan datos"} />}
       </strong>
     </div>
   );

@@ -1,17 +1,51 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Global } from '../../helpers/Global'
 import MenuArticulo from '../modals/MenuArticulo';
+import { PeticionAjax } from '../../helpers/PeticionAjax';
+import ModalConfirm from '../modals/ModalConfirm';
+import Tostada from '../modals/Tostada.jsx';
 
 export const Listado = ( {articulos, setArticulos}) => {
   const [menuArticulo, setMenuArticulo] = useState(false);
+  const [modConfirm, setModConfirm] = useState(false);
+  const [idEliminar, setIdEliminar] = useState(null); // Nueva variable para almacenar el ID del artículo a eliminar
+  const [mostrarToast, setMostrarToast] = useState(false);
 
   const mostrarMenu = (id) => {
     setMenuArticulo(menuArticulo === id ? !menuArticulo : id);
   }
   
-  return (
+  const eliminar = (id) => {
+    
+    setIdEliminar(id); // Establecemos el ID del artículo a eliminar
+    setModConfirm(true); // Mostramos el modal de confirmación
+  } 
+  
+  const confirmEliminar = async () => {
 
-    articulos.map((cards) => {
+    //realizamos una peticion ajax con sus respectivos parametros
+    let {datos} = await PeticionAjax(Global.url + "articulo/" + idEliminar, "DELETE");
+    
+    if(datos.status === "success"){
+      // guardamos en una lista todos los articulos que no sean el del id eliminado
+      let articulosActualizados = articulos.filter(articulo => articulo._id !== idEliminar);
+      setArticulos(articulosActualizados); // actualizamos el estado del componente padre (Articulos.jsx)
+      setModConfirm(false); // cerramos el modal
+
+      
+      // Mostrar la tostada 
+      setMostrarToast(true);
+    }
+  
+  }
+  
+  const editar = (id) => {
+    // Lógica para editar el artículo
+  };
+  
+  return (
+    <>
+    {articulos.map((cards) => {
 
       // Condicion para saber el articulo se le ha asignado una imagen
       let urlImagen = cards.imagen !== "default.png"  ?
@@ -34,16 +68,20 @@ export const Listado = ( {articulos, setArticulos}) => {
 
             
               <i className='bx bx-dots-vertical-rounded' onClick={() => mostrarMenu(cards._id)} >
-                {menuArticulo === cards._id && <MenuArticulo/>} 
+                {menuArticulo === cards._id && 
+                  <MenuArticulo idArticulo={cards._id} eliminar={eliminar} editar={editar} />
+                } 
               </i>
             
 
             <div className="time-update"></div>
             
             <div className="titulo-card">
-              <h4 className="text-xl font-bold text-gray-800">{cards.titulo}</h4>
+              <h4 className="text-lg font-bold text-gray-800">{cards.titulo}</h4>
             </div>
             <div className="text-card">{cards.contenido}</div>
+
+            <hr style={{margin: '2px'}} />
 
             <div className="datos-autor">
               <div className="icon-autor icon-card"></div>
@@ -54,7 +92,23 @@ export const Listado = ( {articulos, setArticulos}) => {
             </div>
           </div>
         </div>
+
+        
       );
-    })
+    })}
+    
+    
+    {modConfirm && (
+      <ModalConfirm
+        confirmEliminar={confirmEliminar}
+        setModConfirm={setModConfirm}
+      />
+    )}
+
+    <strong style={{ width: "100px" }}>
+      {mostrarToast && <Tostada mensaje={"Articulo eliminado"} />}
+    </strong> 
+
+    </>
   );
 }
