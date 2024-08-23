@@ -29,7 +29,7 @@ const Articulos = () => {
   };
 
   return (
-    <div className="Articulos ">
+    <div className="Articulos page ">
       <div className="content-tendencias">
 
         {cargando ? "Cargando..." : (

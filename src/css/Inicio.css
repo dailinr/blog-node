@@ -1,3 +1,7 @@
+.page{
+    /* box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset; */
+    background-color: #fcfcfc; 
+}
 .Inicio{
     display: grid;
     min-height: 100vh;
@@ -7,8 +11,8 @@
         "tendencias"
         "recientes";
     row-gap: 30px;
-    margin-top: 30px;
-    padding: 0 80px;
+    
+    padding: 30px 80px;
 }
 
 .slider{
@@ -203,7 +207,8 @@
     -moz-border-radius: 10px !important;
     -ms-border-radius: 10px !important;
     -o-border-radius: 10px !important;
-    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 10px;
+    box-shadow: rgba(0, 0, 0, 0.35)  0px 5px 10px;
+    /* box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px; */
     padding: 5px;
     display: flex;
     flex-direction: column;
@@ -224,7 +229,7 @@
 
 .label-card{
     position: absolute;
-    padding: 2px 5px;
+    padding: 0.5px 5px;
     background-color: #fbfbfb;
     color: darkblue;
     font-weight: 500;

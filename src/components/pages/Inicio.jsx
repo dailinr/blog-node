@@ -25,7 +25,7 @@ const Inicio = () => {
   };
 
   return (
-    <div className='Inicio'>
+    <div className='Inicio page'>
 
       <div className='slider'>
         <div className="slides-container" style={{ transform: `translateX(-${actualSlide * 100}%)` }}>

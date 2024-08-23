@@ -63,7 +63,7 @@ const CrearArticulo = () => {
   };
 
   return (
-    <div className="pageCrear">
+    <div className="pageCrear page">
       
       {/* <pre>{JSON.stringify(formulario)}</pre> */}
 
