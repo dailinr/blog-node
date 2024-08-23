@@ -6,6 +6,17 @@
   position: relative;
 }
 
+.content-articulos{
+  /* padding: 0 40px; */
+  display: flex;
+  flex-flow: wrap; /* los div se posicionan en filas conforme a su espacio */
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 30px;
+  height: auto;
+  
+}
+
 .card{
   flex: 1 1 calc(25% - 30px);
   min-width: 200px;

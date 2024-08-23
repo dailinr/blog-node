@@ -30,7 +30,7 @@ const Articulos = () => {
 
   return (
     <div className="Articulos page ">
-      <div className="content-tendencias">
+      <div className="content-articulos">
 
         {cargando ? "Cargando..." : (
 
