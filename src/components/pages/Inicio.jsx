@@ -3,40 +3,50 @@ import '../../css/Inicio.css';
 import { Link } from "react-router-dom"
 import Portada from '../layouts/Portada.jsx';
 import { ArticulosContext } from '../../helpers/ArticulosContext.jsx';
-import { Listado } from './Listado.jsx';
 import Articulos from './Articulos.jsx';
+import ArticulosLateral from '../layouts/ArticulosLateral.jsx';
 
 const Inicio = () => {
   const { articulos } = useContext(ArticulosContext);
 
   return (
     <div className='Inicio page'>
+      
+      
 
-      <div style={{paddingRight: '50px', paddingLeft: '50px'}}>
+      {articulos.length >= 1 ? (
+        <>
         <Portada />
 
-        <div className="tendencias">
-          <div className="titulo-tendencias">
-            <h3>Tendencias</h3>
-            <button className='boton-vermas' >
-              <Link to="/articulos" className="link"> Ver Todos 
-                <i className='bx bx-right-arrow-alt' style={{fontSize: 'medium'}}></i>
-              </Link>
-            </button>
-          </div>
-        </div>
-      </div>
-        
+        <div className='art-inicio'>
+          
+          <section className="tendencias">
+            <div className="titulo-tendencias">
+              <h3>Tendencias</h3>
+              <button className='boton-vermas' >
+                <Link to="/articulos" className="link"> Ver Todos 
+                  <i className='bx bx-right-arrow-alt' style={{fontSize: 'medium'}}></i>
+                </Link>
+              </button>
+            </div>
 
-      {articulos.length >= 1 ? 
-        <Articulos  />
-      : 
+            <Articulos customPadding="0 15px 10px 0 "  />
+            
+          </section>
+          
+          <aside className='recientes'>
+            
+            <h4 className='titulo-recientes'>Recientes</h4>
+
+            <ArticulosLateral />
+          </aside>
+
+        </div>
+        </>
+      ): 
         <h1>No hay articulos</h1> 
       }
 
-      
-
-      <div className="recientes"></div>
     </div>
   );
 }

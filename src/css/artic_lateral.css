@@ -1,0 +1,53 @@
+.art-lateral{
+    padding: 0 0 0 8px;
+    /* border-left: 1px solid #979797; */
+    height: auto;
+} 
+
+.card-lat{
+    margin-bottom: 12px;
+    width: 100%;
+    height: 100px;
+    background-color: #FFFFFF;
+    padding: 8px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    column-gap: 10px;
+    box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 1px 3px 1px;
+    border-radius: 10px ;
+    -webkit-border-radius: 10px ;
+    -moz-border-radius: 10px ;
+    -ms-border-radius: 10px ;
+    -o-border-radius: 10px ;
+    
+}
+
+.image-lat{
+    width: 80px;
+    height: 80px;
+    flex-shrink: 0; /* Evita que el contenedor de la imagen se reduzca */
+    overflow: hidden; /* Asegura que la imagen no se salga del contenedor */
+    border-radius: 5px ;
+}
+
+.titulo-lat h5{
+    font-weight: 700;
+}
+
+.label-lat{
+    width: fit-content;
+    padding: 0px 3px;
+    /* background-color: #fbfbfb; */
+    color:  darkblue;
+    font-weight: 700;
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    -ms-border-radius: 5px;
+    -o-border-radius: 5px;
+    display: flex;
+    align-items: center;
+    font-size: small;
+    margin-bottom: 3px;
+  }

@@ -6,7 +6,7 @@
     justify-content: space-between;
     padding:  0 70px 0 50px;
     /* position: relative; */
-    background: transparent;
+    background-color: #F3F3F3; 
 }
 
 .logo{
@@ -24,6 +24,15 @@
 .iconos{
     display: flex;
     column-gap: 15px;
+    
+}
+.input{
+    height: 35px !important;
+    border-radius: 18px !important;
+    -webkit-border-radius: 18px !important;
+    -moz-border-radius: 18px !important;
+    -ms-border-radius: 18px !important;
+    -o-border-radius: 18px !important;
 }
 .iconos > div{
     border-radius: 50%;
@@ -37,6 +46,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    background-color: #FFFFFF;
 }
 .iconos .bx{
     font-size: large;
@@ -55,6 +65,7 @@
     background-size: cover;
     border: none !important;
     position: relative;
+    border: 1px solid rgba(155, 155, 155, 0.767);
 }
 
 .header > div p{

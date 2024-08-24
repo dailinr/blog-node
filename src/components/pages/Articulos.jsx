@@ -6,7 +6,7 @@ import { Global } from "../../helpers/Global";
 import { PeticionAjax } from "../../helpers/PeticionAjax";
 import { Listado } from "./Listado";
 
-const Articulos = () => {
+const Articulos = ({ customPadding, customWidth }) => {
   const [articulos, setArticulos] = useState([]);
   const [cargando, setCargando] = useState(true);
 
@@ -29,7 +29,9 @@ const Articulos = () => {
   };
 
   return (
-    <div className="Articulos page ">
+    <div className="Articulos page " 
+      style={{ padding: customPadding || 'default-padding-value', width: customWidth || 'default-width-value' }} >
+
       <div className="content-articulos">
 
         {cargando ? "Cargando..." : (
