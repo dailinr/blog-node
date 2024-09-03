@@ -1,12 +1,31 @@
 // Portada.jsx
 import React, {  useContext, useEffect, useState } from 'react';
 import '../../css/Inicio.css';
-import { ArticulosContext } from '../../helpers/ArticulosContext.jsx';
-import { Global } from '../../helpers/Global.jsx';
+// import { ArticulosContext } from '../../helpers/ArticulosContext.jsx';
+import { Global } from '../../helpers/Global';
+import { PeticionAjax } from "../../helpers/PeticionAjax";
 
 const Portada = () => {
     const [actualSlide, setActualSlide] = useState(0);
-    const { articulos } = useContext(ArticulosContext);
+    // const { articulos } = useContext(ArticulosContext);
+    const [articulos, setArticulos] = useState([]);
+
+    useEffect(() => {
+      conseguirArticulos();
+    }, []);
+
+    const conseguirArticulos = async () => {
+      const url = Global.url + "listar";
+  
+      const {datos} = await PeticionAjax(url, "GET");
+  
+      if (datos.status === "success") {
+        setArticulos(datos.articulos);
+      }else{
+        setArticulos([]);
+      }
+
+    };
 
     useEffect(() => {
       const interval = setInterval(() => {

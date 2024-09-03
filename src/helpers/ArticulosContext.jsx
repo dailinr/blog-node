@@ -8,18 +8,19 @@ export const ArticulosProvider = ({ children }) => {
     const [articulos, setArticulos] = useState([]);
 
     useEffect(() => {
-        const fetchArticulos = async () => {
-
-            const url = Global.url + "listar";
-            const { datos } = await PeticionAjax(url, "GET");
-            
-            if (datos.status === "success") {
-                setArticulos(datos.articulos);
-            }
-        };
-
-        fetchArticulos();
+        conseguirArticulos();
     }, []);
+
+    const conseguirArticulos = async () => {
+        const url = Global.url + "listar";
+    
+        const {datos } = await PeticionAjax(url, "GET");
+    
+        if (datos.status === "success") {
+          setArticulos(datos.articulos);
+        }
+    };
+
 
     return (
         <ArticulosContext.Provider value={{ articulos, setArticulos }}>

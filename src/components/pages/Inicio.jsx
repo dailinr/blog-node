@@ -30,7 +30,7 @@ const Inicio = () => {
               </button>
             </div>
 
-            <Articulos customPadding="0 15px 10px 0 "  />
+            <Articulos customPadding="0 15px 10px 0 " customJustify="flex-start" />
             
           </section>
           

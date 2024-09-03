@@ -5,6 +5,7 @@ import Articulos from "../components/pages/Articulos";
 import Header from '../components/layouts/Header';
 import Footer from "../components/layouts/Footer";
 import CrearArticulo from "../components/pages/CrearArticulo";
+import { Busqueda } from "../components/pages/Busqueda";
 
 export const Rutas = () => {
 
@@ -17,10 +18,18 @@ export const Rutas = () => {
             <section id="content" className="content">
 
                 <Routes>
-                    <Route path="/" element={ <Inicio/> }></Route>
-                    <Route path="/inicio" element={ <Inicio /> }></Route>
-                    <Route path="/articulos" element={ <Articulos /> }></Route>
-                    <Route path="/crear-articulo" element={ <CrearArticulo/> }></Route>
+                    <Route path="/" element={ <Inicio/> } />
+                    <Route path="/inicio" element={ <Inicio /> } />
+                    <Route path="/articulos" element={ <Articulos /> } />
+                    <Route path="/crear-articulo" element={ <CrearArticulo/> } />
+                    <Route path="/buscar/:busqueda" element={<Busqueda/>} />
+
+                    <Route path="*" element={
+                        <div className="jumbo page">
+                            <h1>Error 404</h1>
+                        </div>
+                    } />
+
                 </Routes>
 
             </section>

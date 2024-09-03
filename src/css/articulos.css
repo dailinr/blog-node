@@ -2,7 +2,7 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  padding: 30px 80px;
+  padding: 30px 60px;
   position: relative;
   
 }
@@ -10,8 +10,9 @@
 .content-articulos{
   /* padding: 0 40px; */
   display: flex;
-  flex-flow: wrap; /* los div se posicionan en filas conforme a su espacio */
+  /* flex-flow: wrap; los div se posicionan en filas conforme a su espacio */
   justify-content: flex-start;
+  flex-flow: row wrap;
   align-items: flex-start;
   gap: 30px;
   height: auto;
@@ -19,8 +20,9 @@
 }
 
 .card{
-  flex: 1 1 calc(30% - 30px);
+  /* flex: 1 1 calc(30% - 30px); */
   min-width: 200px;
+  width: 270px;
   height: auto;
   border-radius: 10px !important;
   -webkit-border-radius: 10px !important;
