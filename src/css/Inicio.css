@@ -2,6 +2,7 @@
     /* box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset; */
     background-color: #F3F3F3; 
     min-height: 100vh;
+    position: relative;
 }
 
 .jumbo{
@@ -20,8 +21,15 @@
     row-gap: 20px;
     
     padding: 30px 50px;
+    
 }
 
+.btn-crear{
+    position: fixed;
+    bottom: 30px;
+    right: 70px;
+   
+}
 .slider{
     grid-area: portada;
     position: relative;
@@ -149,7 +157,7 @@
 .art-inicio{
     grid-area: articulos;
     display: grid;
-    grid-template-columns: 1fr 25%;
+    grid-template-columns: 1fr 27%;
     grid-template-areas: 
         "tendencias recientes";
     grid-template-rows: auto;

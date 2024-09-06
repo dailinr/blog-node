@@ -28,7 +28,7 @@ const ArticulosLateral = () => {
   return (
     
     <div  className='art-lateral'>
-    {articulos.map((articulo) => {
+    {articulos.slice(0, 6).map((articulo) => {
 
         let urlImagen = articulo.imagen !== "default.png"  ?
         Global.url + "ver-imagen/" + articulo.imagen : articulo.imagen;

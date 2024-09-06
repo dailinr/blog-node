@@ -6,7 +6,7 @@ import { Global } from "../../helpers/Global";
 import { PeticionAjax } from "../../helpers/PeticionAjax";
 import { Listado } from "./Listado";
 
-const Articulos = ({ customPadding, customWidth, customJustify }) => {
+const Articulos = ({ customPadding, customWidth, customJustify, maxArticulos }) => {
   const [articulos, setArticulos] = useState([]);
   const [cargando, setCargando] = useState(true);
 
@@ -28,17 +28,19 @@ const Articulos = ({ customPadding, customWidth, customJustify }) => {
     setCargando(false);
   };
 
+  // si la prop tienen un valor limite guardará solo esos articulos, sino guardará todos los articulos
+  const articulosLimitados = maxArticulos ? articulos.slice(0, maxArticulos) : articulos;
+
   return (
     <div className="Articulos page " 
-      style={{ padding: customPadding || 'default-padding-value', width: customWidth || 'default-width-value',
-        justifyContent: customJustify || 'default-justifyContent-value' }} >
+      style={{ padding: customPadding, width: customWidth, justifyContent: customJustify }}>
 
       <div className="content-articulos">
 
         {cargando ? "Cargando..." : (
 
           articulos.length >= 1 ? 
-            <Listado articulos={articulos} setArticulos={setArticulos} /> 
+            <Listado articulos={articulosLimitados} setArticulos={setArticulos} /> 
           : 
             <h1>No hay articulos</h1> 
         )}

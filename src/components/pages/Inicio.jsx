@@ -1,18 +1,22 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import '../../css/Inicio.css';
 import { Link } from "react-router-dom"
 import Portada from '../layouts/Portada.jsx';
 import { ArticulosContext } from '../../helpers/ArticulosContext.jsx';
 import Articulos from './Articulos.jsx';
 import ArticulosLateral from '../layouts/ArticulosLateral.jsx';
+import CrearArticulo from './CrearArticulo.jsx';
 
 const Inicio = () => {
   const { articulos } = useContext(ArticulosContext);
+  const [btnCrear, setBtnCrear] = useState(false);
+
+  const handleBtncrear = () => {
+    setBtnCrear(true);
+  }
 
   return (
     <div className='Inicio page'>
-      
-      
 
       {articulos.length >= 1 ? (
         <>
@@ -30,7 +34,7 @@ const Inicio = () => {
               </button>
             </div>
 
-            <Articulos customPadding="0 15px 10px 0 " customJustify="flex-start" />
+            <Articulos maxArticulos={6} customPadding="0 0px 10px 0 " customJustify="flex-start" />
             
           </section>
           
@@ -46,6 +50,10 @@ const Inicio = () => {
       ): 
         <h1>No hay articulos</h1> 
       }
+
+      <button onClick={handleBtncrear} className='btn btn-crear btn-save'>Crear articulo</button>
+
+      {btnCrear && <CrearArticulo setBtnCrear={setBtnCrear} />}
 
     </div>
   );

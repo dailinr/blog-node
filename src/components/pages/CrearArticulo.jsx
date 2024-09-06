@@ -7,10 +7,15 @@ import { Global } from "../../helpers/Global";
 import Tostada from "../modals/Tostada";
 import ToastError from "../modals/ToastError";
 
-const CrearArticulo = () => {
+const CrearArticulo = ({ setBtnCrear }) => {
   // metodos que se cambiaran conforme el usuario ingrese o envie datos
   const { formulario, enviado, cambiado } = useForm({});
   const [resultado, setResultado] = useState("");
+
+  const cerrarModal = () => {
+    setBtnCrear(false);
+  }
+
 
   const guardarArticulo = async (e) => {
     e.preventDefault();
@@ -54,6 +59,7 @@ const CrearArticulo = () => {
 
       if (subida.datos.status === "success") {
         setResultado("guardado");
+        cerrarModal();
       } else {
         setResultado("error");
       }
@@ -63,11 +69,11 @@ const CrearArticulo = () => {
   };
 
   return (
-    <div className="pageCrear page">
+    <div className="form-overlay" >
       
       {/* <pre>{JSON.stringify(formulario)}</pre> */}
 
-      <form className='formulario' onSubmit={guardarArticulo} >
+      <form className='formulario ' onSubmit={guardarArticulo} >
       
 
         <h1 className='titulo-crear'> <i className='bx bx-notepad'/> &nbsp; Crear Articulo </h1>
@@ -96,17 +102,18 @@ const CrearArticulo = () => {
            className="file-input file-input-bordered file-input-sm w-full max-w-xs" />
         </div>
 
-        <input type="submit" value="Guardar" className="btn btn-active" />
+        <div className="botones">
+          <input onClick={cerrarModal} type="submit" value="Cancelar" className="btn btn-active" />
+          <input type="submit" value="Guardar" className="btn btn-save" />
+          
+        </div>
       </form> 
 
-      <strong style={{ width: "100px" }}>
-        {resultado === 'guardado' && <Tostada mensaje={"Articulo guardado"} />}
-      </strong>
-
-      <strong style={{ width: "100px" }}>
-        {resultado === 'error' && <ToastError mensaje={"Faltan datos"} />}
-      </strong>
+      {resultado === 'guardado' && <Tostada width="100" mensaje={"Articulo guardado"} />}
+      {resultado === 'error' && <ToastError width="100" mensaje={"Faltan datos"} />}
+      
     </div>
+
   );
 };
 
