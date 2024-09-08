@@ -50,4 +50,11 @@
     align-items: center;
     font-size: small;
     margin-bottom: 3px;
-  }
+}
+.fecha-lat{
+    margin-top: 5px;
+}
+.bx-calendar{
+    font-size: medium;
+    margin-right: 3px;
+}

@@ -1,0 +1,35 @@
+.ver-articulo{
+    padding: 0 35%;
+    
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-items: center;
+    row-gap: 10px;
+
+    background-color: rgb(250, 250, 250); 
+    min-height: 100vh;
+}
+.contenido-articulo{
+    padding-top: 20px;
+    /* border: 1px solid rgb(202, 202, 202); */
+}
+.ver-articulo h1{
+    font-size: x-large;
+    font-weight: 700;
+}
+
+.imagen-articulo{
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    height: auto;
+}
+
+.imagen-articulo img{
+    width: 330px;
+}
+.texto-articulo{
+    font-size: large;
+
+}

@@ -1,8 +1,10 @@
 import React, {useState, useEffect} from 'react';
 import "../../css/artic_lateral.css";
+import { Link } from 'react-router-dom';
 // import { ArticulosContext } from '../../helpers/ArticulosContext';
 import { Global } from '../../helpers/Global';
 import { PeticionAjax } from "../../helpers/PeticionAjax";
+import { formatearTiempoRelativo } from '../../helpers/ConvertirFecha';
 
 
 const ArticulosLateral = () => {
@@ -25,6 +27,7 @@ const ArticulosLateral = () => {
         }
     };
 
+ 
   return (
     
     <div  className='art-lateral'>
@@ -33,6 +36,7 @@ const ArticulosLateral = () => {
         let urlImagen = articulo.imagen !== "default.png"  ?
         Global.url + "ver-imagen/" + articulo.imagen : articulo.imagen;
 
+          
         return(
 
         <article key={articulo._id} className='card-lat'>
@@ -47,9 +51,16 @@ const ArticulosLateral = () => {
                 <div className=' label-lat '>{articulo.etiqueta}</div>
 
                 <div className='titulo-lat'>
+                 <Link to={"/articulo/"+articulo._id}>
                     <h5>{articulo.titulo} </h5>
+                 </Link>
                 </div>
                 
+                <div className='fecha-lat'>
+                    <p className="fecha-card" style={{fontSize: 'small'}}>
+                        <i className='bx bx-calendar'/>{formatearTiempoRelativo(articulo.fecha)}
+                    </p>
+                </div>
             </div>
 
         </article>

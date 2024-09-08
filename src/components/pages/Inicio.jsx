@@ -15,6 +15,8 @@ const Inicio = () => {
     setBtnCrear(true);
   }
 
+  
+
   return (
     <div className='Inicio page'>
 

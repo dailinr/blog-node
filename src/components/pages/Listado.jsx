@@ -4,6 +4,7 @@ import MenuArticulo from '../modals/MenuArticulo';
 import { PeticionAjax } from '../../helpers/PeticionAjax';
 import ModalConfirm from '../modals/ModalConfirm';
 import Tostada from '../modals/Tostada.jsx';
+import { Link } from 'react-router-dom';
 
 export const Listado = ( {articulos, setArticulos}) => {
   const [menuArticulo, setMenuArticulo] = useState(false);
@@ -42,6 +43,16 @@ export const Listado = ( {articulos, setArticulos}) => {
   const editar = (id) => {
     // Lógica para editar el artículo
   };
+
+  // Formatear la fecha en DD/MM/YY
+  const formatearFecha = (fecha) => {
+    const date = new Date(fecha);
+    return date.toLocaleDateString('es-ES', {
+      day: '2-digit',
+      month: '2-digit',
+      year: 'numeric',
+    });
+  };
   
   return (
     <>
@@ -54,7 +65,8 @@ export const Listado = ( {articulos, setArticulos}) => {
       return (
 
         <div key={cards._id} className="card">
-          
+
+         
           <div className="image-card"
             style={{
               // background: `linear-gradient(to top, rgba(0, 0, 0, 0.199), rgba(58, 58, 58, 0.178)), url("https://images.pexels.com/photos/1619317/pexels-photo-1619317.jpeg?cs=srgb&dl=pexels-souvenirpixels-1619317.jpg&fm=jpg") no-repeat center / cover`
@@ -87,12 +99,17 @@ export const Listado = ( {articulos, setArticulos}) => {
               <div className="icon-autor icon-card"></div>
               <div>
                 <p className="nombre-card">Nombre Autor</p>
-                <p className="fecha-card">{cards.fecha}</p>
+                <p className="fecha-card">{formatearFecha(cards.fecha)}</p>
               </div>
+
+              <button className='btn btn-ver-mas btn-save'>
+                <Link to={"/articulo/"+cards._id}> leer </Link>
+              </button>
             </div>
           </div>
+         
+          
         </div>
-
         
       );
     })}

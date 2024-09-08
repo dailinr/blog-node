@@ -19,7 +19,7 @@ const Header = () => {
         const searchInput = e.currentTarget.querySelector("input"); // Busca el input dentro del label
         let searchValue = searchInput ? searchInput.value : ""; // Verifica si el input existe y obtiene su valor
         setBuscar(searchValue);
-        console.log("Estás buscando: " + searchValue);
+        // console.log("Estás buscando: " + searchValue);
         navegar("/buscar/"+searchValue, {replace: true}); // para cambiar la ruta por la busqueda actual
     }
 
@@ -48,7 +48,7 @@ const Header = () => {
             </div> */}
 
             <label onChange={hacerBusqueda} className="input search input-bordered flex items-center gap-2">
-                <input type="text" id="search_field" className="grow" placeholder="Search" />
+                <input type="text" id="search_field" className="grow" placeholder="Buscar articulo" />
                 <svg
                     xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 0 16 16"

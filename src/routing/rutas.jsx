@@ -6,6 +6,7 @@ import Header from '../components/layouts/Header';
 import Footer from "../components/layouts/Footer";
 import CrearArticulo from "../components/pages/CrearArticulo";
 import { Busqueda } from "../components/pages/Busqueda";
+import { VerArticulo } from "../components/pages/VerArticulo";
 
 export const Rutas = () => {
 
@@ -23,6 +24,7 @@ export const Rutas = () => {
                     <Route path="/articulos" element={ <Articulos /> } />
                     <Route path="/crear-articulo" element={ <CrearArticulo/> } />
                     <Route path="/buscar/:busqueda" element={<Busqueda/>} />
+                    <Route path="/articulo/:id" element={ <VerArticulo />} />
 
                     <Route path="*" element={
                         <div className="jumbo page">
