@@ -121,7 +121,7 @@ const EditarArticulo = () => {
 
         <div className='form-group'>
           <label htmlFor='file0' />
-          <div className='imagen-articulo border-4 ' style={{width: '150px'}}>
+          <div className='imagen-articulo border-2 mb-1' style={{width: '150px'}}>
             <img src={urlImagen} alt={articulo.titulo} />
           </div>
 

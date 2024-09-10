@@ -22,9 +22,11 @@ const Inicio = () => {
 
       {articulos.length >= 1 ? (
         <>
-        <Portada />
+        
+        <Portada  /> 
+        <Portada className="recomendados"/> 
 
-        <div className='art-inicio'>
+        {/* <div className='art-inicio'> */}
           
           <section className="tendencias">
             <div className="titulo-tendencias">
@@ -36,18 +38,16 @@ const Inicio = () => {
               </button>
             </div>
 
-            <Articulos maxArticulos={6} customPadding="0 0px 10px 0 " customJustify="flex-start" />
+            <Articulos customPadding="0"   maxArticulos={6} />
             
           </section>
-          
-          <aside className='recientes'>
-            
-            <h4 className='titulo-recientes'>Recientes</h4>
 
-            <ArticulosLateral />
-          </aside>
+        {/* </div> */}
 
-        </div>
+        <aside className='recientes'>
+
+          <ArticulosLateral />
+        </aside>
         </>
       ): 
         <h1>No hay articulos</h1> 

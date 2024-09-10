@@ -4,6 +4,7 @@ import '../../css/Inicio.css';
 // import { ArticulosContext } from '../../helpers/ArticulosContext.jsx';
 import { Global } from '../../helpers/Global';
 import { PeticionAjax } from "../../helpers/PeticionAjax";
+import { formatearTiempoRelativo } from '../../helpers/ConvertirFecha';
 
 const Portada = () => {
     const [actualSlide, setActualSlide] = useState(0);
@@ -20,34 +21,41 @@ const Portada = () => {
       const {datos} = await PeticionAjax(url, "GET");
   
       if (datos.status === "success") {
-        setArticulos(datos.articulos);
+        
+        if(articulos.length <= 3){
+          setArticulos(datos.articulos.slice(0, 3));
+        }
+        
       }else{
         setArticulos([]);
       }
 
     };
 
-    useEffect(() => {
-      const interval = setInterval(() => {
-        setActualSlide((prevSlide) => (prevSlide === articulos.length - 1 ? 0 : prevSlide + 1));
-      }, 5000); // cambia cada 3 segundos
+  useEffect(() => {
+    const interval = setInterval(() => {
+      nextSlide();
+    }, 3000); // Cambia cada 3 segundos
 
-      return () => clearInterval(interval);
-    }, []);
+    return () => clearInterval(interval);
+  }, [articulos.length]);
 
-    const nextSlide = () => {
-      setActualSlide((prevSlide) => (prevSlide === articulos.length - 1 ? 0 : prevSlide + 1));
-    };
+  // Función para avanzar el slider
+  const nextSlide = () => {
+    setActualSlide((prevSlide) => (prevSlide + 1) % articulos.length);
+  };
 
-    const prevSlide = () => {
-      setActualSlide((prevSlide) => (prevSlide === 0 ? articulos.length - 1 : prevSlide - 1));
-    };
+  // Función para retroceder el slider
+  const prevSlide = () => {
+    setActualSlide((prevSlide) => (prevSlide - 1 + articulos.length) % articulos.length);
+  };
+
 
   return (
     <div className='slider'>
         <div className="slides-container" style={{ transform: `translateX(-${actualSlide * 100}%)` }}>
 
-          {articulos.slice(0, 3).map((portadas) => {
+          {articulos.map((portadas) => {
 
             let urlImagen = portadas.imagen !== "default.png"  ?
             Global.url + "ver-imagen/" + portadas.imagen : portadas.imagen;
@@ -70,9 +78,9 @@ const Portada = () => {
                   <div className="autor-portada">
                     <div className="icon-autor"></div>
                     <div className="nombre-autor">
-                      <p>{portadas.nombre_autor}</p>
+                      <p>Nombre autor{portadas.nombre_autor}</p>
                     </div>
-                    <div className="fecha-edicion">{portadas.fecha}</div>
+                    <div className="fecha-edicion">{formatearTiempoRelativo(portadas.fecha)}</div>
                   </div>
 
                 </div>

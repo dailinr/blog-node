@@ -24,8 +24,12 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  min-width: 200px;
-  width: 270px;
+  
+  width: 100%;
+  max-width: 275px;
+  flex-grow: 1;
+  flex-basis: 275px;
+  
   max-height: 330px;
   min-height: 330px;
   border-radius: 10px !important;
@@ -33,12 +37,12 @@
   -moz-border-radius: 10px !important;
   -ms-border-radius: 10px !important;
   -o-border-radius: 10px !important;
-  box-shadow: rgba(0, 0, 0, 0.35)  0px 5px 10px;
+  box-shadow: rgba(0, 0, 0, 0.185)  0px 5px 10px;
   /*box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
   */padding: 5px;
   overflow: hidden;
   
-  border: 1px solid rgb(216, 216, 216);
+  border: 1px solid rgb(236, 236, 236);
   background-color: #FFFFFF;
 }
 
@@ -112,8 +116,8 @@
   overflow: hidden;
   text-overflow: ellipsis; /* pone tres puntos al final */
 
-  letter-spacing: 1px;
-  word-spacing: -0.5px;
+  /* letter-spacing: 1px; */
+  /* word-spacing: -0.5px; */
   line-height: 1.3;
   font-size: 15px;
   max-height: calc(1.3em * 2); /* Ajustar de acuerdo al número de líneas */

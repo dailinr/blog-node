@@ -117,9 +117,7 @@ export const Listado = ( {articulos, setArticulos}) => {
       />
     )}
 
-    <strong style={{ width: "100px" }}>
-      {mostrarToast && <Tostada mensaje={"Articulo eliminado"} />}
-    </strong> 
+    {mostrarToast && <Tostada mensaje={"Articulo eliminado"} style={{ width: "100px" }} />}
 
     </>
   );

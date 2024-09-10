@@ -1,6 +1,6 @@
 .page{
     /* box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset; */
-    background-color: #F3F3F3; 
+    background-color: #fdfdfd; 
     min-height: 100vh;
     position: relative;
 }
@@ -15,9 +15,10 @@
     display: grid;
     min-height: 100vh;
     grid-template-rows: auto 1fr ;
+    grid-template-columns: 1fr 28%;
     grid-template-areas: 
-        "portada"
-        "articulos";
+        "portada recientes"
+        "tendencias recientes";
     row-gap: 20px;
     
     padding: 30px 50px;
@@ -41,7 +42,7 @@
     -moz-border-radius: 16px;
     -ms-border-radius: 16px;
     -o-border-radius: 16px;
-    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    box-shadow: rgba(0, 0, 0, 0.274) 0px 5px 15px;
 }
 .slides-container {
     display: flex;
@@ -50,7 +51,11 @@
 .portada {
     min-width: 100%;
     height: 300px;
-    padding: 30px 50px ;
+    padding: 30px 60px ;
+}
+.titulo-portada{
+    font-size: 26px;
+    font-weight: bold;
 }
 
 .prev, .next {
@@ -65,10 +70,10 @@
     font-size: large;
 }
 .prev {
-    left: 10px;
+    left: 20px;
 }
 .next {
-    right: 10px;
+    right: 20px;
 }
 
 .indicators {
@@ -79,6 +84,10 @@
     display: flex;
     justify-content: center;
     gap: 5px;
+    -webkit-transform: translateX(-50%);
+    -moz-transform: translateX(-50%);
+    -ms-transform: translateX(-50%);
+    -o-transform: translateX(-50%);
 }
 
 .indicator {
@@ -128,7 +137,6 @@
 
 .autor-portada{
     display: flex;
-    column-gap: 10px;
     margin-top: 10px;
 }
 .icon-autor{
@@ -143,25 +151,30 @@
     background: url(../../../public/icon-perfil.jpg) no-repeat center;
     background-size: cover;
 }
+.nombre-autor{
+    margin-left: 10px;
+    font-weight: 400;
+}
 
 .nombre-autor,
 .fecha-edicion{
     color: rgb(224, 221, 221);
     font-style: italic;
-    font-size: 14px;
 }
 .fecha-edicion{
-    margin-left: 5px ;
+    align-content: center;
+    margin-left: 6px ;
+    font-size: 13px;
 }
 
-.art-inicio{
+/* .art-inicio{
     grid-area: articulos;
     display: grid;
     grid-template-columns: 1fr 27%;
     grid-template-areas: 
         "tendencias recientes";
-    grid-template-rows: auto;
-}
+    grid-template-rows: auto; 
+} */
 .tendencias{
     grid-area: tendencias;
     height: auto;
@@ -170,14 +183,21 @@
     grid-area: recientes;
     height: auto;
 }
+.recomendados{
+    grid-area: recomendados;
+    height: auto;
+}
 
 .titulo-tendencias{
     padding: 10px 40px 20px 20px;
     display: flex;
+    font-weight: 600;
     justify-content: space-between;
 }
 .titulo-recientes{
-    padding: 10px 20px 25px 15px;
+    padding-left: 8px;
+    padding-bottom: 4px;
+    font-weight: 600;
 }
 
 .boton-vermas {
