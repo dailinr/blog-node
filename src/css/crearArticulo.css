@@ -15,7 +15,6 @@
     justify-content: center;
     align-items: center;
     z-index: 10000;
-    overflow-y: auto;
 }
   
 .titulo-crear{
@@ -31,14 +30,12 @@
 }
 .formulario{
     width: 450px;
-    height: auto;
-    padding: 20px 5.5%  ;
-    /* margin: 0 auto; */
+    max-height: 93vh; /* Limitar la altura del modal al 90% de la altura de la pantalla */
+    padding: 20px 5.5% ;
     display: flex;
     font-size: medium;
     flex-direction: column;
     row-gap: 20px;
-    
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 10px;
     border-radius: 16px;
     -webkit-border-radius: 16px;
@@ -46,6 +43,7 @@
     -ms-border-radius: 16px;
     -o-border-radius: 16px;
     background-color: #FFFFFF;
+    overflow-y: auto;
 }
 
 input[type="text"], textarea{

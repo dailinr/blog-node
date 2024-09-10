@@ -23,7 +23,7 @@ const Portada = () => {
       if (datos.status === "success") {
         
         if(articulos.length <= 3){
-          setArticulos(datos.articulos.slice(0, 3));
+          setArticulos(datos.articulos.slice(5, 8));
         }
         
       }else{
