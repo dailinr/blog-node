@@ -1,7 +1,8 @@
 import React from 'react'
+import { Link } from 'react-router-dom';
 import '../../css/menuUser.css';
 
-const MenuArticulo = ({ idArticulo, eliminar, editar }) => {
+const MenuArticulo = ({ idArticulo, eliminar }) => {
 
 
   return (
@@ -9,9 +10,9 @@ const MenuArticulo = ({ idArticulo, eliminar, editar }) => {
       
       <ul className='lista list-articulo '>
 
-        <li className='editar' onClick={() =>  editar(idArticulo)}> 
-            <i className='bx bxs-edit-alt' /> Editar
-        </li>
+        <Link to={"/editar/"+idArticulo} className='editar'>
+          <li><i className='bx bxs-edit-alt' /> Editar </li>
+        </Link>
 
         <li className='eliminar' onClick={() => eliminar(idArticulo)}> 
             <i className='bx bx-trash' /> Eliminar

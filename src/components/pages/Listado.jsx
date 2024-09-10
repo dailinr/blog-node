@@ -39,10 +39,6 @@ export const Listado = ( {articulos, setArticulos}) => {
     }
   
   }
-  
-  const editar = (id) => {
-    // Lógica para editar el artículo
-  };
 
   // Formatear la fecha en DD/MM/YY
   const formatearFecha = (fecha) => {
@@ -66,6 +62,7 @@ export const Listado = ( {articulos, setArticulos}) => {
 
         <div key={cards._id} className="card">
 
+          <div className='cont-image'>
          
           <div className="image-card"
             style={{
@@ -76,14 +73,15 @@ export const Listado = ( {articulos, setArticulos}) => {
             <div className="label-card">{cards.etiqueta}</div>
           </div>
 
-          <div className="contenido-card">
+          </div>
 
+          <div className="contenido-card">
             
-              <i className='bx bx-dots-vertical-rounded' onClick={() => mostrarMenu(cards._id)} >
-                {menuArticulo === cards._id && 
-                  <MenuArticulo idArticulo={cards._id} eliminar={eliminar} editar={editar} />
-                } 
-              </i>
+            <i className='bx bx-dots-vertical-rounded' onClick={() => mostrarMenu(cards._id)} >
+              {menuArticulo === cards._id && 
+                <MenuArticulo idArticulo={cards._id} eliminar={eliminar}  />
+              } 
+            </i>
             
 
             <div className="time-update"></div>
@@ -93,18 +91,15 @@ export const Listado = ( {articulos, setArticulos}) => {
             </div>
             <div className="text-card">{cards.contenido}</div>
 
-            <hr style={{margin: '2px'}} />
-
-            <div className="datos-autor">
+            <div className="datos-autor border-t pt-2">
               <div className="icon-autor icon-card"></div>
               <div>
                 <p className="nombre-card">Nombre Autor</p>
                 <p className="fecha-card">{formatearFecha(cards.fecha)}</p>
               </div>
 
-              <button className='btn btn-ver-mas btn-save'>
-                <Link to={"/articulo/"+cards._id}> leer </Link>
-              </button>
+              <Link to={"/articulo/"+cards._id} className='btn btn-ver-mas btn-save'> leer </Link>
+
             </div>
           </div>
          

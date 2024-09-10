@@ -76,7 +76,12 @@ const CrearArticulo = ({ setBtnCrear }) => {
       <form className='formulario ' onSubmit={guardarArticulo} >
       
 
-        <h1 className='titulo-crear'> <i className='bx bx-notepad'/> &nbsp; Crear Articulo </h1>
+        <h1 className='titulo-crear'> 
+          <i className='bx bx-notepad'/> &nbsp; Crear Articulo 
+          
+          <i className='bx bx-x' onClick={cerrarModal} 
+          style={{marginLeft: 'auto', marginRight: '0', cursor: 'pointer'}} /> 
+        </h1>
 
         <div className='form-group'>
           <label htmlFor='titulo'>Titulo</label> <br/>

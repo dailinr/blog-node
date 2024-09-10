@@ -39,7 +39,7 @@ const Header = () => {
         <ul className='navegacion'>
             <li><NavLink to="/inicio" ctiveClassName="active" className= "link ">Inicio</NavLink></li>
             <li><NavLink to="/articulos" ctiveClassName="active" className= "link ">Articulos</NavLink></li>
-            <li><NavLink to="/articulos" ctiveClassName="active" className= "link ">Tendencias</NavLink></li>
+            {/* <li><NavLink to="/crear-articulo" ctiveClassName="active" className= "link ">Tendencias</NavLink></li> */}
         </ul>
 
         <div className="iconos">
