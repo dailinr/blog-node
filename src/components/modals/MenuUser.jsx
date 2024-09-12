@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom';
 import '../../css/menuUser.css';
 
 const menuUser = () => {
@@ -20,7 +21,7 @@ const menuUser = () => {
       <ul className='lista'>
         <li> <i className='bx bx-user'></i> Perfil</li>
         <li><i className='bx bx-cog'></i> Configuracion</li>
-        <li><i className='bx bx-log-out-circle'></i> Cerrar Sesion</li>
+        <Link to={"/login"} ><li ><i className='bx bx-log-out-circle'></i> Cerrar Sesion</li></Link>
       </ul>
 
     </div>

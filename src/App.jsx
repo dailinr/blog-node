@@ -1,10 +1,13 @@
 import './App.css';
 import { Rutas } from './routing/rutas';
+import { BrowserRouter } from 'react-router-dom';
 
 function App() {
 
   return (
-    <Rutas />
+    <BrowserRouter>
+      <Rutas />
+    </BrowserRouter>
   )
 }
 
