@@ -21,7 +21,7 @@ const menuUser = () => {
       <ul className='lista'>
         <li> <i className='bx bx-user'></i> Perfil</li>
         <li><i className='bx bx-cog'></i> Configuracion</li>
-        <Link to={"/login"} ><li ><i className='bx bx-log-out-circle'></i> Cerrar Sesion</li></Link>
+        <Link to={"usuario/login"} ><li ><i className='bx bx-log-out-circle'></i> Cerrar Sesion</li></Link>
       </ul>
 
     </div>

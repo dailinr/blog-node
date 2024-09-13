@@ -24,7 +24,7 @@ const Login = () => {
                 </div>
             </div>
             <Link to={"/inicio"} type="submit" className="w-full text-[#FFFFFF] bg-[#1e1e25] focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mb-6">Login</Link>
-            <div className="text-sm font-light text-[#6B7280] ">Don't have an accout yet? <Link to={"/registrar-cuenta"} className="font-medium text-[#1e1e25] hover:underline">Sign Up</Link>
+            <div className="text-sm font-light text-[#6B7280] ">Don't have an accout yet? <Link to={"/usuario/registrar-cuenta"} className="font-medium text-[#1e1e25] hover:underline">Sign Up</Link>
 
             </div>
         </form>
