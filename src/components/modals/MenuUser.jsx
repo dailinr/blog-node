@@ -1,19 +1,22 @@
 import React from 'react'
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import '../../css/menuUser.css';
+import useAuth from '../../helpers/hooks/useAuth';
 
 const menuUser = () => {
-    
+  const { auth } = useAuth();
+
+  console.log(auth);
 
   return (
     <div className='menuUser'>
       
       <div className="datosUser">
         <div className='nombre_usuario'>
-          Dailin Romero
+          {auth.name} {auth.surname}
         </div>
         <div className='user'>
-          @dayromero27
+          @{auth.nick}
         </div>
       </div>
       <hr/>
@@ -21,7 +24,7 @@ const menuUser = () => {
       <ul className='lista'>
         <li> <i className='bx bx-user'></i> Perfil</li>
         <li><i className='bx bx-cog'></i> Configuracion</li>
-        <Link to={"usuario/login"} ><li ><i className='bx bx-log-out-circle'></i> Cerrar Sesion</li></Link>
+        <NavLink to={"usuario/login"} ><li ><i className='bx bx-log-out-circle'></i> Cerrar Sesion</li></NavLink>
       </ul>
 
     </div>

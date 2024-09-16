@@ -1,29 +1,70 @@
-import React from 'react'
+import React, {useState} from 'react'
 import "../../css/login.css"
 import { Link } from 'react-router-dom'
+import { useForm } from '../../helpers/hooks/useForm'
+import { Global } from '../../helpers/Global'
+import { PeticionAjax } from '../../helpers/PeticionAjax'
+import Tostada from '../modals/Tostada'
+import ToastError from '../modals/ToastError'
 
 const Login = () => {
+    const { formulario, cambiado } = useForm({});
+    const [resultado, setResultado] = useState("");
+
+    const loginUser = async (e) => {
+        e.preventDefault();
+
+        let datosUser = formulario;
+
+        const url = Global.url + "usuario/login";
+
+        const { datos } = await PeticionAjax(url, "POST", datosUser);
+
+        if(datos.status === "success"){
+
+            // Persistir los datos en el navegador - guardar una sesion
+            localStorage.setItem("token", datos.token);
+            localStorage.setItem("user", JSON.stringify(datos.user)); 
+
+            setResultado("encontrado");
+        }
+        else{
+            setResultado("error");
+        }
+    }
+
   return (
+    
     <div className="page-login">
+        
+        {resultado === 'encontrado' && <Tostada width="100" mensaje={"Usuario identificado correctamente"} /> }
+        {resultado === 'error' && <ToastError width="100" mensaje={"Usuario no encontrado"} />}
+      
     <div className="login flex flex-col w-full md:w-1/2 xl:w-2/5 2xl:w-2/5 3xl:w-1/3 mx-auto p-8 md:p-10 md:pt-1 2xl:p-12 3xl:p-14 bg-[#ffffff] rounded-2xl shadow-xl">
         <div className='flex flex-col mx-auto'>
             <img src="../../../TecnoPulse-removebg-preview.png" alt="" width="180" />
 
         </div>
-        <form className="flex flex-col">
+        <form className="flex flex-col" onSubmit={loginUser}>
             <div className="pb-2">
                 <label htmlFor="email" className="block mb-2 text-sm font-medium text-[#111827]">Email</label>
-                <div className="relative text-gray-400"><span className="absolute inset-y-0 left-0 flex items-center p-1 pl-3"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-mail"><rect width="20" height="16" x="2" y="4" rx="2"></rect><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path></svg></span> 
-                    <input type="email" name="email" id="email" className="pl-12 mb-2 bg-gray-50 text-gray-600 border focus:border-transparent border-gray-300 sm:text-sm rounded-lg ring ring-transparent focus:ring-1 focus:outline-none focus:ring-gray-400 block w-full p-2.5 rounded-l-lg py-3 px-4" placeholder="name@company.com" autoComplete="off" />
+                <div className="relative text-gray-400">
+                    <span className="absolute inset-y-0 left-0 flex items-center p-1 pl-3">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-mail"><rect width="20" height="16" x="2" y="4" rx="2"></rect><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path></svg>
+                    </span> 
+                    <input type="email" name="email" onChange={cambiado} id="email" className="pl-12 mb-2 bg-gray-50 text-gray-600 border focus:border-transparent border-gray-300 sm:text-sm rounded-lg ring ring-transparent focus:ring-1 focus:outline-none focus:ring-gray-400 block w-full p-2.5 rounded-l-lg py-3 px-4" placeholder="name@company.com" autoComplete="off" />
                 </div>
             </div>
             <div className="pb-6">
                 <label htmlFor="password" className="block mb-2 text-sm font-medium text-[#111827]">Password</label>
-                <div className="relative text-gray-400"><span className="absolute inset-y-0 left-0 flex items-center p-1 pl-3"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-square-asterisk"><rect width="18" height="18" x="3" y="3" rx="2"></rect><path d="M12 8v8"></path><path d="m8.5 14 7-4"></path><path d="m8.5 10 7 4"></path></svg></span> 
-                    <input type="password" name="password" id="password" placeholder="••••••••••" className="pl-12 mb-2 bg-gray-50 text-gray-600 border focus:border-transparent border-gray-300 sm:text-sm rounded-lg ring ring-transparent focus:ring-1 focus:outline-none focus:ring-gray-400 block w-full p-2.5 rounded-l-lg py-3 px-4" autoComplete="new-password" aria-autocomplete="list" data-listener-added_5995265e="true" />
+                <div className="relative text-gray-400">
+                    <span className="absolute inset-y-0 left-0 flex items-center p-1 pl-3">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-key-round"><path d="M2.586 17.414A2 2 0 0 0 2 18.828V21a1 1 0 0 0 1 1h3a1 1 0 0 0 1-1v-1a1 1 0 0 1 1-1h1a1 1 0 0 0 1-1v-1a1 1 0 0 1 1-1h.172a2 2 0 0 0 1.414-.586l.814-.814a6.5 6.5 0 1 0-4-4z"/><circle cx="16.5" cy="7.5" r=".5" fill="currentColor"/></svg>
+                    </span> 
+                    <input type="password" name="password" onChange={cambiado} id="password" placeholder="••••••••••" className="pl-12 mb-2 bg-gray-50 text-gray-600 border focus:border-transparent border-gray-300 sm:text-sm rounded-lg ring ring-transparent focus:ring-1 focus:outline-none focus:ring-gray-400 block w-full p-2.5 rounded-l-lg py-3 px-4" autoComplete="new-password" aria-autocomplete="list" data-listener-added_5995265e="true" />
                 </div>
             </div>
-            <Link to={"/inicio"} type="submit" className="w-full text-[#FFFFFF] bg-[#1e1e25] focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mb-6">Login</Link>
+            <input  type="submit" value="Login" className="w-full text-[#FFFFFF] bg-[#1e1e25] focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mb-6" />
             <div className="text-sm font-light text-[#6B7280] ">Don't have an accout yet? <Link to={"/usuario/registrar-cuenta"} className="font-medium text-[#1e1e25] hover:underline">Sign Up</Link>
 
             </div>

@@ -10,11 +10,14 @@ import Login from "../components/pages/Login";
 import RegistrarCuenta from "../components/pages/RegistrarCuenta";
 import LayoutPublic from "../components/layouts/LayoutPublic";
 import PrivateLayout from "../components/layouts/PrivateLayout";
+import { AuthProvider } from "../helpers/AuthProvider";
 
 export const Rutas = () => {
 
     return(
 
+    <AuthProvider>
+    
         <Routes>
 
             <Route path="/usuario" element={<LayoutPublic />} >
@@ -42,6 +45,7 @@ export const Rutas = () => {
             } /> 
 
         </Routes>
+    </AuthProvider>
 
     );
 }

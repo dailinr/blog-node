@@ -14,9 +14,7 @@ const Inicio = () => {
   const handleBtncrear = () => {
     setBtnCrear(true);
   }
-
   
-
   return (
     <div className='Inicio page'>
 
@@ -37,6 +35,8 @@ const Inicio = () => {
                 </Link>
               </button>
             </div>
+
+
 
             <Articulos customPadding="0"   maxArticulos={6} />
             

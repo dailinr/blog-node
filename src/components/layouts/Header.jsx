@@ -11,7 +11,7 @@ const Header = () => {
 
     const mostrarOpcUser = () => {
         setMenuUsuario(!menuUsuario);
-        console.log("menu usuario: " + menuUsuario);
+        // console.log("menu usuario: " + menuUsuario);
     };
 
     const hacerBusqueda = (e) => {
@@ -37,11 +37,28 @@ const Header = () => {
         </div>
 
         <ul className='navegacion'>
-            <li><NavLink to="/inicio" activeClassName="active" className= "link ">Inicio</NavLink></li>
-            <li><NavLink to="/articulos" activeClassName="active" className= "link ">Articulos</NavLink></li>
-            <li><NavLink to="/editar" activeClassName="active" className= "link ">Tendencias</NavLink></li>
-            <li><NavLink to="/editar" activeClassName="active" className= "link ">Recomendados</NavLink></li>
+            <li>
+                <NavLink  to="/inicio" className={({ isActive }) => isActive ? "link active" : "link"}>
+                    Inicio
+                </NavLink>
+            </li>
+            <li>
+                <NavLink to="/articulos" className={({ isActive }) => isActive ? "link active" : "link"} >
+                    Articulos
+                </NavLink>
+            </li>
+            <li>
+                <NavLink to="/editar" className={({ isActive }) => isActive ? "link active" : "link"}>
+                    Tendencias
+                </NavLink>
+            </li>
+            <li>
+                <NavLink to="/editar" className={({ isActive }) => isActive ? "link active" : "link"}>
+                    Recomendados
+                </NavLink>
+            </li>
         </ul>
+
 
         <div className="iconos">
             {/* <div className="icon-buscar">
