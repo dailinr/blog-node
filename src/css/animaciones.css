@@ -1,0 +1,44 @@
+.page-cargando {
+  /* box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset; */
+  background-color: #fdfdfd;
+  min-height: 100vh;
+  text-align: center;
+  align-content: center;
+}
+.loader {
+  position: relative;
+  font-size: 28px;
+  letter-spacing: 2px;
+  font-weight: 500;
+}
+.loader:before {
+  content: "Loading";
+  color: black;
+}
+.loader:after {
+  content: "";
+  width: 20px;
+  height: 20px;
+  background-color: #ff3d00;
+  border-radius: 50%;
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  top: -70px;
+  animation: motion 3s ease-in-out infinite;
+}
+
+@keyframes motion {
+  0%,
+  50%,
+  100% {
+    transform: translateX(0) scale(1);
+  }
+  25% {
+    transform: translateX(-100px) scale(0.3);
+  }
+  75% {
+    transform: translateX(100px) scale(0.3);
+  }
+}
+

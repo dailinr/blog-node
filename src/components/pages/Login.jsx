@@ -1,15 +1,19 @@
 import React, {useState} from 'react'
 import "../../css/login.css"
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { useForm } from '../../helpers/hooks/useForm'
 import { Global } from '../../helpers/Global'
 import { PeticionAjax } from '../../helpers/PeticionAjax'
 import Tostada from '../modals/Tostada'
 import ToastError from '../modals/ToastError'
+import useAuth from '../../helpers/hooks/useAuth'
 
 const Login = () => {
     const { formulario, cambiado } = useForm({});
     const [resultado, setResultado] = useState("");
+    const navigate = useNavigate(); // Importa y usa useNavigate
+
+    const { setAuth } = useAuth();
 
     const loginUser = async (e) => {
         e.preventDefault();
@@ -22,11 +26,19 @@ const Login = () => {
 
         if(datos.status === "success"){
 
-            // Persistir los datos en el navegador - guardar una sesion
+            // Persistir los datos en el localstorage - guardar una sesion
             localStorage.setItem("token", datos.token);
             localStorage.setItem("user", JSON.stringify(datos.user)); 
 
             setResultado("encontrado");
+
+            // Setear datos del usuario en el auth
+            setAuth(datos.user);
+
+            // Redireccion a parte privada de la app (inicio)
+            setTimeout(() => {
+                navigate("/inicio");
+            }, 1000);
         }
         else{
             setResultado("error");
@@ -59,7 +71,7 @@ const Login = () => {
                 <label htmlFor="password" className="block mb-2 text-sm font-medium text-[#111827]">Password</label>
                 <div className="relative text-gray-400">
                     <span className="absolute inset-y-0 left-0 flex items-center p-1 pl-3">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-key-round"><path d="M2.586 17.414A2 2 0 0 0 2 18.828V21a1 1 0 0 0 1 1h3a1 1 0 0 0 1-1v-1a1 1 0 0 1 1-1h1a1 1 0 0 0 1-1v-1a1 1 0 0 1 1-1h.172a2 2 0 0 0 1.414-.586l.814-.814a6.5 6.5 0 1 0-4-4z"/><circle cx="16.5" cy="7.5" r=".5" fill="currentColor"/></svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-key-round"><path d="M2.586 17.414A2 2 0 0 0 2 18.828V21a1 1 0 0 0 1 1h3a1 1 0 0 0 1-1v-1a1 1 0 0 1 1-1h1a1 1 0 0 0 1-1v-1a1 1 0 0 1 1-1h.172a2 2 0 0 0 1.414-.586l.814-.814a6.5 6.5 0 1 0-4-4z"/><circle cx="16.5" cy="7.5" r=".5" fill="currentColor"/></svg>
                     </span> 
                     <input type="password" name="password" onChange={cambiado} id="password" placeholder="••••••••••" className="pl-12 mb-2 bg-gray-50 text-gray-600 border focus:border-transparent border-gray-300 sm:text-sm rounded-lg ring ring-transparent focus:ring-1 focus:outline-none focus:ring-gray-400 block w-full p-2.5 rounded-l-lg py-3 px-4" autoComplete="new-password" aria-autocomplete="list" data-listener-added_5995265e="true" />
                 </div>

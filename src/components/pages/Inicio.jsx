@@ -36,8 +36,6 @@ const Inicio = () => {
               </button>
             </div>
 
-
-
             <Articulos customPadding="0"   maxArticulos={6} />
             
           </section>

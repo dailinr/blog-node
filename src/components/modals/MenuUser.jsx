@@ -6,8 +6,6 @@ import useAuth from '../../helpers/hooks/useAuth';
 const menuUser = () => {
   const { auth } = useAuth();
 
-  console.log(auth);
-
   return (
     <div className='menuUser'>
       
@@ -24,7 +22,7 @@ const menuUser = () => {
       <ul className='lista'>
         <li> <i className='bx bx-user'></i> Perfil</li>
         <li><i className='bx bx-cog'></i> Configuracion</li>
-        <NavLink to={"usuario/login"} ><li ><i className='bx bx-log-out-circle'></i> Cerrar Sesion</li></NavLink>
+        <NavLink to={"/logout"} ><li ><i className='bx bx-log-out-circle'></i> Cerrar Sesion</li></NavLink>
       </ul>
 
     </div>

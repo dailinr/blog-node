@@ -4,7 +4,8 @@ import { Global } from './Global';
 const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
-    const [auth, setAuth ] = useState({}); // comprueba si el está autenticado
+    const [auth, setAuth] = useState(null); // Modificación: leer user del localStorage al cargar
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         authUser();
@@ -19,7 +20,9 @@ export const AuthProvider = ({ children }) => {
 
         // Comprobar si tengo el token y el user
         if(!token || !user){
-            return false; // termina la funcion 
+            setLoading(false);
+            setAuth(null); // Aseguramos que auth esté vacío
+            return; // termina la funcion 
         }
 
         // Transformar los datos a un objeto de javaScript
@@ -49,13 +52,17 @@ export const AuthProvider = ({ children }) => {
         } 
         catch (error) {
             console.error("Error al obtener el perfil del usuario:", error);
+            setAuth(null);
+        } 
+        finally {
+            setLoading(false);
         }
     };
 
 
   return (
     <AuthContext.Provider 
-        value={{auth, setAuth}} >
+        value={{auth, setAuth, loading}} >
 
         { children }
     </AuthContext.Provider>

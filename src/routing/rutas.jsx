@@ -11,6 +11,7 @@ import RegistrarCuenta from "../components/pages/RegistrarCuenta";
 import LayoutPublic from "../components/layouts/LayoutPublic";
 import PrivateLayout from "../components/layouts/PrivateLayout";
 import { AuthProvider } from "../helpers/AuthProvider";
+import { CerrarSesion } from "../components/pages/CerrarSesion";
 
 export const Rutas = () => {
 
@@ -35,6 +36,7 @@ export const Rutas = () => {
                 <Route path="buscar/:busqueda" element={<Busqueda/>} />
                 <Route path="articulo/:id" element={ <VerArticulo />} />
                 <Route path="editar/:id" element={ <EditarArticulo />} />
+                <Route path="logout" element={<CerrarSesion />} />
 
             </Route>
 
