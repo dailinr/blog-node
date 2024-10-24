@@ -1,14 +1,18 @@
-import React, { useState } from 'react'
+import React, { useState , useEffect } from 'react'
 import '../../css/header.css';
 import MenuUser from '../modals/MenuUser';
 import { NavLink } from "react-router-dom";
 import { useNavigate } from 'react-router-dom';
+import useAuth from '../../helpers/hooks/useAuth';
+import { Global } from '../../helpers/Global';
 
 const Header = () => {
     const [menuUsuario, setMenuUsuario] = useState(false);
     const [buscar, setBuscar] = useState("");
     const navegar = useNavigate();
 
+    const { auth } = useAuth();
+    
     const mostrarOpcUser = () => {
         setMenuUsuario(!menuUsuario);
         // console.log("menu usuario: " + menuUsuario);
@@ -22,7 +26,11 @@ const Header = () => {
         // console.log("Estás buscando: " + searchValue);
         navegar("/buscar/"+searchValue, {replace: true}); // para cambiar la ruta por la busqueda actual
     }
+    
+    const avatarDefault = "../../../public/default-avatar-profile-icon-of-social-media-user-vector.jpg";
 
+    let urlImagen = auth.image === "default.png" ? 
+        avatarDefault : Global.url + "usuario/avatar/" + auth.image;
 
   return (
     <div className='header '>
@@ -48,13 +56,13 @@ const Header = () => {
                 </NavLink>
             </li>
             <li>
-                <NavLink to="/editar" className={({ isActive }) => isActive ? "link active" : "link"}>
+                <NavLink to="/articulos" className={({ isActive }) => isActive ? "link active" : "link"}>
                     Tendencias
                 </NavLink>
             </li>
             <li>
-                <NavLink to="/editar" className={({ isActive }) => isActive ? "link active" : "link"}>
-                    Recomendados
+                <NavLink to="/explorar-users" className={({ isActive }) => isActive ? "link active" : "link"}>
+                    Explorar usuarios
                 </NavLink>
             </li>
         </ul>
@@ -82,19 +90,15 @@ const Header = () => {
             <div className="icon-noti">
                 <i className='bx bxs-bell'></i>
             </div>
-            <div className='icon-perfil'
-                onClick={mostrarOpcUser} >        
+            
+            <div className='icon-perfil' onClick={mostrarOpcUser}
+                style={{ background: `url(${urlImagen}) no-repeat center / cover` }} >
+
                 {menuUsuario && <MenuUser/>}
             </div>
-            
-            
+
         </div>
         
-        
-
-        {/* <div className='buscador'>
-            <input type="search" placeholder='buscar' />
-        </div> */}
     </div>
   )
 }

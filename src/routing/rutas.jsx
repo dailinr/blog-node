@@ -12,6 +12,9 @@ import LayoutPublic from "../components/layouts/LayoutPublic";
 import PrivateLayout from "../components/layouts/PrivateLayout";
 import { AuthProvider } from "../helpers/AuthProvider";
 import { CerrarSesion } from "../components/pages/CerrarSesion";
+import { PerfilUser } from "../components/pages/PerfilUser";
+import { Configuracion } from "../components/pages/Configuracion";
+import { ExplorarUsers } from "../components/pages/ExplorarUsers";
 
 export const Rutas = () => {
 
@@ -37,6 +40,9 @@ export const Rutas = () => {
                 <Route path="articulo/:id" element={ <VerArticulo />} />
                 <Route path="editar/:id" element={ <EditarArticulo />} />
                 <Route path="logout" element={<CerrarSesion />} />
+                <Route path="perfil" element={<PerfilUser />} />
+                <Route path="configuracion" element={<Configuracion />} />
+                <Route path="explorar-users" element={<ExplorarUsers />} />
 
             </Route>
 

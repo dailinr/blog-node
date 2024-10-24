@@ -1,0 +1,81 @@
+.page-perfil {
+    width: 100%;
+    min-height: 100vh;
+    /* border: 1px solid rgba(155, 155, 155, 0.767) ; */
+    background-color: rgba(219, 218, 218, 0.767);
+    padding-top: 10px;
+    display: flex;
+    flex-direction: column;
+    row-gap: 15px;
+}
+
+.info-perfil, .post-perfil{
+    width: 60%;
+    margin: 0px auto;
+    height: auto;
+    background-color: #fdfdfd;
+    padding-bottom: 20px;
+    
+    border-radius: 8px;
+    -webkit-border-radius: 8px;
+    -moz-border-radius: 8px;
+    -ms-border-radius: 8px;
+    -o-border-radius: 8px;
+    box-shadow: rgba(0, 0, 0, 0.185)  0px 5px 10px;
+}
+
+.header-perfil {
+    width: 100%;
+    height: 200px;
+    background-color: aquamarine;
+    position: relative;
+}
+
+.avatar-perfil {
+    width: 150px;
+    height: 150px;
+    background-color: brown;
+    border-radius: 50%;
+    position: absolute;
+    left: 5%; /* Ajusta este valor según lo cerca que quieras el avatar del borde derecho */
+    bottom: -75px; /* Mitad de la altura del avatar */
+    border: 5px solid white; /* Borde blanco para efecto similar a Twitter */
+}
+
+
+/* Ajuste para contenido debajo del avatar */
+.data-user {
+    margin-top: 80px;
+    margin-left: 5%;
+}
+
+.nombre-user{
+    font-size: 22px;
+    font-weight: 700;
+}
+.nick-user{
+    font-size: 16px;
+    font-style: italic;
+}
+
+.follow-counters{
+    margin-top: 15px;
+    display: flex;
+    column-gap: 15px;
+    margin-left: 5%;
+}
+
+
+.following p, .followers p, .articulos p{
+    font-size: 16px;
+    font-weight: 700;
+}
+
+.following span, .followers span, .articulos span{
+    font-weight: 400;
+    font-size: 15px;
+}
+
+.post-perfil{
+
+}

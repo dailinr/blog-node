@@ -61,11 +61,9 @@
     color: rgb(71, 71, 71)
 }
 .icon-perfil{
-    background: url(../../../public/icon-perfil.jpg) no-repeat center;
-    background-size: cover;
     border: none !important;
     position: relative;
-    border: 1px solid rgba(155, 155, 155, 0.767);
+    /* border: 1px solid rgba(155, 155, 155, 0.767); */
 }
 
 .header > div p{

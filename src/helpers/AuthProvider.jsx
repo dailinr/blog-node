@@ -5,6 +5,7 @@ const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
     const [auth, setAuth] = useState(null); // Modificación: leer user del localStorage al cargar
+    const [counters, setCounters] = useState({});
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
@@ -45,10 +46,22 @@ export const AuthProvider = ({ children }) => {
 
             // y me devuelva todos los datos del usuario
             const data = await request.json();
-            console.log("datos user: " + data);
-            
+
+            // ------ Peticion para los contadores -----
+            const requestCounters = await fetch( Global.url + "usuario/counters/" + userId, {
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": token
+                }
+            });
+
+            const dataCounters = await requestCounters.json();
+
             // Setear el estado de auth
             setAuth(data.user);
+            setCounters(dataCounters);
+
         } 
         catch (error) {
             console.error("Error al obtener el perfil del usuario:", error);
@@ -62,7 +75,7 @@ export const AuthProvider = ({ children }) => {
 
   return (
     <AuthContext.Provider 
-        value={{auth, setAuth, loading}} >
+        value={{auth, setAuth, loading, counters}} >
 
         { children }
     </AuthContext.Provider>
