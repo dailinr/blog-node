@@ -2,21 +2,24 @@ import React, { useEffect, useState } from 'react';
 import "../../css/explorar_users.css";
 import useAuth from '../../helpers/hooks/useAuth';
 import { Global } from '../../helpers/Global';
-import { PeticionAjax } from '../../helpers/PeticionAjax';
 
 export const ExplorarUsers = () => {
     const [users, setUsers] = useState([]);
     const token = localStorage.getItem("token");
-    const {auth} = useAuth();
     const [following, setFollowing] = useState([]);
+    const [page, setPage] = useState(1);
+    const [more, setMore] = useState(true);
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         conseguirUsers();
     }, []);
 
-    const conseguirUsers = async() => {
+    const conseguirUsers = async(nextPage) => {
 
-        const request = await fetch(Global.url + "usuario/list/1", {
+        setLoading(true);
+
+        const request = await fetch(Global.url + "usuario/list/" + nextPage, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
@@ -26,13 +29,32 @@ export const ExplorarUsers = () => {
 
         const data = await request.json();
 
-        console.log(data.user_following);
-
         if(data.status == "success" && data.users){
-            setUsers(data.users);
+            
+            let newUsers = data.users;
 
+            if(users.length >= 1){
+                newUsers = [...users, ...data.users];
+            }
+
+            setUsers(newUsers);
+            setLoading(false);
             setFollowing(data.user_following);
+
+            // Paginacion - condición no mostrar btn ver más
+            if(!(data.pages - data.page) >= 1){
+                setMore(false);
+            }
         }
+    }
+
+    const nextPage = () => {
+        let next = page + 1;
+        setPage(next);
+
+        conseguirUsers(next);
+
+        console.log(page, users);
     }
     
     const seguirUsuario = async(userId) => {
@@ -74,10 +96,8 @@ export const ExplorarUsers = () => {
             // filtrar los datos para eliminar el serId al q se dio unfollow
             let filterFollowings = following.filter(followingUserId => userId !== followingUserId);
             setFollowing(filterFollowings);
-
-            
         }
-    }
+    } 
 
     const avatarDefault = "../../../public/default-avatar-profile-icon-of-social-media-user-vector.jpg";
    
@@ -85,6 +105,9 @@ export const ExplorarUsers = () => {
     <div className='page-users'>
         
         <div className='content-users'>
+        
+        {!loading ? (
+            <>
 
             {users.map(user => {
 
@@ -101,7 +124,7 @@ export const ExplorarUsers = () => {
 
                     <div className="info-user">
 
-                        <p className="name-user"> {user.name} {auth.surname} </p>
+                        <p className="name-user"> {user.name} {user.surname} </p>
 
                         <p className="nick-user"> @{user.nick} </p>
 
@@ -124,6 +147,19 @@ export const ExplorarUsers = () => {
                 </div>
                 );
             })}
+            
+            {more &&
+                <button className="btn flex" style={{margin: "0 auto"}} onClick={nextPage} >
+                    Ver más
+                </button> 
+            }
+            </>
+        ):
+            <div className="page-cargando">
+                <h1 className='cerrar-texto'>Cargando</h1>
+                <span className="loader-out" />
+            </div>
+        }
 
         </div>
     </div>
