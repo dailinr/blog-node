@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react'
 import useAuth from '../../helpers/hooks/useAuth'
 import "../../css/perfil_user.css"
 import { Global } from '../../helpers/Global';
+import { Link } from 'react-router-dom';
 
 export const PerfilUser = () => {
 
@@ -9,6 +10,7 @@ export const PerfilUser = () => {
 
   const avatarDefault = "../../../public/default-avatar-profile-icon-of-social-media-user-vector.jpg";
   const headerDefault = "../../../public/header.jpg";
+
 
   let urlImagen = auth.image === "default.png" ? 
     avatarDefault : Global.url + "usuario/avatar/" + auth.image;
@@ -25,6 +27,10 @@ export const PerfilUser = () => {
             style={{ background: `url(${urlImagen}) no-repeat center / cover` }}>
 
           </div>
+
+          <Link to={"/configuracion"} className='editar-perfil' >
+            Editar perfil
+          </Link>
         </div>
 
         <div className='data-user'>
@@ -37,7 +43,9 @@ export const PerfilUser = () => {
         <div className='follow-counters'>
           
           <div className='following'>
-            <p>{counters.following} <span>Siguiendo</span> </p>
+            <Link to={"/mostrar-seguidos"} onClick={() => mostrarSeguidos(auth._id)}> {counters.following} 
+              <span>Siguiendo</span> 
+            </Link>
           </div>
 
           <div className='followers'>

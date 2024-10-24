@@ -13,7 +13,7 @@ const Articulos = ({ customPadding, customWidth, customJustify, maxArticulos }) 
   // peticion ajax a la DB para listar todos los articulos
   useEffect(() => {
     conseguirArticulos();
-  }, [])
+  }, []);
 
   const conseguirArticulos = async () => {
     const url = Global.url + "listar";

@@ -35,7 +35,6 @@ export const Listado = ( {articulos, setArticulos}) => {
       let articulosActualizados = articulos.filter(articulo => articulo._id !== idEliminar);
       setArticulos(articulosActualizados); // actualizamos el estado del componente padre (Articulos.jsx)
       setModConfirm(false); // cerramos el modal
-
       
       // Mostrar la tostada 
       setMostrarToast(true);

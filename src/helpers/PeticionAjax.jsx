@@ -1,6 +1,7 @@
 export const PeticionAjax = async (url, metodo, datosGuardar = "", archivos = false) => {
     
     let cargando = true;
+    const token = localStorage.getItem("token");
 
     let opciones = {
         // por defecto
@@ -31,6 +32,7 @@ export const PeticionAjax = async (url, metodo, datosGuardar = "", archivos = fa
                 body: JSON.stringify(datosGuardar),
                 headers: {
                     "Content-Type": "application/json", // formato para datos que recibe mi api
+                    // "Authorization": token
                 },
             };
         }

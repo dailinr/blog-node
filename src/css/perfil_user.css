@@ -42,6 +42,23 @@
     border: 5px solid white; /* Borde blanco para efecto similar a Twitter */
 }
 
+.editar-perfil{
+    position: absolute;
+    right: 5%;
+    bottom: -60px;
+    
+    width: fit-content;
+    color: rgba(43, 43, 43, 0.849);
+    font-size: medium;
+    padding: 5px 12px;
+    font-weight: 500;
+    border: 2px groove rgb(148, 147, 147);
+    border-radius: 16px;
+    -webkit-border-radius: 16px;
+    -moz-border-radius: 16px;
+    -ms-border-radius: 16px;
+    -o-border-radius: 16px;
+}
 
 /* Ajuste para contenido debajo del avatar */
 .data-user {
