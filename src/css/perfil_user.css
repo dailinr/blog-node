@@ -9,11 +9,11 @@
     row-gap: 15px;
 }
 
-.info-perfil, .post-perfil{
+.info-perfil{
     width: 60%;
     margin: 0px auto;
     height: auto;
-    background-color: #fdfdfd;
+    
     padding-bottom: 20px;
     
     border-radius: 8px;
@@ -21,7 +21,11 @@
     -moz-border-radius: 8px;
     -ms-border-radius: 8px;
     -o-border-radius: 8px;
+    
+}
+.info-perfil{
     box-shadow: rgba(0, 0, 0, 0.185)  0px 5px 10px;
+    background-color: #fdfdfd;
 }
 
 .header-perfil {

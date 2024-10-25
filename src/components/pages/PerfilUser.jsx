@@ -4,6 +4,7 @@ import { Global } from '../../helpers/Global';
 import { Link, useParams } from 'react-router-dom';
 import { getPerfil } from '../../helpers/getPerfil';
 import useAuth from '../../helpers/hooks/useAuth';
+import { ArticulosPerfil } from './ArticulosPerfil';
 
 export const PerfilUser = () => {
 
@@ -11,16 +12,19 @@ export const PerfilUser = () => {
   const {auth} = useAuth();
   const params = useParams();
   const [counters, setCounters] = useState({});
+  const [articulos, setArticulos] = useState([]);
 
   useEffect(() => {
 
     getPerfil(params.userId, setUSer);
     getCounters();
+    getArticulos();
   }, []);
 
   useEffect(() => {
     getPerfil(params.userId, setUSer);
     getCounters();
+    getArticulos();
   }, [params]);
 
   const getCounters = async() => {
@@ -38,6 +42,25 @@ export const PerfilUser = () => {
     if(data.following){
       setCounters(data);
     }
+  }
+
+  const getArticulos = async(nextPage = 1) => {
+    
+    const request = await fetch(Global.url + "articulos-usuario/" + params.userId + "/"+ nextPage, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": localStorage.getItem("token")
+      }
+    });
+
+    const data = await request.json();
+
+    if(data.status == "success"){
+      setArticulos(data.artUser.docs);
+    }
+
+    console.log(data.artUser.docs);
   }
 
   const avatarDefault = "../../../public/default-avatar-profile-icon-of-social-media-user-vector.jpg";
@@ -100,9 +123,18 @@ export const PerfilUser = () => {
       </div>
 
       <div className='post-perfil'>
-      jghjhgfdh
-      djdjsk
-      jsgjhd
+        {articulos.map(articulo => {
+
+          return(
+            <ArticulosPerfil 
+              key={articulo._id}
+              articulo={articulo}
+              user={user}
+            />
+          )
+
+        })} 
+      
       </div>
       
     </div>

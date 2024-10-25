@@ -6,14 +6,21 @@ import ModalConfirm from '../modals/ModalConfirm';
 import Tostada from '../modals/Tostada.jsx';
 import { Link } from 'react-router-dom';
 import useAuth from '../../helpers/hooks/useAuth.jsx';
+import { getPerfil } from '../../helpers/getPerfil.jsx';
 
 export const Listado = ( {articulos, setArticulos}) => {
   const [menuArticulo, setMenuArticulo] = useState(false);
   const [modConfirm, setModConfirm] = useState(false);
   const [idEliminar, setIdEliminar] = useState(null); // Nueva variable para almacenar el ID del artículo a eliminar
   const [mostrarToast, setMostrarToast] = useState(false);
+  const [user, setUSer] = useState({});
 
   const {auth} = useAuth();
+
+  useEffect(() => {
+    getPerfil(articulos.user, setUSer);
+    
+  }, []);
 
   const mostrarMenu = (id) => {
     setMenuArticulo(menuArticulo === id ? !menuArticulo : id);
@@ -96,7 +103,7 @@ export const Listado = ( {articulos, setArticulos}) => {
             <div className="datos-autor border-t pt-2">
               <div className="icon-autor icon-card"></div>
               <div>
-                <p className="nombre-card">Nombre de usuario</p>
+                <p className="nombre-card">{user.name}</p>
                 <p className="fecha-card">{formatearFecha(cards.fecha)}</p>
               </div>
 

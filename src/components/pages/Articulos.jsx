@@ -16,9 +16,15 @@ const Articulos = ({ customPadding, customWidth, customJustify, maxArticulos }) 
   }, []);
 
   const conseguirArticulos = async () => {
-    const url = Global.url + "listar";
+    
+    const request = await fetch(Global.url + "listar", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json"
+      }
+    });
 
-    const {datos, cargando} = await PeticionAjax(url, "GET");
+    const datos = await request.json();
 
     //  console.log(await PeticionAjax(url, "GET"));
 
@@ -31,7 +37,7 @@ const Articulos = ({ customPadding, customWidth, customJustify, maxArticulos }) 
   // si la prop tienen un valor limite guardará solo esos articulos, sino guardará todos los articulos
   const articulosLimitados = maxArticulos ? articulos.slice(0, maxArticulos) : articulos;
 
-  return (
+  return ( 
     <div className="Articulos page " 
       style={{ padding: customPadding, width: customWidth, justifyContent: customJustify }}>
 
