@@ -5,21 +5,17 @@ import { PeticionAjax } from '../../helpers/PeticionAjax';
 import ModalConfirm from '../modals/ModalConfirm';
 import Tostada from '../modals/Tostada.jsx';
 import { Link } from 'react-router-dom';
-import useAuth from '../../helpers/hooks/useAuth.jsx';
 import { getPerfil } from '../../helpers/getPerfil.jsx';
 
-export const Listado = ( {articulos, setArticulos}) => {
+export const Listado = ( {cards, setArticulos }) => {
   const [menuArticulo, setMenuArticulo] = useState(false);
   const [modConfirm, setModConfirm] = useState(false);
   const [idEliminar, setIdEliminar] = useState(null); // Nueva variable para almacenar el ID del artículo a eliminar
   const [mostrarToast, setMostrarToast] = useState(false);
-  const [user, setUSer] = useState({});
-
-  const {auth} = useAuth();
+  const [user, setUser] = useState({});
 
   useEffect(() => {
-    getPerfil(articulos.user, setUSer);
-    
+    getPerfil(cards.user, setUser);
   }, []);
 
   const mostrarMenu = (id) => {
@@ -58,76 +54,73 @@ export const Listado = ( {articulos, setArticulos}) => {
       year: 'numeric',
     });
   };
+
+  // Condicion para saber el articulo se le ha asignado una imagen
+  let urlImagen = cards.imagen !== "default.png"  ?
+  Global.url + "ver-imagen/" + cards.imagen : cards.imagen;
+
+  const avatarDefault = "../../../public/default-avatar-profile-icon-of-social-media-user-vector.jpg";
+  
+  let urlIcon = user.image === "default.png" ? 
+  avatarDefault : Global.url + "usuario/avatar/" + user.image;
+  
   
   return (
-    <>
-    {articulos.map((cards) => {
 
-      // Condicion para saber el articulo se le ha asignado una imagen
-      let urlImagen = cards.imagen !== "default.png"  ?
-        Global.url + "ver-imagen/" + cards.imagen : cards.imagen;
+    <div className='card'>
 
-      return (
+      <div className='cont-image'>
+      
+      <div className="image-card"
+        style={{
+          // background: `linear-gradient(to top, rgba(0, 0, 0, 0.199), rgba(58, 58, 58, 0.178)), url("https://images.pexels.com/photos/1619317/pexels-photo-1619317.jpeg?cs=srgb&dl=pexels-souvenirpixels-1619317.jpg&fm=jpg") no-repeat center / cover`
+          background: `linear-gradient(to top, rgba(0, 0, 0, 0.199), rgba(58, 58, 58, 0.178)), url(${urlImagen}) no-repeat center / cover`
+        }}>
 
-        <div key={cards._id} className="card">
+        <div className="label-card">{cards.etiqueta}</div>
+      </div>
 
-          <div className='cont-image'>
-         
-          <div className="image-card"
-            style={{
-              // background: `linear-gradient(to top, rgba(0, 0, 0, 0.199), rgba(58, 58, 58, 0.178)), url("https://images.pexels.com/photos/1619317/pexels-photo-1619317.jpeg?cs=srgb&dl=pexels-souvenirpixels-1619317.jpg&fm=jpg") no-repeat center / cover`
-              background: `linear-gradient(to top, rgba(0, 0, 0, 0.199), rgba(58, 58, 58, 0.178)), url(${urlImagen}) no-repeat center / cover`
-            }}>
+      </div>
 
-            <div className="label-card">{cards.etiqueta}</div>
-          </div>
-
-          </div>
-
-          <div className="contenido-card">
-            
-            <i className='bx bx-dots-vertical-rounded' onClick={() => mostrarMenu(cards._id)} >
-              {menuArticulo === cards._id && 
-                <MenuArticulo idArticulo={cards._id} eliminar={eliminar}  />
-              } 
-            </i>
-            
-
-            <div className="time-update"></div>
-            
-            <div className="titulo-card">
-              <h4 className="text-lg font-bold text-gray-800">{cards.titulo}</h4>
-            </div>
-            <div className="text-card">{cards.contenido}</div>
-
-            <div className="datos-autor border-t pt-2">
-              <div className="icon-autor icon-card"></div>
-              <div>
-                <p className="nombre-card">{user.name}</p>
-                <p className="fecha-card">{formatearFecha(cards.fecha)}</p>
-              </div>
-
-              <Link to={"/articulo/"+cards._id} className='btn btn-ver-mas btn-save'> leer </Link>
-
-            </div>
-          </div>
-         
-          
-        </div>
+      <div className="contenido-card">
         
-      );
-    })}
-    
-    
-    {modConfirm && (
-      <ModalConfirm
-        confirmEliminar={confirmEliminar}
-        setModConfirm={setModConfirm}
-      />
-    )}
+        <i className='bx bx-dots-vertical-rounded' onClick={() => mostrarMenu(cards._id)} >
+          {menuArticulo === cards._id && 
+            <MenuArticulo idArticulo={cards._id} eliminar={eliminar}  />
+          } 
+        </i>
+        
 
-    {mostrarToast && <Tostada mensaje={"Articulo eliminado"} style={{ width: "100px" }} />}
+        <div className="time-update"></div>
+        
+        <div className="titulo-card">
+          <h4 className="text-lg font-bold text-gray-800">{cards.titulo}</h4>
+        </div>
+        <div className="text-card">{cards.contenido}</div>
 
-    </>
+        <div className="datos-autor border-t pt-2">
+          <div className="icon-card">
+            <img src={urlIcon} alt="icon autor" />
+          </div>
+          <div>
+            <p className="nombre-card">{user.name} {user.surname}</p>
+            <p className="fecha-card">{formatearFecha(cards.fecha)}</p>
+          </div>
+
+          <Link to={"/articulo/"+cards._id} className='btn btn-ver-mas btn-save'> leer </Link>
+
+        </div>
+      </div>
+
+      {modConfirm && (
+        <ModalConfirm
+          confirmEliminar={confirmEliminar}
+          setModConfirm={setModConfirm}
+        />
+      )}
+
+      {mostrarToast && <Tostada mensaje={"Articulo eliminado"} style={{ width: "100px" }} />}
+
+    </div>
   );
 }

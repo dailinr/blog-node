@@ -46,7 +46,15 @@ const Articulos = ({ customPadding, customWidth, customJustify, maxArticulos }) 
         {cargando ? "Cargando..." : (
 
           articulos.length >= 1 ? 
-            <Listado articulos={articulosLimitados} setArticulos={setArticulos} /> 
+          
+            articulosLimitados.map(cards => {
+
+              return(
+                <Listado key={cards._id} 
+                  cards={cards} setArticulos={setArticulos}
+                /> 
+              )
+            })
           : 
             <h1>No hay articulos</h1> 
         )}
