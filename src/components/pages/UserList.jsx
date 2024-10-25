@@ -2,6 +2,7 @@ import React from 'react';
 import "../../css/explorar_users.css";
 import { Global } from '../../helpers/Global';
 import useAuth from '../../helpers/hooks/useAuth';
+import { Link } from 'react-router-dom';
 
 export const UserList = ({users, conseguirUsers, following,
     setFollowing, more, loading, page, setPage}) => {
@@ -37,6 +38,16 @@ export const UserList = ({users, conseguirUsers, following,
             
             // Actualizar estado de following, agregando el nuevo follow
             setFollowing([...following, userId]);
+
+            // Opcionalmente puedes actualizar la lista de usuarios si es necesario
+            const updatedUsers = users.map(user => {
+                if(user._id === userId){
+                    return { ...user, following: true };  // Puedes usar esta lógica si es necesario agregar un estado "siguiendo"
+                }
+                return user;
+            });
+
+            setUsers(updatedUsers);
         }
     }
 
@@ -58,6 +69,10 @@ export const UserList = ({users, conseguirUsers, following,
             // filtrar los datos para eliminar el serId al q se dio unfollow
             let filterFollowings = following.filter(followingUserId => userId !== followingUserId);
             setFollowing(filterFollowings);
+
+            // Opcionalmente actualiza la lista de usuarios si es necesario
+            const updatedUsers = users.filter(user => user._id !== userId);
+            setUsers(updatedUsers);
         }
     } 
 
@@ -68,7 +83,7 @@ export const UserList = ({users, conseguirUsers, following,
 
         {users.map(user => (
         
-            user._id != auth._id && (
+            user && user._id && (user._id != auth._id) && (
 
                 <div key={user._id} className='row-user'>
 
@@ -78,7 +93,7 @@ export const UserList = ({users, conseguirUsers, following,
 
                     <div className="info-user">
 
-                        <p className="name-user"> {user.name} {user.surname} </p>
+                        <Link  className="name-user"> {user.name} {user.surname} </Link>
 
                         <p className="nick-user"> @{user.nick} </p>
 

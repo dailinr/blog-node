@@ -83,7 +83,7 @@
 }
 
 
-.following p, .followers p, .articulos p{
+.following , .followers , .articulos {
     font-size: 16px;
     font-weight: 700;
 }
@@ -93,6 +93,7 @@
     font-size: 15px;
 }
 
-.post-perfil{
-
+.following span:hover, .followers span:hover, .articulos span:hover{
+    text-decoration-line: underline;
+    -moz-text-decoration-line: underline;
 }

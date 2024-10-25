@@ -43,17 +43,18 @@ export const PerfilUser = () => {
         <div className='follow-counters'>
           
           <div className='following'>
-            <Link to={"/mostrar-seguidos"} onClick={() => mostrarSeguidos(auth._id)}> {counters.following} 
-              <span>Siguiendo</span> 
-            </Link>
+            {counters.following}  
+            <span><Link to={"/siguiendo/" + auth._id}> Siguiendo</Link> </span>
           </div>
 
           <div className='followers'>
-            <p>{counters.followed} <span>Seguidores</span> </p>
+            {counters.followed} 
+            <span><Link to={"/seguidores/" + auth._id}> Seguidores</Link> </span>
           </div>
 
           <div className='articulos'>
-            <p>{counters.articulos} <span>Articulos</span> </p>
+            {counters.articulos} 
+            <span>Articulos</span> 
           </div>
         </div>
       </div>
