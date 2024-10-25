@@ -15,7 +15,6 @@ import { CerrarSesion } from "../components/pages/CerrarSesion";
 import { PerfilUser } from "../components/pages/PerfilUser";
 import { Configuracion } from "../components/pages/Configuracion";
 import { ExplorarUsers } from "../components/pages/ExplorarUsers";
-import { MostrarSeguidos } from "../components/pages/MostrarSeguidos";
 
 export const Rutas = () => {
 
@@ -44,7 +43,6 @@ export const Rutas = () => {
                 <Route path="perfil" element={<PerfilUser />} />
                 <Route path="configuracion" element={<Configuracion />} />
                 <Route path="explorar-users" element={<ExplorarUsers />} />
-                <Route path="mostrar-seguidos" element={<MostrarSeguidos />} />
 
             </Route>
 
