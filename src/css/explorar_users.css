@@ -52,7 +52,10 @@
     font-weight: 700;
     font-size: 18px;
 }
-
+.name-user:hover{
+    text-decoration-line: underline;
+    -moz-text-decoration-line: underline;
+}
 .btn-outline, .btn-neutral{
     padding-left: 0px !important;
     padding-right: 0px !important;

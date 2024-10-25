@@ -20,7 +20,7 @@ const menuUser = () => {
       <hr/>
 
       <ul className='lista'>
-        <NavLink to={"/perfil"}> <li> <i className='bx bx-user' /> Perfil </li></NavLink>
+        <NavLink to={"/perfil/"+ auth._id}> <li> <i className='bx bx-user' /> Perfil </li></NavLink>
         <NavLink to={"/configuracion"}> <li> <i className='bx bx-cog' /> Configuracion </li> </NavLink>
         <NavLink to={"/logout"}> <li> <i className='bx bx-log-out-circle'/> Cerrar Sesion </li> </NavLink>
       </ul>

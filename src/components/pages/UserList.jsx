@@ -2,7 +2,7 @@ import React from 'react';
 import "../../css/explorar_users.css";
 import { Global } from '../../helpers/Global';
 import useAuth from '../../helpers/hooks/useAuth';
-import { Link } from 'react-router-dom';
+import { Link} from 'react-router-dom';
 
 export const UserList = ({users, conseguirUsers, following,
     setFollowing, more, loading, page, setPage}) => {
@@ -93,7 +93,7 @@ export const UserList = ({users, conseguirUsers, following,
 
                     <div className="info-user">
 
-                        <Link  className="name-user"> {user.name} {user.surname} </Link>
+                        <Link to={"/perfil/"+ user._id} className="name-user"> {user.name} {user.surname} </Link>
 
                         <p className="nick-user"> @{user.nick} </p>
 

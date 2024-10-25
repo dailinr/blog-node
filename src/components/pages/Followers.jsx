@@ -3,6 +3,7 @@ import "../../css/explorar_users.css";
 import { Global } from '../../helpers/Global';
 import { UserList } from './UserList';
 import { useParams } from 'react-router-dom';
+import { getPerfil } from '../../helpers/getPerfil';
 
 export const Followers = () => {
 
@@ -12,11 +13,14 @@ export const Followers = () => {
     const [more, setMore] = useState(true);
     const [loading, setLoading] = useState(true);
     const [page, setPage] = useState(1);
+    const [userPerfil, setUserPerfil] = useState({});
 
     const params = useParams();
 
     useEffect(() => {
         conseguirUsers();
+        getPerfil(params.userId, setUserPerfil);
+        
     }, []);
  
     const conseguirUsers = async(nextPage) => {
@@ -42,7 +46,7 @@ export const Followers = () => {
             cleanUsers = [... cleanUsers, seguidores.user]
         });
         data.users = cleanUsers;
-        console.log(data.users);
+        
 
         if(data.status == "success" && data.users){
             
@@ -62,13 +66,14 @@ export const Followers = () => {
             }
         }
     }
+
     
   return (
     <div className='page-users'>
         
         <div className='content-users'> 
 
-            <h2>Seguidores de [nombreUser]</h2>
+            <h2>Seguidores de {userPerfil.name} {userPerfil.surname}</h2>
 
             <UserList users={users} conseguirUsers={conseguirUsers}
                 following={following} setFollowing={setFollowing}

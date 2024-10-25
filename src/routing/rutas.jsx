@@ -42,7 +42,7 @@ export const Rutas = () => {
                 <Route path="articulo/:id" element={ <VerArticulo />} />
                 <Route path="editar/:id" element={ <EditarArticulo />} />
                 <Route path="logout" element={<CerrarSesion />} />
-                <Route path="perfil" element={<PerfilUser />} />
+                <Route path="perfil/:userId" element={<PerfilUser />} />
                 <Route path="configuracion" element={<Configuracion />} />
                 <Route path="explorar-users" element={<ExplorarUsers />} />
                 <Route path="siguiendo/:userId" element={<Following />} />
