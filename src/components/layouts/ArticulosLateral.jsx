@@ -21,7 +21,7 @@ const ArticulosLateral = () => {
         const {datos} = await PeticionAjax(url, "GET");
     
         if (datos.status === "success") {
-          setArticulos(datos.articulos);
+          setArticulos(datos.articulos.docs);
         }else{
           setArticulos([]);
         }

@@ -17,7 +17,7 @@ export const ArticulosProvider = ({ children }) => {
         const {datos } = await PeticionAjax(url, "GET");
     
         if (datos.status === "success") {
-          setArticulos(datos.articulos);
+          setArticulos(datos.articulos.docs);
         }
     };
 

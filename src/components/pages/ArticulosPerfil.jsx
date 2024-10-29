@@ -5,13 +5,13 @@ import { Global } from '../../helpers/Global';
 
 export const ArticulosPerfil = ({articulo, user}) => {
 
+    const avatarDefault = "../../../public/default-avatar-profile-icon-of-social-media-user-vector.jpg";
+
     let urlImagen = articulo.imagen === "default.png" ? 
     articulo.imagen : Global.url + "ver-imagen/" + articulo.imagen;
 
     let urlIcon = user.image === "default.png" ? 
     avatarDefault : Global.url + "usuario/avatar/" + user.image;
-
-    const avatarDefault = "../../../public/default-avatar-profile-icon-of-social-media-user-vector.jpg";
     
   return (
 

@@ -17,11 +17,11 @@ export const UserList = ({users, conseguirUsers, following,
 
         conseguirUsers(next);
 
-        console.log(page, users);
+        // console.log(page, users);
     }
 
     const seguirUsuario = async(userId) => {
-        console.log("seguir el usuario " + userId);
+        // console.log("seguir el usuario " + userId);
         
         const request = await fetch( Global.url + "follow/save", {
             method: "POST",
@@ -52,7 +52,7 @@ export const UserList = ({users, conseguirUsers, following,
     }
 
     const unfollowUsuario = async(userId) => {
-        console.log("dejar de seguir el usuario " + userId);
+        // console.log("dejar de seguir el usuario " + userId);
 
         const request = await fetch( Global.url + "follow/unfollow/" + userId,{
             method: "DELETE",
@@ -83,7 +83,7 @@ export const UserList = ({users, conseguirUsers, following,
 
         {users.map(user => (
         
-            user && user._id && (user._id != auth._id) && (
+            user && user._id && (
 
                 <div key={user._id} className='row-user'>
 
@@ -101,16 +101,17 @@ export const UserList = ({users, conseguirUsers, following,
 
                     </div>
                     
-
-                    {following.includes(user._id) ? 
-                        <button onClick={() => unfollowUsuario(user._id)} className="btn btn-neutral">
-                            Siguiendo
-                        </button>
-                    :
-                        <button onClick={() => seguirUsuario(user._id)} className="btn btn-outline">
-                            Seguir
-                        </button>
-                    }      
+                    {user._id != auth._id &&
+                        (following.includes(user._id)? 
+                            <button onClick={() => unfollowUsuario(user._id)} className="btn btn-neutral">
+                                Siguiendo
+                            </button>
+                        :
+                            <button onClick={() => seguirUsuario(user._id)} className="btn btn-outline">
+                                Seguir
+                            </button>
+                        )
+                    }   
 
                     {/* <i className='bx bx-dots-vertical-rounded icon-opt'  /> */}
                     

@@ -6,13 +6,17 @@ import ModalConfirm from '../modals/ModalConfirm';
 import Tostada from '../modals/Tostada.jsx';
 import { Link } from 'react-router-dom';
 import { getPerfil } from '../../helpers/getPerfil.jsx';
+import useAuth from '../../helpers/hooks/useAuth.jsx';
 
-export const Listado = ( {cards, setArticulos }) => {
+export const Listado = ( {cards, setArticulos, setIdEliminar, confirmEliminar}) => {
+
   const [menuArticulo, setMenuArticulo] = useState(false);
   const [modConfirm, setModConfirm] = useState(false);
-  const [idEliminar, setIdEliminar] = useState(null); // Nueva variable para almacenar el ID del artículo a eliminar
+   // Nueva variable para almacenar el ID del artículo a eliminar
   const [mostrarToast, setMostrarToast] = useState(false);
   const [user, setUser] = useState({});
+
+  const {auth} = useAuth();
 
   useEffect(() => {
     getPerfil(cards.user, setUser);
@@ -27,23 +31,6 @@ export const Listado = ( {cards, setArticulos }) => {
     setIdEliminar(id); // Establecemos el ID del artículo a eliminar
     setModConfirm(true); // Mostramos el modal de confirmación
   } 
-  
-  const confirmEliminar = async () => {
-
-    //realizamos una peticion ajax con sus respectivos parametros
-    let {datos} = await PeticionAjax(Global.url + "articulo/" + idEliminar, "DELETE");
-    
-    if(datos.status === "success"){
-      // guardamos en una lista todos los articulos que no sean el del id eliminado
-      let articulosActualizados = articulos.filter(articulo => articulo._id !== idEliminar);
-      setArticulos(articulosActualizados); // actualizamos el estado del componente padre (Articulos.jsx)
-      setModConfirm(false); // cerramos el modal
-      
-      // Mostrar la tostada 
-      setMostrarToast(true);
-    }
-  
-  }
 
   // Formatear la fecha en DD/MM/YY
   const formatearFecha = (fecha) => {
@@ -83,13 +70,14 @@ export const Listado = ( {cards, setArticulos }) => {
       </div>
 
       <div className="contenido-card">
-        
-        <i className='bx bx-dots-vertical-rounded' onClick={() => mostrarMenu(cards._id)} >
-          {menuArticulo === cards._id && 
-            <MenuArticulo idArticulo={cards._id} eliminar={eliminar}  />
-          } 
-        </i>
-        
+
+        {auth._id === user._id &&
+          <i className='bx bx-dots-vertical-rounded' onClick={() => mostrarMenu(cards._id)} >
+            {menuArticulo === cards._id && 
+              <MenuArticulo idArticulo={cards._id} eliminar={eliminar}  />
+            } 
+          </i>
+        }
 
         <div className="time-update"></div>
         
@@ -103,7 +91,9 @@ export const Listado = ( {cards, setArticulos }) => {
             <img src={urlIcon} alt="icon autor" />
           </div>
           <div>
-            <p className="nombre-card">{user.name} {user.surname}</p>
+            <p className="nombre-card">
+              <Link to={"/perfil/"+ user._id}>{user.name} {user.surname} </Link>
+            </p>
             <p className="fecha-card">{formatearFecha(cards.fecha)}</p>
           </div>
 

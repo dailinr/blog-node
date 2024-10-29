@@ -19,9 +19,8 @@ const Inicio = () => {
     <div className='Inicio page'>
 
       {articulos.length >= 1 ? (
-        <>
-        
-        <Portada  /> 
+      <>
+
         <Portada className="recomendados"/> 
 
         {/* <div className='art-inicio'> */}
@@ -46,7 +45,7 @@ const Inicio = () => {
 
           <ArticulosLateral />
         </aside>
-        </>
+      </>
       ): 
         <h1>No hay articulos</h1> 
       }

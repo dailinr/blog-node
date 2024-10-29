@@ -8,24 +8,38 @@ import { ArticulosPerfil } from './ArticulosPerfil';
 
 export const PerfilUser = () => {
 
-  const [user, setUSer] = useState({});
+  const [user, setUser] = useState({});
   const {auth} = useAuth();
   const params = useParams();
   const [counters, setCounters] = useState({});
   const [articulos, setArticulos] = useState([]);
+  const [iFollow, setiFollow] = useState(false);
 
   useEffect(() => {
 
-    getPerfil(params.userId, setUSer);
+    getDataUser();
     getCounters();
     getArticulos();
+
   }, []);
 
   useEffect(() => {
-    getPerfil(params.userId, setUSer);
+    
+    getDataUser();
     getCounters();
     getArticulos();
+
   }, [params]);
+
+  const getDataUser = async() => {
+    
+
+    let dataUser = await getPerfil(params.userId, setUser);
+    // console.log(dataUser);
+    if(dataUser.following && dataUser.following._id ){
+      setiFollow(true);
+    }
+  }
 
   const getCounters = async() => {
 
@@ -46,7 +60,7 @@ export const PerfilUser = () => {
 
   const getArticulos = async(nextPage = 1) => {
     
-    const request = await fetch(Global.url + "articulos-usuario/" + params.userId + "/"+ nextPage, {
+    const request = await fetch(Global.url + "articulos-usuario/" + params.userId + "/" + nextPage, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -60,8 +74,46 @@ export const PerfilUser = () => {
       setArticulos(data.artUser.docs);
     }
 
-    console.log(data.artUser.docs);
   }
+
+  const seguirUsuario = async(userId) => {
+    // console.log("seguir el usuario " + userId);
+    
+    const request = await fetch( Global.url + "follow/save", {
+      method: "POST",
+      body: JSON.stringify({followed: userId}),
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": localStorage.getItem("token")
+      }
+    });
+
+    const data = await request.json();
+
+    if(data.status == "success"){
+        
+      // Actualizar estado de following, agregando el nuevo follow
+      setiFollow(true);
+    }
+}
+
+const unfollowUsuario = async(userId) => {
+    // console.log("dejar de seguir el usuario " + userId);
+
+    const request = await fetch( Global.url + "follow/unfollow/" + userId,{
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": localStorage.getItem("token")
+      }
+    });
+
+    const data = await request.json();
+
+    if(data.status == "success"){
+      setiFollow(false);
+    }
+} 
 
   const avatarDefault = "../../../public/default-avatar-profile-icon-of-social-media-user-vector.jpg";
   const headerDefault = "../../../public/header.jpg";
@@ -88,12 +140,18 @@ export const PerfilUser = () => {
               Editar perfil
             </Link>
           :
-            <button className="btn btn-outline seguir-perfil">
-              Seguir 
-            </button> 
+            
+            (!iFollow ?
+              <button onClick={() => seguirUsuario(user._id)} className=" seguir-perfil btn btn-outline">
+                Seguir
+              </button>
+            :
+              <button onClick={() => unfollowUsuario(user._id)} className=" seguir-perfil btn btn-neutral">
+                Siguiendo
+              </button>
+            )
           }
 
-          
         </div>
 
         <div className='data-user'>
