@@ -18,10 +18,18 @@ const ArticulosLateral = () => {
     const conseguirArticulos = async () => {
         const url = Global.url + "listar";
     
-        const {datos} = await PeticionAjax(url, "GET");
-    
+        const request = await fetch(url, {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+              "Authorization": localStorage.getItem("token")
+            }
+        });
+
+        const datos = await request.json();
+
         if (datos.status === "success") {
-          setArticulos(datos.articulos.docs);
+          setArticulos(datos.articulos);
         }else{
           setArticulos([]);
         }

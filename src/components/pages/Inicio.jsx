@@ -21,7 +21,7 @@ const Inicio = () => {
       {articulos.length >= 1 ? (
       <>
 
-        <Portada className="recomendados"/> 
+        <Portada className="recomendados" /> 
 
         {/* <div className='art-inicio'> */}
           
@@ -36,6 +36,7 @@ const Inicio = () => {
             </div>
 
             <Articulos 
+              enPoint={"inicio"}
               customPadding="0" maxArticulos={6} 
             />
             

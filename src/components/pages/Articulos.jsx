@@ -1,13 +1,12 @@
 import React from "react";
 import { useState, useEffect } from "react";
-// import { articulos } from "../../Data/articulos.js";
 import "../../css/articulos.css";
 import { Global } from "../../helpers/Global";
-import { PeticionAjax } from "../../helpers/PeticionAjax";
 import { Listado } from "./Listado";
 import CrearArticulo from "./CrearArticulo";
+import { useLocation } from "react-router-dom";
 
-const Articulos = ({ customPadding, customWidth, customJustify, maxArticulos}) => {
+const Articulos = ({ enPoint, customPadding, customWidth, customJustify, maxArticulos}) => {
 
   const [articulos, setArticulos] = useState([]);
   const [cargando, setCargando] = useState(true);
@@ -15,61 +14,65 @@ const Articulos = ({ customPadding, customWidth, customJustify, maxArticulos}) =
   const [page, setPage] = useState(1);
   const [idEliminar, setIdEliminar] = useState(null);
   const [btnCrear, setBtnCrear] = useState(false);
-  
+  const location = useLocation();
 
   const handleBtncrear = () => {
     setBtnCrear(true);
   }
 
-  // peticion ajax a la DB para listar todos los articulos
   useEffect(() => {
-    conseguirArticulos(page);
-  }, []);
+    
+    setArticulos([]);
+    setPage(1);
+    setMore(true);
+    conseguirArticulos(1);
+
+  }, [location.pathname, enPoint]); // Dependencias actualizadas
+  
+  useEffect(() => {
+    // Llamar a conseguirArticulos cada vez que se actualiza la página
+    if (page > 1) {
+      conseguirArticulos(page);
+    }
+  }, [page]); 
 
   const conseguirArticulos = async (nextPage) => {
-    
-    const request = await fetch(Global.url + "feed/" + nextPage, {
+    let url;
+
+    if (enPoint === "inicio") {
+      url = `${Global.url}feed/${nextPage}`;
+    } else if (location.pathname.includes("articulos")) {
+      url = `${Global.url}listar/${nextPage}`;
+    } else if (location.pathname.includes("feed")) {
+      url = `${Global.url}feed/${nextPage}`;
+    }
+  
+    const request = await fetch(url, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-        "Authorization": localStorage.getItem("token")
-      }
+        "Authorization": localStorage.getItem("token"),
+      },
     });
-
+  
     const datos = await request.json();
-
-    //  console.log(await PeticionAjax(url, "GET"));
-
+  
     if (datos.status === "success") {
-
-      let newArticulos = datos.articulos;
-
-      if(articulos.length >= 1){
-        newArticulos = [...articulos, ...datos.articulos];
-      }
-      
+      let newArticulos = nextPage === 1 ? datos.articulos : [...articulos, ...datos.articulos];
       setArticulos(newArticulos);
-
-      // Paginacion - condición no mostrar btn ver más
-      if (!datos.pagination.hasNextPage) {
-        setMore(false);
-      }
+  
+      // Controlar la paginación para mostrar el botón de ver más
+      setMore(datos.pagination.hasNextPage);
     }
     setCargando(false);
   };
 
   const nextPage = () => {
-    let next = page + 1;
-    setPage(next);
-
-    conseguirArticulos(next);
-
-    // console.log(page, users);
+    setPage(prevPage => prevPage + 1);
   }
 
   const confirmEliminar = async () => {
 
-    //realizamos una peticion ajax con sus respectivos parametros
     const request = await fetch (Global.url + "articulo/" + idEliminar, {
       method: "DELETE",
       headers: {
@@ -83,7 +86,8 @@ const Articulos = ({ customPadding, customWidth, customJustify, maxArticulos}) =
     if(datos.status === "success"){
       // guardamos en una lista todos los articulos que no sean el del id eliminado
       let articulosActualizados = articulos.filter(articulo => articulo._id !== idEliminar);
-      setArticulos(articulosActualizados); // actualizamos el estado del componente padre (Articulos.jsx)
+
+      setArticulos(articulosActualizados); // actualizamos el estado de articulos
 
       // conseguirArticulos(1);
       setModConfirm(false); // cerramos el modal
@@ -100,6 +104,8 @@ const Articulos = ({ customPadding, customWidth, customJustify, maxArticulos}) =
   return ( 
     <div className="Articulos page " 
       style={{ padding: customPadding, width: customWidth, justifyContent: customJustify }}>
+        
+        <p>articulos totales: {articulos.length}</p>
 
       <div className="content-articulos">
 
@@ -112,12 +118,11 @@ const Articulos = ({ customPadding, customWidth, customJustify, maxArticulos}) =
         :(
 
           articulos.length >= 1 ? (
-
+            
             (articulosLimitados.map(cards => (
 
               <Listado 
                 key={cards._id} cards={cards} 
-                conseguirArticulos={conseguirArticulos}
                 setIdEliminar={setIdEliminar} confirmEliminar={confirmEliminar}
               /> 
             )))
@@ -129,7 +134,7 @@ const Articulos = ({ customPadding, customWidth, customJustify, maxArticulos}) =
 
       </div>
 
-      {!maxArticulos && more &&            
+      {!maxArticulos && more &&  articulos.length > 1 &&         
         <button className="btn mt-10"  onClick={nextPage} >
           Ver más
         </button>

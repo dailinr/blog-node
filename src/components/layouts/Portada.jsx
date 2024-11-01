@@ -20,7 +20,8 @@ const Portada = () => {
     const request = await fetch(Global.url + "listar", {
       method: "GET",
       headers: {
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
+        "Authorization": localStorage.getItem("token")
       }
     });
 
@@ -28,7 +29,7 @@ const Portada = () => {
 
     if (datos.status === "success") {
 
-      setArticulos(datos.articulos.docs.slice(0, 3));
+      setArticulos(datos.articulos.slice(0, 3));
     }
 
   };

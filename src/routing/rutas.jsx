@@ -36,6 +36,7 @@ export const Rutas = () => {
                 
                 <Route index element={ <Inicio/> } />
                 <Route path="inicio" element={ <Inicio /> } />
+                <Route path="feed" element={ <Articulos /> } />
                 <Route path="articulos" element={ <Articulos /> } />
                 <Route path="crear-articulo" element={ <CrearArticulo/> } />
                 <Route path="buscar/:busqueda" element={<Busqueda/>} />

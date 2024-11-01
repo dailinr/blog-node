@@ -51,13 +51,13 @@ const Header = () => {
                 </NavLink>
             </li>
             <li>
-                <NavLink to="/articulos" className={({ isActive }) => isActive ? "link active" : "link"} >
-                    Articulos
+                <NavLink to="/feed" className={({ isActive }) => isActive ? "link active" : "link"}>
+                    Siguiendo
                 </NavLink>
             </li>
             <li>
-                <NavLink to="/articulos" className={({ isActive }) => isActive ? "link active" : "link"}>
-                    Tendencias
+                <NavLink to="/articulos" className={({ isActive }) => isActive ? "link active" : "link"} >
+                    Articulos
                 </NavLink>
             </li>
             <li>

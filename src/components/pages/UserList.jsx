@@ -4,7 +4,7 @@ import { Global } from '../../helpers/Global';
 import useAuth from '../../helpers/hooks/useAuth';
 import { Link} from 'react-router-dom';
 
-export const UserList = ({users, conseguirUsers, following,
+export const UserList = ({users, conseguirUsers, following, 
     setFollowing, more, loading, page, setPage}) => {
     
     const avatarDefault = "../../../public/default-avatar-profile-icon-of-social-media-user-vector.jpg";
@@ -38,16 +38,6 @@ export const UserList = ({users, conseguirUsers, following,
             
             // Actualizar estado de following, agregando el nuevo follow
             setFollowing([...following, userId]);
-
-            // Opcionalmente puedes actualizar la lista de usuarios si es necesario
-            const updatedUsers = users.map(user => {
-                if(user._id === userId){
-                    return { ...user, following: true };  // Puedes usar esta lógica si es necesario agregar un estado "siguiendo"
-                }
-                return user;
-            });
-
-            setUsers(updatedUsers);
         }
     }
 
@@ -70,9 +60,6 @@ export const UserList = ({users, conseguirUsers, following,
             let filterFollowings = following.filter(followingUserId => userId !== followingUserId);
             setFollowing(filterFollowings);
 
-            // Opcionalmente actualiza la lista de usuarios si es necesario
-            const updatedUsers = users.filter(user => user._id !== userId);
-            setUsers(updatedUsers);
         }
     } 
 

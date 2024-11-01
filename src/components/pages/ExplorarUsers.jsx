@@ -53,7 +53,8 @@ export const ExplorarUsers = () => {
         
         <div className='content-users'> 
 
-            <UserList users={users} conseguirUsers={conseguirUsers}
+            <UserList 
+                users={users} conseguirUsers={conseguirUsers}
                 following={following} setFollowing={setFollowing}
                 more={more} loading={loading} page={page} setPage={setPage}
             />

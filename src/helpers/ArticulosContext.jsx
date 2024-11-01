@@ -12,12 +12,19 @@ export const ArticulosProvider = ({ children }) => {
     }, []);
 
     const conseguirArticulos = async () => {
-        const url = Global.url + "listar";
-    
-        const {datos } = await PeticionAjax(url, "GET");
-    
+        
+        const request = await fetch(Global.url + "listar", {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+              "Authorization": localStorage.getItem("token")
+            }
+        });
+      
+        const datos = await request.json();
+
         if (datos.status === "success") {
-          setArticulos(datos.articulos.docs);
+          setArticulos(datos.articulos);
         }
     };
 
