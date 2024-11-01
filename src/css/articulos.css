@@ -152,6 +152,10 @@
   font-weight: 600;
   font-size: 14px
 }
+.nombre-card:hover{
+  text-decoration-line: underline;
+  -moz-text-decoration-line: underline;
+}
 .fecha-card{
   font-style: italic;
   font-size: 12px;

@@ -10,6 +10,7 @@ import Tostada from "../modals/Tostada";
 import ToastError from "../modals/ToastError";
 
 const EditarArticulo = () => {
+  
   const { formulario, enviado, cambiado, setFormulario } = useForm({});
   const [resultado, setResultado] = useState("");
   const [articulo, setArticulo] = useState({});
@@ -20,10 +21,19 @@ const EditarArticulo = () => {
     conseguirArticulo();
   }, [])
 
+
   const conseguirArticulo = async () => {
     const url = Global.url + "articulo/"+ id;
 
-    const {datos} = await PeticionAjax(url, "GET");
+    const request = await fetch(url, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": localStorage.getItem("token")
+      }
+    });
+
+    const datos = await request.json();
 
     if (datos.status === "success") {
       setArticulo(datos.articulo);
@@ -83,14 +93,14 @@ const EditarArticulo = () => {
     // console.log(datos);
   };
 
-   // Conseguir url de la imagen del articulo
-   let urlImagen = articulo.imagen !== "default.png" ?
-   Global.url + "ver-imagen/" + articulo.imagen : articulo.imagen;
+  // Conseguir url de la imagen del articulo
+  let urlImagen = articulo.imagen !== "default.png" ?
+  Global.url + "ver-imagen/" + articulo.imagen : articulo.imagen;
 
 
   return (
     
-    <div className="form-overlay" >
+    <div className="form-overlay">
       
       {/* <pre>{JSON.stringify(formulario)}</pre> */}
 
@@ -130,7 +140,7 @@ const EditarArticulo = () => {
         </div>
 
         <div className="botones">
-          <Link to={"/inicio"}> <input type="submit" value="Cancelar" className="btn btn-active" /> </Link>
+          <Link to={"/inicio"}> <input  type="submit" value="Cancelar" className="btn btn-active" /> </Link>
           <input type="submit" value="Guardar" className="btn btn-save" />
           
         </div>

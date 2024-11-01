@@ -186,8 +186,10 @@ const unfollowUsuario = async(userId) => {
           return(
             <ArticulosPerfil 
               key={articulo._id}
-              articulo={articulo}
-              user={user}
+              articulo={articulo} user={user}
+              seguirUsuario={seguirUsuario} 
+              unfollowUsuario={unfollowUsuario}
+              iFollow={iFollow}
             />
           )
 

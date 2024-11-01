@@ -93,7 +93,9 @@ export const UserList = ({users, conseguirUsers, following,
 
                     <div className="info-user">
 
-                        <Link to={"/perfil/"+ user._id} className="name-user"> {user.name} {user.surname} </Link>
+                        <Link to={"/perfil/"+ user._id} className="name-user"> 
+                            {user.name} {user.surname} 
+                        </Link>
 
                         <p className="nick-user"> @{user.nick} </p>
 

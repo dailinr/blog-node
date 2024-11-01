@@ -1,9 +1,12 @@
-import React from 'react';
+import React, {useState} from 'react';
 import "../../css/articulosUser.css";
 import "../../css/explorar_users.css";
 import { Global } from '../../helpers/Global';
+import useAuth from '../../helpers/hooks/useAuth';
 
-export const ArticulosPerfil = ({articulo, user}) => {
+export const ArticulosPerfil = ({articulo, user, seguirUsuario, unfollowUsuario, iFollow}) => {
+
+    const {auth} = useAuth();
 
     const avatarDefault = "../../../public/default-avatar-profile-icon-of-social-media-user-vector.jpg";
 
@@ -45,9 +48,19 @@ export const ArticulosPerfil = ({articulo, user}) => {
                     
                     <p className="name_user">
                         {user.name} {user.surname} &nbsp;
-                        <span className="follow_user">
-                            Seguir
-                        </span> 
+                        
+                        {user._id != auth._id &&
+
+                            (!iFollow ?
+                                <button onClick={() => seguirUsuario(user._id)} className="follow_user ">
+                                    Seguir
+                                </button>
+                            :
+                                <button onClick={() => unfollowUsuario(user._id)} className="follow_user">
+                                    Siguiendo
+                                </button>
+                            )
+                        }
                     </p>
                     
                     <p className="user-name" style={{fontSize: '15px'}}>

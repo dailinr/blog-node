@@ -19,7 +19,7 @@ export const Listado = ( {cards, setArticulos, setIdEliminar, confirmEliminar}) 
   const {auth} = useAuth();
 
   useEffect(() => {
-    getPerfil(cards.user, setUser);
+    getPerfil(cards.user._id, setUser);
   }, []);
 
   const mostrarMenu = (id) => {
@@ -90,11 +90,15 @@ export const Listado = ( {cards, setArticulos, setIdEliminar, confirmEliminar}) 
           <div className="icon-card">
             <img src={urlIcon} alt="icon autor" />
           </div>
+          
           <div>
-            <p className="nombre-card">
-              <Link to={"/perfil/"+ user._id}>{user.name} {user.surname} </Link>
-            </p>
+            
+            <Link to={"/perfil/"+ user._id} className="nombre-card">
+              {user.name} {user.surname} 
+            </Link>
+            
             <p className="fecha-card">{formatearFecha(cards.fecha)}</p>
+
           </div>
 
           <Link to={"/articulo/"+cards._id} className='btn btn-ver-mas btn-save'> leer </Link>

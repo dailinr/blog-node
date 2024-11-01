@@ -35,7 +35,9 @@ const Inicio = () => {
               </button>
             </div>
 
-            <Articulos customPadding="0"   maxArticulos={6} />
+            <Articulos 
+              customPadding="0" maxArticulos={6} 
+            />
             
           </section>
 
@@ -50,7 +52,9 @@ const Inicio = () => {
         <h1>No hay articulos</h1> 
       }
 
-      <button onClick={handleBtncrear} className='btn btn-crear btn-save'>Crear articulo</button>
+      <button onClick={handleBtncrear} className='btn btn-crear btn-save'>
+        Crear articulo
+      </button>
 
       {btnCrear && <CrearArticulo setBtnCrear={setBtnCrear} />}
 

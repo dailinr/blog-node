@@ -2,7 +2,7 @@ import React from "react";
 import "../../css/crearArticulo.css";
 import { useState } from "react";
 import { useForm } from "../../helpers/hooks/useForm";
-import { PeticionAjax } from "../../helpers/PeticionAjax";
+// import { PeticionAjax } from "../../helpers/PeticionAjax";
 import { Global } from "../../helpers/Global";
 import Tostada from "../modals/Tostada";
 import ToastError from "../modals/ToastError";

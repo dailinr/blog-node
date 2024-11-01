@@ -5,13 +5,21 @@ import "../../css/articulos.css";
 import { Global } from "../../helpers/Global";
 import { PeticionAjax } from "../../helpers/PeticionAjax";
 import { Listado } from "./Listado";
+import CrearArticulo from "./CrearArticulo";
 
-const Articulos = ({ customPadding, customWidth, customJustify, maxArticulos }) => {
+const Articulos = ({ customPadding, customWidth, customJustify, maxArticulos}) => {
+
   const [articulos, setArticulos] = useState([]);
   const [cargando, setCargando] = useState(true);
   const [more, setMore] = useState(true);
   const [page, setPage] = useState(1);
   const [idEliminar, setIdEliminar] = useState(null);
+  const [btnCrear, setBtnCrear] = useState(false);
+  
+
+  const handleBtncrear = () => {
+    setBtnCrear(true);
+  }
 
   // peticion ajax a la DB para listar todos los articulos
   useEffect(() => {
@@ -20,10 +28,11 @@ const Articulos = ({ customPadding, customWidth, customJustify, maxArticulos }) 
 
   const conseguirArticulos = async (nextPage) => {
     
-    const request = await fetch(Global.url + "listar/" + nextPage, {
+    const request = await fetch(Global.url + "feed/" + nextPage, {
       method: "GET",
       headers: {
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
+        "Authorization": localStorage.getItem("token")
       }
     });
 
@@ -33,16 +42,16 @@ const Articulos = ({ customPadding, customWidth, customJustify, maxArticulos }) 
 
     if (datos.status === "success") {
 
-      let newArticulos = datos.articulos.docs;
+      let newArticulos = datos.articulos;
 
       if(articulos.length >= 1){
-        newArticulos = [...articulos, ...datos.articulos.docs];
+        newArticulos = [...articulos, ...datos.articulos];
       }
       
       setArticulos(newArticulos);
 
       // Paginacion - condición no mostrar btn ver más
-      if (!datos.articulos.hasNextPage) {
+      if (!datos.pagination.hasNextPage) {
         setMore(false);
       }
     }
@@ -94,26 +103,24 @@ const Articulos = ({ customPadding, customWidth, customJustify, maxArticulos }) 
 
       <div className="content-articulos">
 
-        {cargando ? "Cargando..." : (
+        {cargando ? (
+          <div className="page-cargando">
+            <h1 className='cerrar-texto'>Cargando</h1>
+            <span className="loader-out" />
+          </div>
+        ) 
+        :(
 
           articulos.length >= 1 ? (
-          <>
-            {articulosLimitados.map(cards => (
+
+            (articulosLimitados.map(cards => (
 
               <Listado 
                 key={cards._id} cards={cards} 
                 conseguirArticulos={conseguirArticulos}
                 setIdEliminar={setIdEliminar} confirmEliminar={confirmEliminar}
               /> 
-            ))}
-            
-            {!maxArticulos &&
-              <button className="btn"  onClick={nextPage} >
-                Ver más
-              </button>
-            }
-
-          </>
+            )))
           )
           :(
             <h1>No hay articulos</h1> 
@@ -121,6 +128,19 @@ const Articulos = ({ customPadding, customWidth, customJustify, maxArticulos }) 
         )}
 
       </div>
+
+      {!maxArticulos && more &&            
+        <button className="btn mt-10"  onClick={nextPage} >
+          Ver más
+        </button>
+      }
+
+      <button onClick={handleBtncrear} className='btn btn-crear btn-save'>
+        Crear articulo
+      </button>
+
+      {btnCrear && <CrearArticulo setBtnCrear={setBtnCrear} />}
+      
     </div>
   );
 };
