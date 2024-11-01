@@ -24,14 +24,10 @@ const Inicio = () => {
       {articulos.length >= 1 ? (
       <>
         
-        
           <Portada 
             className="recomendados" 
 
           />
-        
-
-        {/* <div className='art-inicio'> */}
           
           <section className="tendencias">
             <div className="titulo-tendencias">

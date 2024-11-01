@@ -72,14 +72,11 @@ const CrearArticulo = ({ setBtnCrear }) => {
       } else {
         setResultado("error");
       }
-
-      // Limpiar formulario
-      if(data.status == "success" && subidaData == "success"){
-        const myForm = document.querySelector("#articulo-form");
-        myForm.reset();
-      }
     }
-
+    
+    // Limpiar formulario
+    const myForm = document.querySelector("#articulo-form");
+    myForm.reset();
   };
 
 

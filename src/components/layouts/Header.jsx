@@ -33,18 +33,15 @@ const Header = () => {
         avatarDefault : Global.url + "usuario/avatar/" + auth.image;
 
   return (
-    <div className='header '>
-
-        
-        {/* <div className='iconos-izq'>
-            <i className='bx bx-revision'></i>
-            
-        </div> */}
+    <div className='header '>    
+    
         <div className='logo'>
             <div className='image-logo'></div>
         </div>
 
         <ul className='navegacion'>
+
+            
             <li>
                 <NavLink  to="/inicio" className={({ isActive }) => isActive ? "link active" : "link"}>
                     Inicio
@@ -67,10 +64,13 @@ const Header = () => {
             </li>
         </ul>
 
-
         <div className="iconos">
             {/* <div className="icon-buscar">
                 <i className='bx bx-search-alt'></i>
+            </div> */}
+
+            {/* <div className='icon-recargar' style={{alignContent: "center"}}>
+                <i className='bx bx-revision' />
             </div> */}
 
             <label onChange={hacerBusqueda} className="input search input-bordered flex items-center gap-2">

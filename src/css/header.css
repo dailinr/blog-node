@@ -52,20 +52,28 @@
     font-size: large;
     color: rgb(71, 71, 71)
 }
-.iconos-izq{
+
+.icon-recargar{
     width: 100px
 }
-.iconos-izq .bx{
+.icon-recargar .bx{
     font-size: larger;
     font-weight: bold;
     color: rgb(71, 71, 71)
 }
+.icon-recargar .bx:hover{
+    cursor: pointer;
+}
+.icon-recargar .bx:active{
+    font-size: large;
+    font-weight: 600;
+}
+
 .icon-perfil{
     border: none !important;
     position: relative;
     /* border: 1px solid rgba(155, 155, 155, 0.767); */
 }
-
 .header > div p{
     font-size: medium;
     font-weight: 500;

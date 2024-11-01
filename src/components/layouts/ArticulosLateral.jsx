@@ -13,10 +13,15 @@ const ArticulosLateral = () => {
     const [articulos, setArticulos] = useState([]);
 
     useEffect(() => {
-        conseguirArticulos();
+        conseguirArticulos(false);
     }, []);
 
-    const conseguirArticulos = async () => {
+    const conseguirArticulos = async (showNews = false) => {
+
+        if(showNews){
+            setArticulos([]);
+        }
+
         const url = Global.url + "listar";
     
         const request = await fetch(url, {
@@ -40,6 +45,11 @@ const ArticulosLateral = () => {
   return (
     
     <div  className='art-lateral'>
+
+      <div className='icon-recargar' onClick={() => conseguirArticulos(true)}
+        style={{position: "absolute", top: "10px", right: "0"}}>
+        <i className='bx bx-revision' />
+      </div>
 
     <h4 className='titulo-recientes'>Recientes</h4>
     
