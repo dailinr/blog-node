@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { Global } from '../../helpers/Global'
 import MenuArticulo from '../modals/MenuArticulo';
-import { PeticionAjax } from '../../helpers/PeticionAjax';
 import ModalConfirm from '../modals/ModalConfirm';
 import Tostada from '../modals/Tostada.jsx';
 import { Link } from 'react-router-dom';
@@ -74,7 +73,7 @@ export const Listado = ( {cards, setArticulos, setIdEliminar, confirmEliminar}) 
         {auth._id === user._id &&
           <i className='bx bx-dots-vertical-rounded' onClick={() => mostrarMenu(cards._id)} >
             {menuArticulo === cards._id && 
-              <MenuArticulo idArticulo={cards._id} eliminar={eliminar}  />
+              <MenuArticulo idArticulo={cards._id} eliminar={eliminar} clase={"menuArticulo"} />
             } 
           </i>
         }

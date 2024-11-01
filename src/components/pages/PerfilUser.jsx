@@ -14,6 +14,7 @@ export const PerfilUser = () => {
   const [counters, setCounters] = useState({});
   const [articulos, setArticulos] = useState([]);
   const [iFollow, setiFollow] = useState(false);
+  const [idEliminar, setIdEliminar] = useState(null);
 
   useEffect(() => {
 
@@ -113,7 +114,34 @@ const unfollowUsuario = async(userId) => {
     if(data.status == "success"){
       setiFollow(false);
     }
-} 
+  } 
+
+  const confirmEliminar = async () => {
+
+    const request = await fetch (Global.url + "articulo/" + idEliminar, {
+      method: "DELETE",
+      headers: {
+        "Context-Type": "application/json",
+        "Authorization": localStorage.getItem("token")
+      }
+    });
+
+    let datos = await request.json();
+    
+    if(datos.status === "success"){
+      // guardamos en una lista todos los articulos que no sean el del id eliminado
+      let articulosActualizados = articulos.filter(articulo => articulo._id !== idEliminar);
+
+      setArticulos(articulosActualizados); // actualizamos el estado de articulos
+
+      // conseguirArticulos(1);
+      setModConfirm(false); // cerramos el modal
+      
+      // Mostrar la tostada 
+      setMostrarToast(true);
+    }
+  
+  }
 
   const avatarDefault = "../../../public/default-avatar-profile-icon-of-social-media-user-vector.jpg";
   const headerDefault = "../../../public/header.jpg";
@@ -189,7 +217,8 @@ const unfollowUsuario = async(userId) => {
               articulo={articulo} user={user}
               seguirUsuario={seguirUsuario} 
               unfollowUsuario={unfollowUsuario}
-              iFollow={iFollow}
+              iFollow={iFollow} setIdEliminar={setIdEliminar} 
+              confirmEliminar={confirmEliminar}
             />
           )
 

@@ -1,12 +1,11 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import { Link } from 'react-router-dom';
 import '../../css/menuUser.css';
-import EditarArticulo from '../pages/EditarArticulo';
 
-const MenuArticulo = ({ idArticulo, eliminar }) => {
+const MenuArticulo = ({ idArticulo, eliminar, clase }) => {
 
   return (
-    <div className='menuArticulo'>
+    <div className={clase}>
       
       <ul className='lista list-articulo '>
 

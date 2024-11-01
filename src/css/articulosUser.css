@@ -41,6 +41,7 @@
     display: flex;
     flex-direction: column;
     overflow: hidden;
+    position: relative;
 }
 
 .art-user{
@@ -80,4 +81,34 @@
 .user-name{
     font-size: 15px;
     font-style: italic;
+}
+
+.bx-dots-horizontal-rounded{
+    position: absolute;
+    right: 5px;
+    top: 0px;
+    font-size: larger;
+    color: rgb(41, 41, 41);
+    cursor: pointer;
+    padding: 5px;
+    background-color: inherit;
+    border-radius: 50%;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    -ms-border-radius: 50%;
+    -o-border-radius: 50%;
+    transition: transform 500ms;
+
+}
+.menu_user{
+    min-width: 110px;
+    height: auto;
+    position: absolute;
+    background-color: #f4f4f8;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 8px;
+    border-radius: 10px;
+    z-index: 20000000;
+    left: 0%;
+    transform: translateX(-75%);
+    top: 90%;
 }

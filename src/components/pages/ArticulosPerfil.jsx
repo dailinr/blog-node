@@ -3,10 +3,27 @@ import "../../css/articulosUser.css";
 import "../../css/explorar_users.css";
 import { Global } from '../../helpers/Global';
 import useAuth from '../../helpers/hooks/useAuth';
+import MenuArticulo from '../modals/MenuArticulo';
+import ModalConfirm from '../modals/ModalConfirm';
+import Tostada from '../modals/Tostada';
 
-export const ArticulosPerfil = ({articulo, user, seguirUsuario, unfollowUsuario, iFollow}) => {
+export const ArticulosPerfil = ({articulo, user, seguirUsuario,
+    unfollowUsuario, iFollow, setIdEliminar, confirmEliminar}) => {
 
     const {auth} = useAuth();
+    const [menuArticulo, setMenuArticulo] = useState(false);
+    const [modConfirm, setModConfirm] = useState(false);
+    const [mostrarToast, setMostrarToast] = useState(false);
+
+    const mostrarMenu = (id) => {
+        setMenuArticulo(menuArticulo === id ? !menuArticulo : id);
+    }
+
+    const eliminar = (id) => {
+
+        setIdEliminar(id); // Establecemos el ID del artículo a eliminar
+        setModConfirm(true); // Mostramos el modal de confirmación
+    }
 
     const avatarDefault = "../../../public/default-avatar-profile-icon-of-social-media-user-vector.jpg";
 
@@ -25,6 +42,16 @@ export const ArticulosPerfil = ({articulo, user, seguirUsuario, unfollowUsuario,
         </div>
 
         <section className='articulo-content'>
+
+            {auth._id === user._id &&
+                <i className='bx bx-dots-horizontal-rounded' 
+                    onClick={() => mostrarMenu(articulo._id)} >
+                        
+                    {menuArticulo === articulo._id && 
+                        <MenuArticulo idArticulo={articulo._id} eliminar={eliminar} clase={"menu_user"} />
+                    } 
+                </i>
+            }
 
             <div className='flex'>
                 <span className="label-lat">{articulo.etiqueta}</span>
@@ -72,6 +99,16 @@ export const ArticulosPerfil = ({articulo, user, seguirUsuario, unfollowUsuario,
             </section> 
 
         </section>
+
+        {modConfirm && (
+            <ModalConfirm
+            confirmEliminar={confirmEliminar}
+            setModConfirm={setModConfirm}
+            />
+        )}
+
+      {mostrarToast && <Tostada mensaje={"Articulo eliminado"} style={{ width: "100px" }} />}
+
 
     </article>
   )
