@@ -98,7 +98,7 @@ export const PerfilUser = () => {
     }
 }
 
-const unfollowUsuario = async(userId) => {
+  const unfollowUsuario = async(userId) => {
     // console.log("dejar de seguir el usuario " + userId);
 
     const request = await fetch( Global.url + "follow/unfollow/" + userId,{
@@ -213,8 +213,8 @@ const unfollowUsuario = async(userId) => {
 
           return(
             <ArticulosPerfil 
-              key={articulo._id}
-              articulo={articulo} user={user}
+              key={articulo._id} articulo={articulo} 
+              setArticulos={setArticulos} user={user}
               seguirUsuario={seguirUsuario} 
               unfollowUsuario={unfollowUsuario}
               iFollow={iFollow} setIdEliminar={setIdEliminar} 

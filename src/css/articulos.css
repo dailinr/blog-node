@@ -108,6 +108,10 @@
 .titulo-card{
   word-spacing: -0.5px;
 }
+.titulo-card .text-lg:hover{
+  color: red !important;
+}
+
 .text-card{
   display: -webkit-box;
   -webkit-box-orient: vertical;

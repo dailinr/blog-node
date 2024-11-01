@@ -124,6 +124,7 @@ const Articulos = ({ enPoint, customPadding, customWidth, customJustify, maxArti
               <Listado 
                 key={cards._id} cards={cards} 
                 setIdEliminar={setIdEliminar} confirmEliminar={confirmEliminar}
+                setArticulos={setArticulos}
               /> 
             )))
           )

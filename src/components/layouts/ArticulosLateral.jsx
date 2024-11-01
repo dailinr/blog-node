@@ -1,14 +1,15 @@
 import React, {useState, useEffect} from 'react';
 import "../../css/artic_lateral.css";
 import { Link } from 'react-router-dom';
-// import { ArticulosContext } from '../../helpers/ArticulosContext';
 import { Global } from '../../helpers/Global';
-import { PeticionAjax } from "../../helpers/PeticionAjax";
 import { formatearTiempoRelativo } from '../../helpers/ConvertirFecha';
+import { incrementarVistas } from '../../helpers/incrementarVistas';
+import useAuth from '../../helpers/hooks/useAuth';
 
 
 const ArticulosLateral = () => {
-    // const { articulos } = useContext(ArticulosContext);
+    
+    const {auth} = useAuth();
     const [articulos, setArticulos] = useState([]);
 
     useEffect(() => {
@@ -62,9 +63,12 @@ const ArticulosLateral = () => {
                 <div className=' label-lat '>{articulo.etiqueta}</div>
 
                 <div className='titulo-lat'>
-                 <Link to={"/articulo/"+articulo._id}>
+                 
+                 <Link to={"/articulo/"+articulo._id}
+                    onClick={articulo.user._id != auth._id ? () => incrementarVistas(articulo._id, setArticulos): null}>
                     <h5>{articulo.titulo} </h5>
                  </Link>
+                 
                 </div>
                 
                 <div className='fecha-lat'>

@@ -1,23 +1,32 @@
 // Portada.jsx
-import React, {  useContext, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import '../../css/Inicio.css';
-// import { ArticulosContext } from '../../helpers/ArticulosContext.jsx';
 import { Global } from '../../helpers/Global';
-import { PeticionAjax } from "../../helpers/PeticionAjax";
 import { formatearTiempoRelativo } from '../../helpers/ConvertirFecha';
+import { incrementarVistas } from '../../helpers/incrementarVistas';
+import { Link } from 'react-router-dom';
+import { getPerfil } from '../../helpers/getPerfil';
+import useAuth from '../../helpers/hooks/useAuth';
 
 const Portada = () => {
   const [actualSlide, setActualSlide] = useState(0);
-  // const { articulos } = useContext(ArticulosContext);
   const [articulos, setArticulos] = useState([]);
+  const [user, setUser] = useState({});
+  const {auth} = useAuth();
+  let idUser;
 
   useEffect(() => {
     conseguirArticulos();
+    getPerfil(idUser, setUser);
   }, []);
+
+  useEffect(() => {
+    getPerfil(idUser, setUser);
+  }, [idUser]);
 
   const conseguirArticulos = async () => {
 
-    const request = await fetch(Global.url + "listar", {
+    const request = await fetch(Global.url + "mas-vistos", {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -28,16 +37,14 @@ const Portada = () => {
     const datos = await request.json();
 
     if (datos.status === "success") {
-
       setArticulos(datos.articulos.slice(0, 3));
     }
-
   };
 
   useEffect(() => {
     const interval = setInterval(() => {
       nextSlide();
-    }, 3000); // Cambia cada 3 segundos
+    }, 5000); // Cambia cada 3 segundos
 
     return () => clearInterval(interval);
   }, [articulos.length]);
@@ -52,6 +59,8 @@ const Portada = () => {
     setActualSlide((prevSlide) => (prevSlide - 1 + articulos.length) % articulos.length);
   };
 
+  const avatarDefault = "../../../public/default-avatar-profile-icon-of-social-media-user-vector.jpg";
+
   return (
     
     <div className='slider'>
@@ -63,31 +72,45 @@ const Portada = () => {
           let urlImagen = portadas.imagen !== "default.png"  ?
           Global.url + "ver-imagen/" + portadas.imagen : portadas.imagen;
 
+          idUser = portadas.user;
+
+          let urlIcon = user.image === "default.png" ? 
+          avatarDefault : Global.url + "usuario/avatar/" + user.image;
           
           return(
             <div key={portadas._id} className="portada" style={{
               background: `linear-gradient(to top, rgba(0, 0, 0, 0.863), rgba(56, 56, 56, 0.527)), url(${urlImagen}) no-repeat center / cover`
             }}>
 
-              <div className="contenido-portada">
-                
-                <div className="etiqueta">
-                  <p>{portadas.etiqueta}</p>
-                </div>
-              
-                <div className="titulo-portada">
-                  <h2>{portadas.titulo}</h2>
-                </div>
-                <div className="text-portada">{portadas.contenido}</div>
-                <div className="autor-portada">
-                  <div className="icon-autor"></div>
-                  <div className="nombre-autor">
-                    <p>Nombre autor{portadas.nombre_autor}</p>
+              <Link to={"/articulo/"+portadas._id}
+                onClick={portadas.user != auth._id ? () => incrementarVistas(portadas._id, setArticulos): null}>
+
+                <div className="contenido-portada">
+
+                  <div className="etiqueta">
+                    <p>{portadas.etiqueta}</p>
                   </div>
-                  <div className="fecha-edicion">{formatearTiempoRelativo(portadas.fecha)}</div>
+                
+                  <div className="titulo-portada">
+                    <h2>{portadas.titulo}</h2>
+                  </div>
+
+                  <div className="text-portada">{portadas.contenido}</div>
+
+                  <div className="autor-portada">
+                    <div className="icon-card">
+                      <img src={urlIcon} alt="icon autor" />
+                    </div>
+
+                    <div className="nombre-autor">
+                      <p>{user.name} {user.surname}</p>
+                    </div>
+                    <div className="fecha-edicion">{formatearTiempoRelativo(portadas.fecha)}</div>
+                  </div>
+
                 </div>
 
-              </div>
+              </Link>
             </div>
           );
           

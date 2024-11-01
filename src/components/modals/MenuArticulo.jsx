@@ -1,5 +1,5 @@
 import React from 'react'
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import '../../css/menuUser.css';
 
 const MenuArticulo = ({ idArticulo, eliminar, clase }) => {
@@ -11,7 +11,8 @@ const MenuArticulo = ({ idArticulo, eliminar, clase }) => {
 
         <Link  to={"/editar/"+ idArticulo}>
           <li className='editar' > 
-            <i className='bx bxs-edit-alt' /> Editar 
+            <i className='bx bxs-edit-alt' /> 
+              Editar 
           </li>
         </Link>        
 

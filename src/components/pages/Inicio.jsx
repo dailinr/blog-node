@@ -15,13 +15,21 @@ const Inicio = () => {
     setBtnCrear(true);
   }
   
+  let enPoint = "inicio";
+
+
   return (
     <div className='Inicio page'>
 
       {articulos.length >= 1 ? (
       <>
+        
+        
+          <Portada 
+            className="recomendados" 
 
-        <Portada className="recomendados" /> 
+          />
+        
 
         {/* <div className='art-inicio'> */}
           
@@ -35,8 +43,9 @@ const Inicio = () => {
               </button>
             </div>
 
+
             <Articulos 
-              enPoint={"inicio"}
+              enPoint={enPoint}
               customPadding="0" maxArticulos={6} 
             />
             

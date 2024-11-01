@@ -6,8 +6,10 @@ import useAuth from '../../helpers/hooks/useAuth';
 import MenuArticulo from '../modals/MenuArticulo';
 import ModalConfirm from '../modals/ModalConfirm';
 import Tostada from '../modals/Tostada';
+import { incrementarVistas } from '../../helpers/incrementarVistas';
+import { Link } from 'react-router-dom';
 
-export const ArticulosPerfil = ({articulo, user, seguirUsuario,
+export const ArticulosPerfil = ({articulo, setArticulos, user, seguirUsuario,
     unfollowUsuario, iFollow, setIdEliminar, confirmEliminar}) => {
 
     const {auth} = useAuth();
@@ -60,8 +62,14 @@ export const ArticulosPerfil = ({articulo, user, seguirUsuario,
             </div>
             
             <div className="art-titulo">
-                <h2  className="text-lg font-bold text-gray-800">{articulo.titulo} 
-                </h2>
+                
+                <Link to={"/articulo/"+articulo._id}
+                    onClick={articulo.user._id != auth._id ? () => incrementarVistas(articulo._id, setArticulos): null}>
+                    
+                    <h2 className="text-lg font-bold text-gray-800">
+                        {articulo.titulo} 
+                    </h2>
+                </Link>
             </div>
 
             <div className="art-contenido">{articulo.contenido}</div>

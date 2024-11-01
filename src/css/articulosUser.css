@@ -16,6 +16,10 @@
     align-items: center;
     box-shadow: rgba(0, 0, 0, 0.185)  0px 5px 10px;
 }
+
+.art-titulo h2:hover{
+    color: rgb(221, 30, 30);
+}
 .art-image{
     width: 200px ;
     height: 180px ;

@@ -3,15 +3,16 @@ import { Global } from '../../helpers/Global'
 import MenuArticulo from '../modals/MenuArticulo';
 import ModalConfirm from '../modals/ModalConfirm';
 import Tostada from '../modals/Tostada.jsx';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { getPerfil } from '../../helpers/getPerfil.jsx';
 import useAuth from '../../helpers/hooks/useAuth.jsx';
+import { incrementarVistas } from '../../helpers/incrementarVistas.jsx';
 
 export const Listado = ( {cards, setArticulos, setIdEliminar, confirmEliminar}) => {
 
   const [menuArticulo, setMenuArticulo] = useState(false);
   const [modConfirm, setModConfirm] = useState(false);
-   // Nueva variable para almacenar el ID del artículo a eliminar
+  // Nueva variable para almacenar el ID del artículo a eliminar
   const [mostrarToast, setMostrarToast] = useState(false);
   const [user, setUser] = useState({});
 
@@ -81,8 +82,12 @@ export const Listado = ( {cards, setArticulos, setIdEliminar, confirmEliminar}) 
         <div className="time-update"></div>
         
         <div className="titulo-card">
-          <h4 className="text-lg font-bold text-gray-800">{cards.titulo}</h4>
+          <Link to={"/articulo/"+cards._id} className="text-lg font-bold text-gray-800"
+            onClick={cards.user._id != auth._id ? () => incrementarVistas(cards._id, setArticulos): null} >
+            {cards.titulo}
+          </Link>
         </div>
+        
         <div className="text-card">{cards.contenido}</div>
 
         <div className="datos-autor border-t pt-2">
@@ -100,7 +105,10 @@ export const Listado = ( {cards, setArticulos, setIdEliminar, confirmEliminar}) 
 
           </div>
 
-          <Link to={"/articulo/"+cards._id} className='btn btn-ver-mas btn-save'> leer </Link>
+          <Link to={"/articulo/"+cards._id} className='btn btn-ver-mas btn-save'
+            onClick={cards.user._id != auth._id ? () => incrementarVistas(cards._id, setArticulos): null} > 
+            leer 
+          </Link>
 
         </div>
       </div>
