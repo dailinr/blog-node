@@ -8,6 +8,7 @@ import ModalConfirm from '../modals/ModalConfirm';
 import Tostada from '../modals/Tostada';
 import { incrementarVistas } from '../../helpers/incrementarVistas';
 import { Link } from 'react-router-dom';
+import ReactTimeAgo from 'react-time-ago';
 
 export const ArticulosPerfil = ({articulo, setArticulos, user, seguirUsuario,
     unfollowUsuario, iFollow, setIdEliminar, confirmEliminar}) => {
@@ -58,7 +59,14 @@ export const ArticulosPerfil = ({articulo, setArticulos, user, seguirUsuario,
             <div className='flex'>
                 <span className="label-lat">{articulo.etiqueta}</span>
                 &nbsp; &nbsp; 
-                <span className="fecha-card">{articulo.fecha}</span>
+
+                <span className="fecha-card">
+                    {articulo.fecha ? (
+                        <ReactTimeAgo date={new Date(articulo.fecha)} locale="es-ES" />
+                    ):(
+                        <span>Fecha no disponible</span>
+                    )}
+                </span>
             </div>
             
             <div className="art-titulo">

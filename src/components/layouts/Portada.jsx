@@ -2,11 +2,11 @@
 import React, { useEffect, useState } from 'react';
 import '../../css/Inicio.css';
 import { Global } from '../../helpers/Global';
-import { formatearTiempoRelativo } from '../../helpers/ConvertirFecha';
 import { incrementarVistas } from '../../helpers/incrementarVistas';
 import { Link } from 'react-router-dom';
 import { getPerfil } from '../../helpers/getPerfil';
 import useAuth from '../../helpers/hooks/useAuth';
+import ReactTimeAgo from 'react-time-ago';
 
 const Portada = () => {
   const [actualSlide, setActualSlide] = useState(0);
@@ -105,7 +105,14 @@ const Portada = () => {
                     <div className="nombre-autor">
                       <p>{user.name} {user.surname}</p>
                     </div>
-                    <div className="fecha-edicion">{formatearTiempoRelativo(portadas.fecha)}</div>
+
+                    <div className="fecha-edicion">
+                      {portadas.fecha ? (
+                        <ReactTimeAgo date={new Date(portadas.fecha)} locale="es-ES" />
+                      ) : (
+                        <span>Fecha no disponible</span>
+                      )}
+                    </div>
                   </div>
 
                 </div>

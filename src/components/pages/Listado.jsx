@@ -7,6 +7,7 @@ import { Link, useLocation } from 'react-router-dom';
 import { getPerfil } from '../../helpers/getPerfil.jsx';
 import useAuth from '../../helpers/hooks/useAuth.jsx';
 import { incrementarVistas } from '../../helpers/incrementarVistas.jsx';
+import ReactTimeAgo from 'react-time-ago';
 
 export const Listado = ( {cards, setArticulos, setIdEliminar, confirmEliminar}) => {
 
@@ -31,16 +32,6 @@ export const Listado = ( {cards, setArticulos, setIdEliminar, confirmEliminar}) 
     setIdEliminar(id); // Establecemos el ID del artículo a eliminar
     setModConfirm(true); // Mostramos el modal de confirmación
   } 
-
-  // Formatear la fecha en DD/MM/YY
-  const formatearFecha = (fecha) => {
-    const date = new Date(fecha);
-    return date.toLocaleDateString('es-ES', {
-      day: '2-digit',
-      month: '2-digit',
-      year: 'numeric',
-    });
-  };
 
   // Condicion para saber el articulo se le ha asignado una imagen
   let urlImagen = cards.imagen !== "default.png"  ?
@@ -82,6 +73,7 @@ export const Listado = ( {cards, setArticulos, setIdEliminar, confirmEliminar}) 
         <div className="time-update"></div>
         
         <div className="titulo-card">
+          
           <Link to={"/articulo/"+cards._id} className="text-lg font-bold text-gray-800"
             onClick={cards.user._id != auth._id ? () => incrementarVistas(cards._id, setArticulos): null} >
             {cards.titulo}
@@ -101,7 +93,13 @@ export const Listado = ( {cards, setArticulos, setIdEliminar, confirmEliminar}) 
               {user.name} {user.surname} 
             </Link>
             
-            <p className="fecha-card">{formatearFecha(cards.fecha)}</p>
+            <p className="fecha-card">
+              {cards.fecha ? (
+                <ReactTimeAgo date={new Date(cards.fecha)} locale="es-ES" />
+              ) : (
+                <span>Fecha no disponible</span>
+              )}
+            </p>
 
           </div>
 

@@ -4,8 +4,7 @@ import { useParams } from 'react-router-dom';
 import '../../css/ver_articulo.css'
 import '../../css/Inicio.css';
 import { Global } from "../../helpers/Global";
-import { PeticionAjax } from "../../helpers/PeticionAjax";
-import { formatearTiempoRelativo } from '../../helpers/ConvertirFecha';
+import ReactTimeAgo from 'react-time-ago';
 
 export const VerArticulo = () => {
   const { id }  = useParams();
@@ -20,12 +19,20 @@ export const VerArticulo = () => {
   const conseguirArticulo = async () => {
     const url = Global.url + "articulo/"+ id;
 
-    console.log(url);
+    const request = await fetch(url, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": localStorage.getItem("token")
+      }
+    });
 
-    const {datos, cargando} = await PeticionAjax(url, "GET");
+    const datos = await request.json();
 
     if (datos.status === "success") {
       setArticulo(datos.articulo);
+    }else{
+      setArticulo([]);
     }
 
     setCargando(false);
@@ -45,7 +52,11 @@ export const VerArticulo = () => {
           <h1>articulo {articulo.titulo}</h1>
 
           <span>
-            {formatearTiempoRelativo(articulo.fecha) }
+            {articulo.fecha ? (
+              <ReactTimeAgo date={new Date(articulo.fecha)} locale="es-ES" />
+            ) : (
+              <span>Fecha no disponible</span>
+            )}
             <span className='etiqueta'> {articulo.etiqueta} </span> 
           </span>
 
