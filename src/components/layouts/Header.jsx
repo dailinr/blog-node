@@ -29,7 +29,7 @@ const Header = () => {
     
     const avatarDefault = "../../../public/default-avatar-profile-icon-of-social-media-user-vector.jpg";
 
-    let urlImagen = auth.image === "default.png" ? 
+    let urlImagen =  auth.image === "default.png" ? 
         avatarDefault : Global.url + "usuario/avatar/" + auth.image;
 
   return (

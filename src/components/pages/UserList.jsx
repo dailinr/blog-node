@@ -65,8 +65,7 @@ export const UserList = ({users, conseguirUsers, following,
 
   return (
 
-    !loading ? (
-        <>  
+    !loading ? ( <> 
 
         {users.map(user => (
         
@@ -112,10 +111,8 @@ export const UserList = ({users, conseguirUsers, following,
             <button className="btn flex" style={{margin: "0 auto"}} onClick={nextPage} >
                 Ver más
             </button> 
-        }
-
-        </>
-    ) 
+        }        
+    </> ) 
     :(
         <div className="page-cargando">
             <h1 className='cerrar-texto'>Cargando</h1>

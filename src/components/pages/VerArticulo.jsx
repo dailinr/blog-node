@@ -45,20 +45,29 @@ export const VerArticulo = () => {
 
   return (
     
-    cargando ? "Cargando..." : (
+    cargando ? (
+      <div className="page-cargando">
+        <h1 className='cerrar-texto'>Cargando</h1>
+        <span className="loader-out" />
+      </div>
+    )
+    : (
       <div className='ver-articulo'>
 
         <section className='contenido-articulo'>
           <h1>articulo {articulo.titulo}</h1>
 
-          <span>
+          <span  className='fecha-articulo'>
             {articulo.fecha ? (
               <ReactTimeAgo date={new Date(articulo.fecha)} locale="es-ES" />
             ) : (
               <span>Fecha no disponible</span>
             )}
+            
             <span className='etiqueta'> {articulo.etiqueta} </span> 
           </span>
+
+          
 
           <div className='imagen-articulo'>
             <img src={urlImagen} alt={articulo.titulo} />

@@ -18,7 +18,7 @@ import { ExplorarUsers } from "../components/pages/ExplorarUsers";
 import { Following } from "../components/pages/Following";
 import { Followers } from "../components/pages/Followers";
 
-export const Rutas = () => {
+export const Rutas = ({auth}) => {
 
     return(
 
@@ -43,7 +43,7 @@ export const Rutas = () => {
                 <Route path="articulo/:id" element={ <VerArticulo />} />
                 <Route path="editar/:id" element={ <EditarArticulo />} />
                 <Route path="logout" element={<CerrarSesion />} />
-                <Route path="perfil/:userId" element={<PerfilUser />} />
+                <Route path="perfil/:id" element={<PerfilUser />} />
                 <Route path="configuracion" element={<Configuracion />} />
                 <Route path="explorar-users" element={<ExplorarUsers />} />
                 <Route path="siguiendo/:userId" element={<Following />} />

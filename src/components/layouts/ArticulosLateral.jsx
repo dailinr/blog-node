@@ -10,6 +10,7 @@ const ArticulosLateral = () => {
     
   const {auth} = useAuth();
   const [articulos, setArticulos] = useState([]);
+  const [cargando, setCargando] = useState(true)
 
   useEffect(() => {
     conseguirArticulos(false);
@@ -38,6 +39,8 @@ const ArticulosLateral = () => {
     }else{
       setArticulos([]);
     }
+
+    setCargando(false);
   };
 
  
@@ -51,8 +54,16 @@ const ArticulosLateral = () => {
       </div>
 
     <h4 className='titulo-recientes'>Recientes</h4>
+
+    {cargando ? (
+      <div className="page-cargando">
+        <h1 className='cerrar-texto'>Cargando</h1>
+        <span className="loader-out" />
+      </div>
+    ) 
+    :(
     
-    {articulos.slice(0, 10).map((articulo) => {
+    articulos.slice(0, 10).map((articulo) => {
 
       let urlImagen = articulo.imagen !== "default.png"  ?
       Global.url + "ver-imagen/" + articulo.imagen : articulo.imagen;
@@ -95,7 +106,8 @@ const ArticulosLateral = () => {
         </article>
       );
 
-    })}
+    })
+  )}
     </div> 
 
   )

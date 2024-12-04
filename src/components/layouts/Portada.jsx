@@ -4,25 +4,18 @@ import '../../css/Inicio.css';
 import { Global } from '../../helpers/Global';
 import { incrementarVistas } from '../../helpers/incrementarVistas';
 import { Link } from 'react-router-dom';
-import { getPerfil } from '../../helpers/getPerfil';
 import useAuth from '../../helpers/hooks/useAuth';
 import ReactTimeAgo from 'react-time-ago';
 
 const Portada = () => {
   const [actualSlide, setActualSlide] = useState(0);
   const [articulos, setArticulos] = useState([]);
-  const [user, setUser] = useState({});
   const {auth} = useAuth();
-  let idUser;
+  const [cargando, setCargando] = useState(true);
 
   useEffect(() => {
     conseguirArticulos();
-    getPerfil(idUser, setUser);
   }, []);
-
-  useEffect(() => {
-    getPerfil(idUser, setUser);
-  }, [idUser]);
 
   const conseguirArticulos = async () => {
 
@@ -39,6 +32,7 @@ const Portada = () => {
     if (datos.status === "success") {
       setArticulos(datos.articulos.slice(0, 3));
     }
+    setCargando(false);
   };
 
   useEffect(() => {
@@ -67,12 +61,19 @@ const Portada = () => {
     
       <div className="slides-container" style={{ transform: `translateX(-${actualSlide * 100}%)` }}>
 
-        {articulos.map((portadas) => {
+      {cargando ? (
+        <div className="page-cargando">
+          <h1 className='cerrar-texto'>Cargando</h1>
+          <span className="loader-out" />
+        </div>
+      ) 
+      :(
+        articulos.map((portadas) => {
 
           let urlImagen = portadas.imagen !== "default.png"  ?
           Global.url + "ver-imagen/" + portadas.imagen : portadas.imagen;
 
-          idUser = portadas.user;
+          let user = portadas.user;
 
           let urlIcon = user.image === "default.png" ? 
           avatarDefault : Global.url + "usuario/avatar/" + user.image;
@@ -91,7 +92,7 @@ const Portada = () => {
                     <p>{portadas.etiqueta}</p>
                   </div>
                 
-                  <div className="titulo-portada">
+                  <div className="titulo-portada ">
                     <h2>{portadas.titulo}</h2>
                   </div>
 
@@ -121,7 +122,8 @@ const Portada = () => {
             </div>
           );
           
-        })}
+        }) 
+      )}
       </div>
 
       <button className='prev' onClick={prevSlide}>&#10094;</button>

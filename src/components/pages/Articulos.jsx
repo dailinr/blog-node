@@ -39,14 +39,25 @@ const Articulos = ({ enPoint, customPadding, customWidth, customJustify, maxArti
   const conseguirArticulos = async (nextPage) => {
     let url;
 
-    if (enPoint === "inicio") {
-      url = `${Global.url}feed/${nextPage}`;
-    } else if (location.pathname.includes("articulos")) {
-      url = `${Global.url}listar/${nextPage}`;
+    switch(enPoint) {
+      
+      case "siguiendo":
+        url = Global.url + "feed/" + nextPage;
+        break;
+      case "populares":
+        url = Global.url + "mas-vistos/";
+        break;
+    
+      default:
+        break;
+    } 
+
+    if (location.pathname.includes("articulos")) {
+      url = Global.url + "listar/" + nextPage;
     } else if (location.pathname.includes("feed")) {
-      url = `${Global.url}feed/${nextPage}`;
+      url = Global.url + "feed/" + nextPage;
     }
-  
+
     const request = await fetch(url, {
       method: "GET",
       headers: {

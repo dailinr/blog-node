@@ -25,8 +25,8 @@ const PrivateLayout = () => {
     <>
       <Header />
 
-      <section  className="content">
-        <Outlet />
+      <section className="content" >
+        <Outlet  />
       </section>
 
       <Footer />

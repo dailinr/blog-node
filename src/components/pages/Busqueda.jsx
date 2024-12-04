@@ -25,9 +25,15 @@ export const Busqueda = () => {
   const conseguirArticulos = async () => {
     const url = Global.url + "buscar/" + params.busqueda;
 
-    const {datos, cargando} = await PeticionAjax(url, "GET");
+    const request = await fetch(url, {
+      method: "GET",
+      headers: {
+        "Context-Type": "application/json",
+        "Authorization": localStorage.getItem("token")
+      }
+    });
 
-    //  console.log(await PeticionAjax(url, "GET"));
+    const datos = await request.json();
 
     if (datos.status === "success") {
       setArticulos(datos.articulos);
@@ -36,16 +42,29 @@ export const Busqueda = () => {
     }
     setCargando(false);
   };
+  
 
   return (
     <div className="Articulos page "  >
 
       <div className="content-articulos">
 
-        {cargando ? "Cargando..." : (
-
+        {cargando ? (
+          <div className="page-cargando">
+            <h1 className='cerrar-texto'>Cargando</h1>
+            <span className="loader-out" />
+          </div>
+        )
+        :(
           articulos.length >= 1 ? 
-            <Listado articulos={articulos} setArticulos={setArticulos} /> 
+
+            (articulos.map(cards => (
+              
+              <Listado key={cards._id}
+                cards={cards} setArticulos={setArticulos} 
+              /> 
+            )))
+            
           : 
             <h1 className='jumbo'>No hay articulos</h1> 
         )}

@@ -15,36 +15,52 @@ export const PerfilUser = () => {
   const [articulos, setArticulos] = useState([]);
   const [iFollow, setiFollow] = useState(false);
   const [idEliminar, setIdEliminar] = useState(null);
+  const [idUser, setIdUser] = useState(params.id);
+
+  const [cargando, setCargando] = useState(true);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
 
-    getDataUser();
-    getCounters();
-    getArticulos();
+      getDataUser();
+      getCounters();
+      getArticulos();
 
   }, []);
 
   useEffect(() => {
-    
-    getDataUser();
-    getCounters();
-    getArticulos();
+
+      getDataUser();
+      getCounters();
+      getArticulos();
 
   }, [params]);
 
   const getDataUser = async() => {
     
+    try{
+      
+      let dataUser = await getPerfil(idUser, setUser);
 
-    let dataUser = await getPerfil(params.userId, setUser);
-    // console.log(dataUser);
-    if(dataUser.following && dataUser.following._id ){
-      setiFollow(true);
+      if(dataUser){
+        setLoading(false);
+        setCargando(false);
+      }
+      
+      // console.log(dataUser);
+      if(dataUser.following && dataUser.following._id ){
+        setiFollow(true);
+      }
     }
-  }
+    catch(error){
+      console.error("Error al cargar los datos del usuario:", error);
+    }
+    
+  };
 
   const getCounters = async() => {
 
-    const request = await fetch(Global.url + "usuario/counters/" + params.userId, {
+    const request = await fetch(Global.url + "usuario/counters/" + idUser, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -61,7 +77,7 @@ export const PerfilUser = () => {
 
   const getArticulos = async(nextPage = 1) => {
     
-    const request = await fetch(Global.url + "articulos-usuario/" + params.userId + "/" + nextPage, {
+    const request = await fetch(Global.url + "articulos-usuario/" + idUser + "/" + nextPage, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -74,7 +90,6 @@ export const PerfilUser = () => {
     if(data.status == "success"){
       setArticulos(data.artUser.docs);
     }
-
   }
 
   const seguirUsuario = async(userId) => {
@@ -96,7 +111,8 @@ export const PerfilUser = () => {
       // Actualizar estado de following, agregando el nuevo follow
       setiFollow(true);
     }
-}
+    
+  }
 
   const unfollowUsuario = async(userId) => {
     // console.log("dejar de seguir el usuario " + userId);
@@ -149,80 +165,104 @@ export const PerfilUser = () => {
   let urlImagen = user.image === "default.png" ? 
     avatarDefault : Global.url + "usuario/avatar/" + user.image;
 
+    console.log("loading: "+loading + " cargando: "+cargando );
+
+    if (loading) {
+      return (
+        <div className="page-cargando">
+          <h1 className='cerrar-texto'>Cargando</h1>
+          <span className="loader-out" />
+        </div>
+      );
+    }
+
   return (
     <div className=' page-perfil'>
       
       <div className='info-perfil'>
 
-        <div className='header-perfil'
-          style={{ background: `url(${headerDefault}) no-repeat center / cover` }}>
+        
+        
+          <div className='header-perfil'
+            style={{ background: `url(${headerDefault}) no-repeat center / cover` }}>
 
-          <div className='avatar-perfil'
-            style={{ background: `url(${urlImagen}) no-repeat center / cover` }}>
+            <div className='avatar-perfil'
+              style={{ background: `url(${urlImagen}) no-repeat center / cover` }}>
 
-          </div>
+            </div>
 
-          {user._id == auth._id ? 
+            {user._id == auth._id ? 
 
-            <Link to={"/configuracion"} className='editar-perfil' >
-              Editar perfil
-            </Link>
-          :
-            
-            (!iFollow ?
-              <button onClick={() => seguirUsuario(user._id)} className=" seguir-perfil btn btn-outline">
-                Seguir
-              </button>
+              <Link to={"/configuracion"} className='editar-perfil' >
+                Editar perfil
+              </Link>
             :
-              <button onClick={() => unfollowUsuario(user._id)} className=" seguir-perfil btn btn-neutral">
-                Siguiendo
-              </button>
-            )
-          }
+              
+              (!iFollow ?
+                <button onClick={() => seguirUsuario(user._id)} className=" seguir-perfil btn btn-outline">
+                  Seguir
+                </button>
+              :
+                <button onClick={() => unfollowUsuario(user._id)} className=" seguir-perfil btn btn-neutral">
+                  Siguiendo
+                </button>
+              )
+            }
 
-        </div>
-
-        <div className='data-user'>
-
-          <h2 className='nombre-user'>{user.name} {user.surname}</h2>
-          <p className='nick-user'>@{user.nick}</p>
-
-        </div> 
-      
-        <div className='follow-counters'>
-          
-          <div className='following'>
-            {counters.following >= 1 ? counters.following : 0}  
-            <span><Link to={"/siguiendo/" + user._id}> Siguiendo</Link> </span>
           </div>
 
-          <div className='followers'>
-            {counters.followed >= 1 ? counters.followed : 0} 
-            <span><Link to={"/seguidores/" + user._id}> Seguidores</Link> </span>
-          </div>
+          <div className='data-user'>
 
-          <div className='articulos'>
-            {counters.articulos >= 1 ? counters.articulos : 0} 
-            <span>Articulos</span> 
-          </div>
-        </div>
+            <h2 className='nombre-user'>{user.name} {user.surname}</h2>
+            <p className='nick-user'>@{user.nick}</p>
+
+          </div> 
+        
+          <div className='follow-counters'>
+            
+            <div className='following'>
+              {counters.following >= 1 ? counters.following : 0}  
+              <span><Link to={"/siguiendo/" + user._id}> Siguiendo</Link> </span>
+            </div>
+
+            <div className='followers'>
+              {counters.followed >= 1 ? counters.followed : 0} 
+              <span><Link to={"/seguidores/" + user._id}> Seguidores</Link> </span>
+            </div>
+
+            <div className='articulos'>
+              {counters.articulos >= 1 ? counters.articulos : 0} 
+              <span>Articulos</span> 
+            </div>
+          </div> 
+
+        
+
       </div>
 
       <div className='post-perfil'>
-        {articulos.map(articulo => {
+        {cargando ? (
+          <div className="page-cargando">
+            <h1 className='cerrar-texto'>Cargando</h1>
+            <span className="loader-out" />
+          </div>
+        ) 
+        :(
+          articulos.map(articulo => {
 
-          return(
-            <ArticulosPerfil 
-              key={articulo._id} articulo={articulo} 
-              setArticulos={setArticulos} user={user}
-              seguirUsuario={seguirUsuario} 
-              unfollowUsuario={unfollowUsuario}
-              iFollow={iFollow} setIdEliminar={setIdEliminar} 
-              confirmEliminar={confirmEliminar}
-            />
-          )
+            return(
+              <ArticulosPerfil 
+                key={articulo._id} articulo={articulo} 
+                setArticulos={setArticulos} user={user}
+                seguirUsuario={seguirUsuario} 
+                unfollowUsuario={unfollowUsuario}
+                iFollow={iFollow} setIdEliminar={setIdEliminar} 
+                confirmEliminar={confirmEliminar}
+              />
+            )
 
-        })} 
+          })
+        )}
       
       </div>
       
