@@ -6,18 +6,26 @@ import { incrementarVistas } from '../../helpers/incrementarVistas';
 import { Link } from 'react-router-dom';
 import useAuth from '../../helpers/hooks/useAuth';
 import ReactTimeAgo from 'react-time-ago';
+import { useGlobalContext } from '../../helpers/GlobalContext.jsx';
 
 const Portada = () => {
   const [actualSlide, setActualSlide] = useState(0);
   const [articulos, setArticulos] = useState([]);
   const {auth} = useAuth();
   const [cargando, setCargando] = useState(true);
+  const { refreshKey } = useGlobalContext();
 
   useEffect(() => {
     conseguirArticulos();
   }, []);
+  
+  useEffect(() => {
+    conseguirArticulos();
+  }, [refreshKey]);
 
   const conseguirArticulos = async () => {
+
+    setArticulos([]);
 
     const request = await fetch(Global.url + "mas-vistos", {
       method: "GET",

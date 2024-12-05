@@ -42,8 +42,6 @@ export const PeticionAjax = async (url, metodo, datosGuardar = "", archivos = fa
     const peticion = await fetch(url, opciones);
     const datos = await peticion.json();
 
-    // console.log(datos);
-
     cargando = false;
 
     return {

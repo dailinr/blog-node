@@ -15,39 +15,29 @@ export const PerfilUser = () => {
   const [articulos, setArticulos] = useState([]);
   const [iFollow, setiFollow] = useState(false);
   const [idEliminar, setIdEliminar] = useState(null);
-  const [idUser, setIdUser] = useState(params.id);
 
   const [cargando, setCargando] = useState(true);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
 
-      getDataUser();
-      getCounters();
-      getArticulos();
+    getDataUser();
+    getCounters();
+    getArticulos();
 
-  }, []);
-
-  useEffect(() => {
-
-      getDataUser();
-      getCounters();
-      getArticulos();
-
-  }, [params]);
+  }, [params.id]);
 
   const getDataUser = async() => {
     
     try{
       
-      let dataUser = await getPerfil(idUser, setUser);
+      let dataUser = await getPerfil(params.id, setUser);
 
       if(dataUser){
         setLoading(false);
         setCargando(false);
       }
       
-      // console.log(dataUser);
       if(dataUser.following && dataUser.following._id ){
         setiFollow(true);
       }
@@ -60,7 +50,7 @@ export const PerfilUser = () => {
 
   const getCounters = async() => {
 
-    const request = await fetch(Global.url + "usuario/counters/" + idUser, {
+    const request = await fetch(Global.url + "usuario/counters/" + params.id, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -77,7 +67,7 @@ export const PerfilUser = () => {
 
   const getArticulos = async(nextPage = 1) => {
     
-    const request = await fetch(Global.url + "articulos-usuario/" + idUser + "/" + nextPage, {
+    const request = await fetch(Global.url + "articulos-usuario/" + params.id + "/" + nextPage, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -93,7 +83,6 @@ export const PerfilUser = () => {
   }
 
   const seguirUsuario = async(userId) => {
-    // console.log("seguir el usuario " + userId);
     
     const request = await fetch( Global.url + "follow/save", {
       method: "POST",
@@ -115,7 +104,6 @@ export const PerfilUser = () => {
   }
 
   const unfollowUsuario = async(userId) => {
-    // console.log("dejar de seguir el usuario " + userId);
 
     const request = await fetch( Global.url + "follow/unfollow/" + userId,{
       method: "DELETE",
@@ -164,8 +152,6 @@ export const PerfilUser = () => {
 
   let urlImagen = user.image === "default.png" ? 
     avatarDefault : Global.url + "usuario/avatar/" + user.image;
-
-    console.log("loading: "+loading + " cargando: "+cargando );
 
     if (loading) {
       return (

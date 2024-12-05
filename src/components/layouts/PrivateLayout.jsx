@@ -7,7 +7,7 @@ import "../../css/animaciones.css";
 
 const PrivateLayout = () => {
   const { auth, loading } = useAuth();
-
+  
   if(loading){
 
     return (
@@ -17,7 +17,7 @@ const PrivateLayout = () => {
     );
   }
   // Modificación: Asegurar que la autenticación se verifica correctamente
-  if (!auth ) {
+  if (!auth  && loading) {
     return <Navigate to="/usuario/login" />;
   }
 

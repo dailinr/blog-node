@@ -1,9 +1,8 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import "../../css/login.css"
 import { Link, useNavigate } from 'react-router-dom'
 import { useForm } from '../../helpers/hooks/useForm'
 import { Global } from '../../helpers/Global'
-import { PeticionAjax } from '../../helpers/PeticionAjax'
 import Tostada from '../modals/Tostada'
 import ToastError from '../modals/ToastError'
 import useAuth from '../../helpers/hooks/useAuth'
@@ -13,40 +12,50 @@ const Login = () => {
     const [resultado, setResultado] = useState("");
     const navigate = useNavigate(); // Importa y usa useNavigate
 
-    const { auth, setAuth } = useAuth();
+    const {auth, loading, authUser } = useAuth();
 
     const loginUser = async (e) => {
         e.preventDefault();
 
         let datosUser = formulario;
+        try{
+            const url = Global.url + "usuario/login";
 
-        const url = Global.url + "usuario/login";
+            const request = await fetch(url, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(datosUser)
+            })
 
-        const { datos } = await PeticionAjax(url, "POST", datosUser);
+            if(!request.ok){
+                throw new Error('Error al iniciar sesión');
+            }
 
-        if(datos.status === "success"){
+            const datos = await request.json();
+            
+            if(datos.status === "success"){
 
-            // Persistir los datos en el localstorage - guardar una sesion
-            localStorage.setItem("token", datos.token);
-            localStorage.setItem("user", JSON.stringify(datos.user)); 
+                // Persistir los datos en el localstorage - guardar una sesion
+                localStorage.setItem("token", datos.token);
+                localStorage.setItem("user", JSON.stringify(datos.user)); 
 
-            setResultado("encontrado");
+                setResultado("encontrado");
 
-            // Setear datos del usuario en el auth
-            setAuth(datos.user);
+                // Setear datos del usuario en el auth
+                await authUser();
 
-            console.log(datos);
+                console.log("Estado actual de auth:", auth);
+                console.log("Estado actual de loading:", loading);
 
-            // Redireccion a parte privada de la app (inicio)
-            setTimeout(() => {
-                navigate("/perfil/" + datos.user.id);
-                // navigate("/inicio");
-            }, 1000);
+                if(auth && !loading) navigate("/inicio");
+            }
         }
-        else{
+        catch(error){
             setResultado("error");
-        }
-        
+            console.error('Error al iniciar sesión:');
+        }        
     }
 
   return (
@@ -55,7 +64,7 @@ const Login = () => {
         
         {resultado === 'encontrado' && <Tostada width="100" mensaje={"Usuario identificado correctamente"} /> }
         {resultado === 'error' && <ToastError width="100" mensaje={"Usuario no encontrado"} />}
-      
+        
         <div className="login flex flex-col w-full md:w-1/2 xl:w-2/5 2xl:w-2/5 3xl:w-1/3 mx-auto p-8 md:p-10 md:pt-1 2xl:p-12 3xl:p-14 bg-[#ffffff] rounded-2xl shadow-xl">
             <div className='flex flex-col mx-auto'>
                 <img src="../../../TecnoPulse-removebg-preview.png" alt="" width="180" />

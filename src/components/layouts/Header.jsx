@@ -1,21 +1,25 @@
-import React, { useState , useEffect } from 'react'
+import React, { useState } from 'react'
 import '../../css/header.css';
 import MenuUser from '../modals/MenuUser';
 import { NavLink } from "react-router-dom";
 import { useNavigate } from 'react-router-dom';
 import useAuth from '../../helpers/hooks/useAuth';
 import { Global } from '../../helpers/Global';
+import { useGlobalContext } from '../../helpers/GlobalContext';
 
 const Header = () => {
     const [menuUsuario, setMenuUsuario] = useState(false);
-    const [buscar, setBuscar] = useState("");
+    const [ setBuscar] = useState("");
     const navegar = useNavigate();
-
     const { auth } = useAuth();
+    const { refreshPage } = useGlobalContext();
     
+    const avatarDefault = "../../../public/default-avatar-profile-icon-of-social-media-user-vector.jpg";
+    let urlImagen =  auth.image === "default.png" ? 
+        avatarDefault : Global.url + "usuario/avatar/" + auth.image;
+
     const mostrarOpcUser = () => {
         setMenuUsuario(!menuUsuario);
-        // console.log("menu usuario: " + menuUsuario);
     };
 
     const hacerBusqueda = (e) => {
@@ -23,15 +27,9 @@ const Header = () => {
         const searchInput = e.currentTarget.querySelector("input"); // Busca el input dentro del label
         let searchValue = searchInput ? searchInput.value : ""; // Verifica si el input existe y obtiene su valor
         setBuscar(searchValue);
-        // console.log("Estás buscando: " + searchValue);
         navegar("/buscar/"+searchValue, {replace: true}); // para cambiar la ruta por la busqueda actual
     }
-    
-    const avatarDefault = "../../../public/default-avatar-profile-icon-of-social-media-user-vector.jpg";
-
-    let urlImagen =  auth.image === "default.png" ? 
-        avatarDefault : Global.url + "usuario/avatar/" + auth.image;
-
+ 
   return (
     <div className='header '>    
     
@@ -69,9 +67,9 @@ const Header = () => {
                 <i className='bx bx-search-alt'></i>
             </div> */}
 
-            {/* <div className='icon-recargar' style={{alignContent: "center"}}>
+            <div onClick={refreshPage} className='icon-recargar' style={{alignContent: "center"}}>
                 <i className='bx bx-revision' />
-            </div> */}
+            </div> 
 
             <label onChange={hacerBusqueda} className="input search input-bordered flex items-center gap-2">
                 <input type="text" id="search_field" className="grow" placeholder="Buscar articulo" />

@@ -16,12 +16,9 @@ export const UserList = ({users, conseguirUsers, following,
         setPage(next);
 
         conseguirUsers(next);
-
-        // console.log(page, users);
     }
 
     const seguirUsuario = async(userId) => {
-        // console.log("seguir el usuario " + userId);
         
         const request = await fetch( Global.url + "follow/save", {
             method: "POST",
@@ -42,7 +39,6 @@ export const UserList = ({users, conseguirUsers, following,
     }
 
     const unfollowUsuario = async(userId) => {
-        // console.log("dejar de seguir el usuario " + userId);
 
         const request = await fetch( Global.url + "follow/unfollow/" + userId,{
             method: "DELETE",

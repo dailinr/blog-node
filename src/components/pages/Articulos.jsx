@@ -5,6 +5,7 @@ import { Global } from "../../helpers/Global";
 import { Listado } from "./Listado";
 import CrearArticulo from "./CrearArticulo";
 import { useLocation } from "react-router-dom";
+import { useGlobalContext } from '../../helpers/GlobalContext.jsx';
 
 const Articulos = ({ enPoint, customPadding, customWidth, customJustify, maxArticulos}) => {
 
@@ -15,6 +16,7 @@ const Articulos = ({ enPoint, customPadding, customWidth, customJustify, maxArti
   const [idEliminar, setIdEliminar] = useState(null);
   const [btnCrear, setBtnCrear] = useState(false);
   const location = useLocation();
+  const { refreshKey } = useGlobalContext();
 
   const handleBtncrear = () => {
     setBtnCrear(true);
@@ -27,7 +29,7 @@ const Articulos = ({ enPoint, customPadding, customWidth, customJustify, maxArti
     setMore(true);
     conseguirArticulos(1);
 
-  }, [location.pathname, enPoint]); // Dependencias actualizadas
+  }, [location.pathname, enPoint, refreshKey]); // Dependencias actualizadas
   
   useEffect(() => {
     // Llamar a conseguirArticulos cada vez que se actualiza la página

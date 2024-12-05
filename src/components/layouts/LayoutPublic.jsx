@@ -4,7 +4,7 @@ import useAuth from '../../helpers/hooks/useAuth';
 import "../../css/animaciones.css";
 
 const LayoutPublic = () => {
-  const { auth, loading } = useAuth();
+  const { loading } = useAuth();
 
   if(loading){
 
@@ -14,11 +14,7 @@ const LayoutPublic = () => {
       </div>
     );
   }
-
-  if(auth){
-    return <Navigate to="/" />;
-  }
-
+  
   return (
     <section className="content">
 
@@ -26,6 +22,7 @@ const LayoutPublic = () => {
       
     </section>
   )
+  
 }
 
 export default LayoutPublic

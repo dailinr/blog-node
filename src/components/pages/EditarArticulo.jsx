@@ -47,8 +47,6 @@ const EditarArticulo = () => {
 
     // Recoger datos del formulario
     let nuevoArticulo = formulario;
-    // console.log("Datos enviados:", nuevoArticulo); // Revisa si ahora captura todos los campos
-
 
     // Guardar articulo en backend -- parametros: url, metodo ajax, datos a guardar
     const { datos } = await PeticionAjax(
@@ -80,7 +78,6 @@ const EditarArticulo = () => {
         formData,
         true
       );
-      // console.log(subida.datos); 
 
       if (subida.datos.status === "success") {
         setResultado("guardado");
@@ -89,8 +86,6 @@ const EditarArticulo = () => {
         setResultado("error");
       }
     }
-
-    // console.log(datos);
   };
 
   // Conseguir url de la imagen del articulo

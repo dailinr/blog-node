@@ -33,8 +33,6 @@ export const useForm  = ( objetoInicial = {} ) => {
             ...formulario,
             [name]: value
         });
-
-        // console.log(formulario);
     }
 
     return {

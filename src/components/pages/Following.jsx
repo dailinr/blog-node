@@ -45,7 +45,6 @@ export const Following = () => {
             cleanUsers = [... cleanUsers, siguiendo.followed]
         });
         data.users = cleanUsers;
-        console.log(data.users);
 
         if(data.status == "success" && data.users){
             

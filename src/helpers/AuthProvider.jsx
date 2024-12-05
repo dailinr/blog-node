@@ -26,12 +26,13 @@ export const AuthProvider = ({ children }) => {
             return; // termina la funcion 
         }
 
-        // Transformar los datos a un objeto de javaScript
-        const userObj = JSON.parse(user);
-        const userId = userObj.id;
-
-        // Peticion ajax al backend que compruebe el token 
+        
         try{
+            // Transformar los datos a un objeto de javaScript
+            const userObj = JSON.parse(user);
+            const userId = userObj.id;
+
+            // Peticion ajax al backend que compruebe el token 
             const request = await fetch( Global.url + "usuario/perfil/" + userId, {
                 method: "GET",
                 headers: {
@@ -40,12 +41,13 @@ export const AuthProvider = ({ children }) => {
                 }
             });
             
-            if (!request.ok) {
-                throw new Error(`Error HTTP: ${request.status}`); // Maneja errores HTTP
+            if(request.ok) {
+                // y me devuelva todos los datos del usuario
+                const data = await request.json();
+                setAuth(data.user);
+            } else {
+                console.warn("No se pudo obtener el perfil del usuario.");
             }
-
-            // y me devuelva todos los datos del usuario
-            const data = await request.json();
 
             // ------ Peticion para los contadores -----
             const requestCounters = await fetch( Global.url + "usuario/counters/" + userId, {
@@ -56,12 +58,12 @@ export const AuthProvider = ({ children }) => {
                 }
             });
 
-            const dataCounters = await requestCounters.json();
-
-            // Setear el estado de auth
-            setAuth(data.user);
-            setCounters(dataCounters);
-
+            if (requestCounters.ok) {
+                const dataCounters  = await requestCounters.json();
+                setCounters(dataCounters);
+            } else {
+                console.warn("No se pudo obtener los contadores del usuario.");
+            }
         } 
         catch (error) {
             console.error("Error al obtener el perfil del usuario:", error);
@@ -75,7 +77,7 @@ export const AuthProvider = ({ children }) => {
 
   return (
     <AuthContext.Provider 
-        value={{auth, setAuth, loading, counters}} >
+        value={{auth, setAuth, loading, counters, authUser}} >
 
         { children }
     </AuthContext.Provider>

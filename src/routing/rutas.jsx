@@ -18,7 +18,7 @@ import { ExplorarUsers } from "../components/pages/ExplorarUsers";
 import { Following } from "../components/pages/Following";
 import { Followers } from "../components/pages/Followers";
 
-export const Rutas = ({auth}) => {
+export const Rutas = () => {
 
     return(
 

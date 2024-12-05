@@ -14,7 +14,6 @@ export const Busqueda = () => {
 
   // peticion ajax a la DB para listar todos los articulos
   useEffect(() => {
-    // console.log(params);
     conseguirArticulos();
   }, []);
 
