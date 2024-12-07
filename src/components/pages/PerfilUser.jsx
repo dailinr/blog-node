@@ -6,9 +6,11 @@ import { getPerfil } from '../../helpers/getPerfil';
 import useAuth from '../../helpers/hooks/useAuth';
 import { ArticulosPerfil } from './ArticulosPerfil';
 import { guardarNotificacion } from '../../helpers/guardarNotificacion';
+import { useGlobalContext } from '../../helpers/GlobalContext';
+import CrearArticulo from './CrearArticulo';
 
 export const PerfilUser = () => {
-
+  const [btnCrear, setBtnCrear] = useState(false);
   const [user, setUser] = useState({});
   const {auth} = useAuth();
   const params = useParams();
@@ -16,6 +18,10 @@ export const PerfilUser = () => {
   const [articulos, setArticulos] = useState([]);
   const [iFollow, setiFollow] = useState(false);
   const [idEliminar, setIdEliminar] = useState(null);
+  const { refreshKey } = useGlobalContext();
+
+  const [more, setMore] = useState(true);
+  const [page, setPage] = useState(1);
 
   const [cargando, setCargando] = useState(true);
   const [loading, setLoading] = useState(true);
@@ -24,9 +30,9 @@ export const PerfilUser = () => {
 
     getDataUser();
     getCounters();
-    getArticulos();
+    getArticulos(page);
 
-  }, [params.id]);
+  }, [params.id, refreshKey, page]);
 
   const getDataUser = async() => {
     
@@ -66,7 +72,13 @@ export const PerfilUser = () => {
     }
   }
 
-  const getArticulos = async(nextPage = 1) => {
+  const nextPage = () => {
+    setPage(prevPage => prevPage + 1);
+  }
+
+  const getArticulos = async(nextPage) => {
+
+    setArticulos([]);
     
     const request = await fetch(Global.url + "articulos-usuario/" + params.id + "/" + nextPage, {
       method: "GET",
@@ -79,7 +91,14 @@ export const PerfilUser = () => {
     const data = await request.json();
 
     if(data.status == "success"){
-      setArticulos(data.artUser.docs);
+
+      let newArticulos = nextPage === 1 ? data.artUser.docs : [...articulos, ...data.artUser.docs];
+      setArticulos(newArticulos);
+
+      // Paginacion - condición no mostrar btn ver más
+      if(!data.artUser.nextPage){
+        setMore(false);
+      }
     }
   }
 
@@ -233,9 +252,10 @@ export const PerfilUser = () => {
           </div>
         ) 
         :(
-          articulos.map(articulo => {
+          articulos.length >= 1 ? (
+            <>
+            {articulos.map(articulo => (
 
-            return(
               <ArticulosPerfil 
                 key={articulo._id} articulo={articulo} 
                 setArticulos={setArticulos} user={user}
@@ -244,14 +264,31 @@ export const PerfilUser = () => {
                 iFollow={iFollow} setIdEliminar={setIdEliminar} 
                 confirmEliminar={confirmEliminar}
               />
-            )
+            ))}
 
-          })
+            {more &&
+              <button className="btn flex" style={{margin: "0 auto"}} onClick={nextPage} >
+                Ver más
+              </button> 
+            }
+            </>
+          )
+          :(
+            <h1 className='flex justify-center'>
+              No hay articulos
+            </h1>
+          )
         )}
       
       </div>
       
       
+      <button onClick={() =>  setBtnCrear(true)} className='btn btn-crear btn-save'>
+        Crear articulo
+      </button>
+
+      {btnCrear && <CrearArticulo setBtnCrear={setBtnCrear} />}
+
     </div>
   )
 }

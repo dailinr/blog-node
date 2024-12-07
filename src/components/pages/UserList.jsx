@@ -2,7 +2,7 @@ import React from 'react';
 import "../../css/explorar_users.css";
 import { Global } from '../../helpers/Global';
 import useAuth from '../../helpers/hooks/useAuth';
-import { Link} from 'react-router-dom';
+import { Link, useParams} from 'react-router-dom';
 import { guardarNotificacion } from '../../helpers/guardarNotificacion';
 
 export const UserList = ({users, conseguirUsers, following, 
@@ -11,6 +11,7 @@ export const UserList = ({users, conseguirUsers, following,
     const avatarDefault = "../../../public/default-avatar-profile-icon-of-social-media-user-vector.jpg";
     const token = localStorage.getItem("token");
     const {auth} = useAuth();
+    const params = useParams();
 
     const nextPage = () => {
         let next = page + 1;
@@ -67,8 +68,9 @@ export const UserList = ({users, conseguirUsers, following,
 
         {users.map(user => (
         
-            user && user._id && (
-
+            user && user._id &&  ( 
+                // !params.id ? ( user._id != auth._id && (
+                
                 <div key={user._id} className='row-user'>
 
                     <div className='pfp-user'>
@@ -102,7 +104,7 @@ export const UserList = ({users, conseguirUsers, following,
                     {/* <i className='bx bx-dots-vertical-rounded icon-opt'  /> */}
                     
                 </div>
-            )
+            ) 
         ))}
         
         {more &&

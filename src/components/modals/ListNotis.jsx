@@ -5,7 +5,8 @@ import ReactTimeAgo from 'react-time-ago';
 import { NavLink } from 'react-router-dom';
 
 export const ListNotis = ({ noti }) => {
-
+    
+    const avatarDefault = "../../../public/default-avatar-profile-icon-of-social-media-user-vector.jpg";
     let urlIcon = noti.seguidor.image === "default.png" ? 
         avatarDefault : Global.url + "usuario/avatar/" + noti.seguidor.image;
 

@@ -1,9 +1,9 @@
 import React, {useState, useEffect} from 'react';
 import "../../css/artic_lateral.css";
 import { Link } from 'react-router-dom';
-import { Global } from '../../helpers/Global';
-import { incrementarVistas } from '../../helpers/incrementarVistas';
-import useAuth from '../../helpers/hooks/useAuth';
+import { Global } from '../../helpers/Global.jsx';
+import { incrementarVistas } from '../../helpers/incrementarVistas.jsx';
+import useAuth from '../../helpers/hooks/useAuth.jsx';
 import ReactTimeAgo from 'react-time-ago';
 import { useGlobalContext } from '../../helpers/GlobalContext.jsx';
 

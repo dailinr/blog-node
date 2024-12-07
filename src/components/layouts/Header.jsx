@@ -10,8 +10,6 @@ import { Notificaciones } from '../modals/Notificaciones';
 
 
 const Header = () => {
-    // const [menuUsuario, setMenuUsuario] = useState(false);
-    // const [mostrarNotis, setMostrarNotis] = useState(false);
     
     const [buscar, setBuscar] = useState("");
     const navegar = useNavigate();

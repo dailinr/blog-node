@@ -5,9 +5,11 @@ import "../../css/articulos.css";
 import { Global } from "../../helpers/Global";
 import { PeticionAjax } from "../../helpers/PeticionAjax";
 import { Listado } from "./Listado";
+import CrearArticulo from './CrearArticulo';
 
 export const Busqueda = () => {
-
+  
+  const [btnCrear, setBtnCrear] = useState(false);
   const [articulos, setArticulos] = useState([]);
   const [cargando, setCargando] = useState(true);
   const params = useParams(); // nos permite coger el parametro de la URL (valor de busqueda)
@@ -36,6 +38,7 @@ export const Busqueda = () => {
 
     if (datos.status === "success") {
       setArticulos(datos.articulos);
+      console.log("articulos: "+articulos);
     }else{
       setArticulos([]);
     }
@@ -69,6 +72,13 @@ export const Busqueda = () => {
         )}
 
       </div>
+
+      <button onClick={() =>  setBtnCrear(true)} className='btn btn-crear btn-save'>
+        Crear articulo
+      </button>
+
+      {btnCrear && <CrearArticulo setBtnCrear={setBtnCrear} />}
+
     </div>
   );
 }

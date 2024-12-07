@@ -4,9 +4,10 @@ import { Global } from '../../helpers/Global';
 import { UserList } from './UserList';
 import { useParams } from 'react-router-dom';
 import { getPerfil } from '../../helpers/getPerfil';
+import CrearArticulo from './CrearArticulo';
 
 export const Followers = () => {
-
+    const [btnCrear, setBtnCrear] = useState(false);
     const [users, setUsers] = useState([]);
     const token = localStorage.getItem("token");
     const [following, setFollowing] = useState([]);
@@ -81,6 +82,13 @@ export const Followers = () => {
             />
         
         </div>
+
+              
+      <button onClick={() =>  setBtnCrear(true)} className='btn btn-crear btn-save'>
+        Crear articulo
+      </button>
+
+      {btnCrear && <CrearArticulo setBtnCrear={setBtnCrear} />}
     </div>
   )
 }

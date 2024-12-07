@@ -7,6 +7,7 @@ export const GlobalProvider = ({ children }) => {
   const [modales, setModales] = useState({
     menuUsuario: false,
     notificaciones: false,
+    menuArticulo: false
   });
 
   const refreshPage = () => {
@@ -17,13 +18,14 @@ export const GlobalProvider = ({ children }) => {
     setModales({
       menuUsuario: false,
       notificaciones: false,
+      menuArticulo: false
     });
   };
 
   useEffect(() => {
     const handleClickOutside = (event) => {
       // Detecta clics globales y cierra los modales si están abiertos
-      if (modales.menuUsuario || modales.notificaciones) {
+      if (modales.menuUsuario || modales.notificaciones || modales.menuArticulo) {
         cerrarModales();
       }
     };

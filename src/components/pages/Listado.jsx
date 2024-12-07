@@ -8,6 +8,7 @@ import { getPerfil } from '../../helpers/getPerfil.jsx';
 import useAuth from '../../helpers/hooks/useAuth.jsx';
 import { incrementarVistas } from '../../helpers/incrementarVistas.jsx';
 import ReactTimeAgo from 'react-time-ago';
+import { useGlobalContext } from '../../helpers/GlobalContext.jsx';
 
 export const Listado = ( {cards, setArticulos, setIdEliminar, confirmEliminar}) => {
 
@@ -16,6 +17,7 @@ export const Listado = ( {cards, setArticulos, setIdEliminar, confirmEliminar}) 
   // Nueva variable para almacenar el ID del artículo a eliminar
   const [mostrarToast, setMostrarToast] = useState(false);
   const [user, setUser] = useState({});
+  const { modales, setModales } = useGlobalContext();
 
   const {auth} = useAuth();
 
@@ -24,6 +26,10 @@ export const Listado = ( {cards, setArticulos, setIdEliminar, confirmEliminar}) 
   }, []);
 
   const mostrarMenu = (id) => {
+    // e.stopPropagation();
+    
+    // Alternar el estado del menú para el artículo específico
+    // setMenuArticulo(menuArticulo === id ? false : id);
     setMenuArticulo(menuArticulo === id ? !menuArticulo : id);
   }
   

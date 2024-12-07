@@ -9,11 +9,8 @@ export const Notificaciones = ({ idUser } ) => {
   const [notis, setNotis] = useState([]);
   const [cargando, setCargando] = useState(true);
   const { refreshKey } = useGlobalContext();
-
-  const handleClickInside = (e) => {
-    e.stopPropagation(); // Evita el evento de cierre global
-  };
-
+  const [more, setMore] = useState(true);
+  const [page, setPage] = useState(1);
   
   useEffect(() => {
     conseguirNotis();
@@ -22,15 +19,22 @@ export const Notificaciones = ({ idUser } ) => {
   useEffect(() => {
     conseguirNotis();
   }, [refreshKey]);
-  
-  const conseguirNotis = async () => {
 
+  const nextPage = () => {
+    let next = page + 1;
+    setPage(next);
+
+    conseguirNotis(next);
+  }
+  
+  const conseguirNotis = async (nextPage) => {
+    
     setCargando(true);
     setNotis([]);
 
     try {
 
-      const request = await fetch(Global.url + "notificaciones/mostrar/"+ idUser, {
+      const request = await fetch(Global.url + "notificaciones/mostrar/"+ idUser +"/"+nextPage, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -40,7 +44,15 @@ export const Notificaciones = ({ idUser } ) => {
 
       const data = await request.json();
 
-      if(data.status === "success") setNotis(data.notificaciones);
+      if(data.status === "success"){ 
+        
+        setNotis(data.notificaciones); 
+
+        // Paginacion - condición no mostrar btn ver más
+        if(!data.pagination.nextPage){
+          setMore(false);
+        }
+      }
 
       setCargando(false);
     } 
@@ -48,6 +60,10 @@ export const Notificaciones = ({ idUser } ) => {
       console.error("Error al obtener las notificaciones:", error.response?.data || error.message);
     }  
   }
+
+  const handleClickInside = (e) => {
+    e.stopPropagation(); // Evita el evento de cierre global
+  };
   
   return (
     
@@ -61,11 +77,18 @@ export const Notificaciones = ({ idUser } ) => {
       )
       :(
         notis.length >= 1 ? (
-
-          notis.map(noti => (
+          <>
+          {notis.map(noti => (
 
             <ListNotis key={noti._id} noti={noti} cargando={cargando} /> 
-          ))
+          ))}
+
+          {more &&
+            <button className="more-notis flex" style={{margin: "0 auto"}} onClick={nextPage} >
+              Ver más
+            </button> 
+          }
+          </>
         )
         :(
           <h1>No hay notificaciones</h1>

@@ -106,7 +106,7 @@ const EditarArticulo = () => {
 
         <h1 className='titulo-crear'> 
           <i className='bx bx-notepad'/> &nbsp; Editar Articulo 
-          <Link to={"/inicio"}  style={{marginLeft: 'auto', marginRight: '0'}} > <i className='bx bx-x' /> </Link>
+          <Link to={"/articulo/"+articulo._id}  style={{marginLeft: 'auto', marginRight: '0'}} > <i className='bx bx-x' /> </Link>
         </h1>
 
         <div className='form-group'>
@@ -138,7 +138,7 @@ const EditarArticulo = () => {
         </div>
 
         <div className="botones">
-          <Link to={"/inicio"}> <input  type="submit" value="Cancelar" className="btn btn-active" /> </Link>
+          <Link to={"/articulo/"+articulo._id}> <input  type="submit" value="Cancelar" className="btn btn-active" /> </Link>
           <input type="submit" value="Guardar" className="btn btn-save" />
           
         </div>

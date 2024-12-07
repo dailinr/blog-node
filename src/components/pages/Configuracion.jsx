@@ -1,8 +1,7 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import "../../css/config.css";
 import useAuth from '../../helpers/hooks/useAuth';
 import { Global } from '../../helpers/Global';
-import { Link } from 'react-router-dom';
 import { SerializeForm } from '../../helpers/SerializeForm';
 import Tostada from '../modals/Tostada';
 import ToastError from '../modals/ToastError';

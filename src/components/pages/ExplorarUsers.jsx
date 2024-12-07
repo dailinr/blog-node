@@ -2,22 +2,33 @@ import React, { useEffect, useState } from 'react';
 import "../../css/explorar_users.css";
 import { Global } from '../../helpers/Global';
 import { UserList } from './UserList';
+import { useGlobalContext } from '../../helpers/GlobalContext';
+import CrearArticulo from './CrearArticulo';
 
 export const ExplorarUsers = () => {
-    const [users, setUsers] = useState([]);
     const token = localStorage.getItem("token");
+
+    const [users, setUsers] = useState([]);
     const [following, setFollowing] = useState([]);
     const [more, setMore] = useState(true);
     const [loading, setLoading] = useState(true);
     const [page, setPage] = useState(1);
+    const [btnCrear, setBtnCrear] = useState(false);
+
+    const { refreshKey } = useGlobalContext();
 
     useEffect(() => {
         conseguirUsers();
     }, []);
+
+    useEffect(() => {
+        conseguirUsers();
+      }, [refreshKey]);
  
     const conseguirUsers = async(nextPage) => {
 
         setLoading(true);
+        setUsers([]);
 
         const request = await fetch(Global.url + "usuario/list/" + nextPage, {
             method: "GET",
@@ -60,6 +71,12 @@ export const ExplorarUsers = () => {
             />
         
         </div>
+
+        <button onClick={() =>  setBtnCrear(true)} className='btn btn-crear btn-save'>
+            Crear articulo
+        </button>
+
+        {btnCrear && <CrearArticulo setBtnCrear={setBtnCrear} />}
     </div>
   )
 }

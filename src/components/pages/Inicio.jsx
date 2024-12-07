@@ -5,15 +5,41 @@ import Articulos from './Articulos.jsx';
 import ArticulosLateral from '../layouts/ArticulosLateral.jsx';
 import CrearArticulo from './CrearArticulo.jsx';
 import { useNavigate } from 'react-router-dom'; 
+import useAuth from '../../helpers/hooks/useAuth.jsx';
+import { Global } from '../../helpers/Global.jsx';
 
 
 const Inicio = () => {
   const [btnCrear, setBtnCrear] = useState(false);
   const [enPoint, setEnPoint] = useState("siguiendo");
   const navigate = useNavigate();
+  const { auth } = useAuth();
+  const [counters, setCounters] = useState({});
+
+  useEffect(() => {
+    getCounters();
+  }, []);
+
+  useEffect(() => {
+    // Cambiar automáticamente el selector a "populares" si no hay "siguiendo"
+    if (!counters || counters === 0) {
+      setEnPoint("populares");
+    }
+  }, [counters]);
+
+  const getCounters = async() => {
+
+    const request = await fetch(Global.url + "usuario/counters/" + auth._id, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": localStorage.getItem("token")
+      }
+    });
+
+    const data = await request.json();
   
-  const handleBtncrear = () => {
-    setBtnCrear(true);
+    setCounters(data.following);
   }
 
   const handleSelectChange = (e) => {
@@ -43,9 +69,9 @@ const Inicio = () => {
         
       <section className="tendencias">
         <div className="titulo-tendencias">
-          <h3>Tendencias</h3>
-
-          <select onChange={handleSelectChange}
+          <h3>Articulos {enPoint}</h3>
+          
+          <select onChange={handleSelectChange} value={enPoint}
             className="select select-bordered select-sm w-50 max-w-xs " >
 
             <option value="siguiendo">Siguiendo</option>
@@ -75,7 +101,7 @@ const Inicio = () => {
         <ArticulosLateral />
       </aside>
 
-      <button onClick={handleBtncrear} className='btn btn-crear btn-save'>
+      <button onClick={() =>  setBtnCrear(true)} className='btn btn-crear btn-save'>
         Crear articulo
       </button>
 

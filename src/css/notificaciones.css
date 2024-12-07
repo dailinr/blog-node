@@ -1,7 +1,7 @@
 .notis{
     width: 240px;
     height: auto;
-    max-height: 360px;
+    max-height: 380px;
     position: absolute;
     background-color: #FFFFFF;
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 8px;
@@ -47,4 +47,17 @@
 
 .row-noti{
     display: flex;
+}
+
+.more-notis{
+    font-size: 13px;
+    font-weight: 700;
+    padding-top: 7px;
+    color: #242424;
+}
+
+.more-notis:hover,
+.more-notis:active{
+    text-decoration: underline;    
+    font-weight: 700;
 }

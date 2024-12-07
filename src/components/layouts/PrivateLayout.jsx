@@ -29,7 +29,7 @@ const PrivateLayout = () => {
         <Outlet  />
       </section>
 
-      <Footer />
+      {/* <Footer /> */}
     </>
   );
   
