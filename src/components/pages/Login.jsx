@@ -46,8 +46,8 @@ const Login = () => {
                 // Setear datos del usuario en el auth
                 await authUser();
 
-                console.log("Estado actual de auth:", auth);
-                console.log("Estado actual de loading:", loading);
+                // console.log("Estado actual de auth:", auth);
+                // console.log("Estado actual de loading:", loading);
 
                 if(auth && !loading) navigate("/inicio");
             }

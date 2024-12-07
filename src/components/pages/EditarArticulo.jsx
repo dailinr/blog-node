@@ -72,14 +72,17 @@ const EditarArticulo = () => {
       formData.append("file0", fileInput.files[0]); // se le asigna el archivo con el primero
 
       // nueva peticion ajax para la ruta de subir imagen
-      const subida = await PeticionAjax(
-        Global.url + "subir-imagen/" + datos.articulo._id,
-        "POST",
-        formData,
-        true
-      );
+      const subida = await fetch(Global.url + "subir-imagen/" + datos.articulo._id, {
+        method: "POST",
+        body: formData,
+        headers: {
+          "Authorization": localStorage.getItem("token")
+        }
+      });
 
-      if (subida.datos.status === "success") {
+      const subidaData = await subida.json();
+
+      if (subidaData.status === "success") {
         setResultado("guardado");
         
       } else {

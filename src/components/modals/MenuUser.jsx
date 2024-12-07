@@ -5,9 +5,13 @@ import useAuth from '../../helpers/hooks/useAuth';
 
 const menuUser = () => {
   const { auth } = useAuth();
+  
+  const handleClickInside = (e) => {
+    e.stopPropagation(); // Evita el evento de cierre global
+  };
 
   return (
-    <div className='menuUser'>
+    <div className='menuUser' onClick={handleClickInside}>
       
       <div className="datosUser">
         <div className='nombre_usuario'>

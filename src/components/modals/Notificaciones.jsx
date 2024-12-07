@@ -9,6 +9,11 @@ export const Notificaciones = ({ idUser } ) => {
   const [notis, setNotis] = useState([]);
   const [cargando, setCargando] = useState(true);
   const { refreshKey } = useGlobalContext();
+
+  const handleClickInside = (e) => {
+    e.stopPropagation(); // Evita el evento de cierre global
+  };
+
   
   useEffect(() => {
     conseguirNotis();
@@ -46,7 +51,7 @@ export const Notificaciones = ({ idUser } ) => {
   
   return (
     
-    <div className='notis'>
+    <div className='notis' onClick={handleClickInside}>
 
       {cargando ? (
         <div className="page-cargando">

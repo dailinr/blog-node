@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import '../../css/header.css';
 import MenuUser from '../modals/MenuUser';
 import { NavLink } from "react-router-dom";
@@ -6,15 +6,27 @@ import { useNavigate } from 'react-router-dom';
 import useAuth from '../../helpers/hooks/useAuth';
 import { Global } from '../../helpers/Global';
 import { useGlobalContext } from '../../helpers/GlobalContext';
-import { Notificaciones } from '../pages/Notificaciones';
+import { Notificaciones } from '../modals/Notificaciones';
+
 
 const Header = () => {
-    const [menuUsuario, setMenuUsuario] = useState(false);
+    // const [menuUsuario, setMenuUsuario] = useState(false);
+    // const [mostrarNotis, setMostrarNotis] = useState(false);
+    
     const [buscar, setBuscar] = useState("");
-    const [mostrarNotis, setMostrarNotis] = useState(false);
     const navegar = useNavigate();
     const { auth } = useAuth();
-    const { refreshPage } = useGlobalContext();
+    const { refreshPage, modales, setModales } = useGlobalContext();
+
+    const abrirModalNotificaciones = (e) => {
+        e.stopPropagation(); // Evita el cierre al hacer clic dentro del modal
+        setModales({ notificaciones: !modales.notificaciones, menuUsuario: false });
+    };
+
+    const abrirModalUsuario = (e) => {
+        e.stopPropagation(); // Evita el cierre al hacer clic dentro del modal
+        setModales({ menuUsuario: !modales.menuUsuario, notificaciones: false });
+    };
 
     const avatarDefault = "../../../public/default-avatar-profile-icon-of-social-media-user-vector.jpg";
     let urlImagen =  auth.image === "default.png" ? 
@@ -92,16 +104,17 @@ const Header = () => {
                 </svg>
             </label>
 
-            <div className="icon-noti" onClick={() => { setMostrarNotis(!mostrarNotis); setMenuUsuario(false); }}>
+            <div className="icon-noti" onClick={abrirModalNotificaciones}>
+            
                 <i className='bx bxs-bell'></i>
                 
-                {mostrarNotis && <Notificaciones idUser={auth._id} /> }
+                {modales.notificaciones && <Notificaciones idUser={auth._id} /> }
             </div>
             
-            <div className='icon-perfil' style={{ background: `url(${urlImagen}) no-repeat center / cover` }} 
-                onClick={() => { setMenuUsuario(!menuUsuario); setMostrarNotis(false); }}>
-
-                {menuUsuario && <MenuUser/>}
+            <div className='icon-perfil' onClick={abrirModalUsuario}
+                style={{ background: `url(${urlImagen}) no-repeat center / cover` }} >
+                
+                {modales.menuUsuario && <MenuUser/>}
             </div>
 
         </div>

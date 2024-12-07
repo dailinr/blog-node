@@ -19,7 +19,7 @@ export const guardarNotificacion = async (idSeguidor, idUser) => {
 
     if(data.status === "success"){
       
-      console.log("Notificación guardada: ", data.notificacion);
+      // console.log("Notificación guardada: ", data.notificacion);
     }
   } 
   catch (error) {
