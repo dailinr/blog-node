@@ -3,6 +3,7 @@ import "../../css/explorar_users.css";
 import { Global } from '../../helpers/Global';
 import useAuth from '../../helpers/hooks/useAuth';
 import { Link} from 'react-router-dom';
+import { guardarNotificacion } from '../../helpers/guardarNotificacion';
 
 export const UserList = ({users, conseguirUsers, following, 
     setFollowing, more, loading, page, setPage}) => {
@@ -35,6 +36,7 @@ export const UserList = ({users, conseguirUsers, following,
             
             // Actualizar estado de following, agregando el nuevo follow
             setFollowing([...following, userId]);
+            guardarNotificacion(auth._id, userId);
         }
     }
 

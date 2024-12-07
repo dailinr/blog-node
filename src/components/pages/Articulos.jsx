@@ -118,8 +118,6 @@ const Articulos = ({ enPoint, customPadding, customWidth, customJustify, maxArti
     <div className="Articulos page " 
       style={{ padding: customPadding, width: customWidth, justifyContent: customJustify }}>
         
-        <p>articulos totales: {articulos.length}</p>
-
       <div className="content-articulos">
 
         {cargando ? (

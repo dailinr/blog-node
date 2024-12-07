@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import '../../css/header.css';
 import MenuUser from '../modals/MenuUser';
 import { NavLink } from "react-router-dom";
@@ -6,29 +6,34 @@ import { useNavigate } from 'react-router-dom';
 import useAuth from '../../helpers/hooks/useAuth';
 import { Global } from '../../helpers/Global';
 import { useGlobalContext } from '../../helpers/GlobalContext';
+import { Notificaciones } from '../pages/Notificaciones';
 
 const Header = () => {
     const [menuUsuario, setMenuUsuario] = useState(false);
-    const [ setBuscar] = useState("");
+    const [buscar, setBuscar] = useState("");
+    const [mostrarNotis, setMostrarNotis] = useState(false);
     const navegar = useNavigate();
     const { auth } = useAuth();
     const { refreshPage } = useGlobalContext();
-    
+
     const avatarDefault = "../../../public/default-avatar-profile-icon-of-social-media-user-vector.jpg";
     let urlImagen =  auth.image === "default.png" ? 
         avatarDefault : Global.url + "usuario/avatar/" + auth.image;
 
-    const mostrarOpcUser = () => {
-        setMenuUsuario(!menuUsuario);
-    };
-
     const hacerBusqueda = (e) => {
         e.preventDefault();
-        const searchInput = e.currentTarget.querySelector("input"); // Busca el input dentro del label
-        let searchValue = searchInput ? searchInput.value : ""; // Verifica si el input existe y obtiene su valor
+
+        const searchValue = e.target.value; // Obtén el valor del input
         setBuscar(searchValue);
-        navegar("/buscar/"+searchValue, {replace: true}); // para cambiar la ruta por la busqueda actual
-    }
+
+        if (!searchValue.trim()) { // Verifica si esté vacío
+            navegar("/inicio");
+        }
+        else{
+            navegar("/buscar/" + searchValue, { replace: true }); // para cambiar la ruta por la busqueda actual
+        }
+    };
+    
  
   return (
     <div className='header '>    
@@ -38,7 +43,6 @@ const Header = () => {
         </div>
 
         <ul className='navegacion'>
-
             
             <li>
                 <NavLink  to="/inicio" className={({ isActive }) => isActive ? "link active" : "link"}>
@@ -71,8 +75,11 @@ const Header = () => {
                 <i className='bx bx-revision' />
             </div> 
 
-            <label onChange={hacerBusqueda} className="input search input-bordered flex items-center gap-2">
-                <input type="text" id="search_field" className="grow" placeholder="Buscar articulo" />
+            <label className="input search input-bordered flex items-center gap-2">
+                <input  onChange={(e) => hacerBusqueda(e)}
+                    type="text" id="search_field" className="grow" placeholder="Buscar articulo" 
+                />
+
                 <svg
                     xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 0 16 16"
@@ -85,12 +92,14 @@ const Header = () => {
                 </svg>
             </label>
 
-            <div className="icon-noti">
+            <div className="icon-noti" onClick={() => { setMostrarNotis(!mostrarNotis); setMenuUsuario(false); }}>
                 <i className='bx bxs-bell'></i>
+                
+                {mostrarNotis && <Notificaciones idUser={auth._id} /> }
             </div>
             
-            <div className='icon-perfil' onClick={mostrarOpcUser}
-                style={{ background: `url(${urlImagen}) no-repeat center / cover` }} >
+            <div className='icon-perfil' style={{ background: `url(${urlImagen}) no-repeat center / cover` }} 
+                onClick={() => { setMenuUsuario(!menuUsuario); setMostrarNotis(false); }}>
 
                 {menuUsuario && <MenuUser/>}
             </div>

@@ -68,6 +68,9 @@
     font-size: large;
     font-weight: 600;
 }
+.icon-noti{
+    position: relative;
+}
 
 .icon-perfil{
     border: none !important;

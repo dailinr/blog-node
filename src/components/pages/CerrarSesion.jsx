@@ -20,8 +20,8 @@ export const CerrarSesion = () => {
 
   return (
     <div className="page-cargando">
-        <h1 className='cerrar-texto'>Cerrando Sesion</h1>
-        <span className="loader-out" />
+      <h1 className='cerrar-texto'>Cerrando Sesion</h1>
+      <span className="loader-out" />
     </div>
   )
 }

@@ -5,6 +5,7 @@ import { Link, useParams } from 'react-router-dom';
 import { getPerfil } from '../../helpers/getPerfil';
 import useAuth from '../../helpers/hooks/useAuth';
 import { ArticulosPerfil } from './ArticulosPerfil';
+import { guardarNotificacion } from '../../helpers/guardarNotificacion';
 
 export const PerfilUser = () => {
 
@@ -99,8 +100,8 @@ export const PerfilUser = () => {
         
       // Actualizar estado de following, agregando el nuevo follow
       setiFollow(true);
+      guardarNotificacion(auth._id, userId); // seguidor, user_seguido
     }
-    
   }
 
   const unfollowUsuario = async(userId) => {
@@ -163,66 +164,64 @@ export const PerfilUser = () => {
     }
 
   return (
+    
     <div className=' page-perfil'>
-      
+       
       <div className='info-perfil'>
-
         
-        
-          <div className='header-perfil'
-            style={{ background: `url(${headerDefault}) no-repeat center / cover` }}>
+        <div className='header-perfil'
+          style={{ background: `url(${headerDefault}) no-repeat center / cover` }}>
 
-            <div className='avatar-perfil'
-              style={{ background: `url(${urlImagen}) no-repeat center / cover` }}>
-
-            </div>
-
-            {user._id == auth._id ? 
-
-              <Link to={"/configuracion"} className='editar-perfil' >
-                Editar perfil
-              </Link>
-            :
-              
-              (!iFollow ?
-                <button onClick={() => seguirUsuario(user._id)} className=" seguir-perfil btn btn-outline">
-                  Seguir
-                </button>
-              :
-                <button onClick={() => unfollowUsuario(user._id)} className=" seguir-perfil btn btn-neutral">
-                  Siguiendo
-                </button>
-              )
-            }
+          <div className='avatar-perfil'
+            style={{ background: `url(${urlImagen}) no-repeat center / cover` }}>
 
           </div>
 
-          <div className='data-user'>
+          {user._id == auth._id ? 
 
-            <h2 className='nombre-user'>{user.name} {user.surname}</h2>
-            <p className='nick-user'>@{user.nick}</p>
-
-          </div> 
-        
-          <div className='follow-counters'>
+            <Link to={"/configuracion"} className='editar-perfil' >
+              Editar perfil
+            </Link>
+          :
             
-            <div className='following'>
-              {counters.following >= 1 ? counters.following : 0}  
-              <span><Link to={"/siguiendo/" + user._id}> Siguiendo</Link> </span>
-            </div>
+            (!iFollow ?
+              <button onClick={() => seguirUsuario(user._id)} className=" seguir-perfil btn btn-outline">
+                Seguir 
+              </button>
+              
+            :
+              <button onClick={() => unfollowUsuario(user._id)} className=" seguir-perfil btn btn-neutral">
+                Siguiendo
+              </button>
+            )
+          }
 
-            <div className='followers'>
-              {counters.followed >= 1 ? counters.followed : 0} 
-              <span><Link to={"/seguidores/" + user._id}> Seguidores</Link> </span>
-            </div>
+        </div>
 
-            <div className='articulos'>
-              {counters.articulos >= 1 ? counters.articulos : 0} 
-              <span>Articulos</span> 
-            </div>
-          </div> 
+        <div className='data-user'>
 
-        
+          <h2 className='nombre-user'>{user.name} {user.surname}</h2>
+          <p className='nick-user'>@{user.nick}</p>
+
+        </div> 
+      
+        <div className='follow-counters'>
+          
+          <div className='following'>
+            {counters.following >= 1 ? counters.following : 0}  
+            <span><Link to={"/siguiendo/" + user._id}> Siguiendo</Link> </span>
+          </div>
+
+          <div className='followers'>
+            {counters.followed >= 1 ? counters.followed : 0} 
+            <span><Link to={"/seguidores/" + user._id}> Seguidores</Link> </span>
+          </div>
+
+          <div className='articulos'>
+            {counters.articulos >= 1 ? counters.articulos : 0} 
+            <span>Articulos</span> 
+          </div>
+        </div> 
 
       </div>
 
@@ -251,6 +250,7 @@ export const PerfilUser = () => {
         )}
       
       </div>
+      
       
     </div>
   )
