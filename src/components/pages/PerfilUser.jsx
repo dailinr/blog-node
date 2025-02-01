@@ -155,14 +155,10 @@ export const PerfilUser = () => {
     if(datos.status === "success"){
       // guardamos en una lista todos los articulos que no sean el del id eliminado
       let articulosActualizados = articulos.filter(articulo => articulo._id !== idEliminar);
-
       setArticulos(articulosActualizados); // actualizamos el estado de articulos
 
       // conseguirArticulos(1);
       setModConfirm(false); // cerramos el modal
-      
-      // Mostrar la tostada 
-      setMostrarToast(true);
     }
   
   }
@@ -288,7 +284,6 @@ export const PerfilUser = () => {
       </button>
 
       {btnCrear && <CrearArticulo setBtnCrear={setBtnCrear} />}
-
     </div>
   )
 }

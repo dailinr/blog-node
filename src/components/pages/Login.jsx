@@ -1,18 +1,30 @@
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import "../../css/login.css"
 import { Link, useNavigate } from 'react-router-dom'
 import { useForm } from '../../helpers/hooks/useForm'
 import { Global } from '../../helpers/Global'
-import Tostada from '../modals/Tostada'
-import ToastError from '../modals/ToastError'
 import useAuth from '../../helpers/hooks/useAuth'
+import Toast from '../modals/Toast'
 
 const Login = () => {
     const { formulario, cambiado } = useForm({});
-    const [resultado, setResultado] = useState("");
     const navigate = useNavigate(); // Importa y usa useNavigate
+    const [tostada, setTostada] = useState(null);
+    const [type, setType] = useState(null);
 
     const {auth, loading, authUser } = useAuth();
+
+    useEffect(() => {
+
+        if (tostada) {
+          const timer = setTimeout(() => {
+            setTostada(null);
+            setType(null);
+          }, 3000); // 3 segundos
+    
+          return () => clearTimeout(timer);
+        }
+    }, [tostada, type]);
 
     const loginUser = async (e) => {
         e.preventDefault();
@@ -37,11 +49,12 @@ const Login = () => {
             
             if(datos.status === "success"){
 
+                setTostada("¡Usuario logeado!");
+                setType("exito");
+
                 // Persistir los datos en el localstorage - guardar una sesion
                 localStorage.setItem("token", datos.token);
                 localStorage.setItem("user", JSON.stringify(datos.user)); 
-
-                setResultado("encontrado");
 
                 // Setear datos del usuario en el auth
                 await authUser();
@@ -53,7 +66,8 @@ const Login = () => {
             }
         }
         catch(error){
-            setResultado("error");
+            setTostada("¡Error al iniciar sesion!");
+            setType("error");
             console.error('Error al iniciar sesión:');
         }        
     }
@@ -62,9 +76,15 @@ const Login = () => {
     
     <div className="page-login">
         
-        {resultado === 'encontrado' && <Tostada width="100" mensaje={"Usuario identificado correctamente"} /> }
-        {resultado === 'error' && <ToastError width="100" mensaje={"Usuario no encontrado"} />}
-        
+        {tostada && type && (
+            type == "error" ? 
+                <Toast mensaje={tostada} background="#c0131b" type={type} />
+            :
+            ((type == "exito") && 
+                <Toast mensaje={tostada} background="green" type={type} />
+            )
+        )}
+
         <div className="login flex flex-col w-full md:w-1/2 xl:w-2/5 2xl:w-2/5 3xl:w-1/3 mx-auto p-8 md:p-10 md:pt-1 2xl:p-12 3xl:p-14 bg-[#ffffff] rounded-2xl shadow-xl">
             <div className='flex flex-col mx-auto'>
                 <img src="../../../TecnoPulse-removebg-preview.png" alt="" width="180" />

@@ -1,16 +1,28 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import "../../css/config.css";
 import useAuth from '../../helpers/hooks/useAuth';
 import { Global } from '../../helpers/Global';
 import { SerializeForm } from '../../helpers/SerializeForm';
-import Tostada from '../modals/Tostada';
-import ToastError from '../modals/ToastError';
+import Toast from '../modals/Toast';
 
 export const Configuracion = () => {
 
   const {auth, setAuth} = useAuth();
-  const [saved, setSaved] = useState("not_saved");
+  const [tostada, setTostada] = useState(null);
+  const [type, setType] = useState(null);
   const [cargando, setCargando] = useState(true);
+
+  useEffect(() => {
+
+    if (tostada) {
+      const timer = setTimeout(() => {
+        setTostada(null);
+        setType(null);
+      }, 3000); // 3 segundos
+
+      return () => clearTimeout(timer);
+    }
+  }, [tostada, type]);
 
   setTimeout(() => {
     setCargando(false);
@@ -41,10 +53,12 @@ export const Configuracion = () => {
 
       delete data.user.password;
       setAuth(data.user);
-      setSaved("saved");
+      setTostada("¡Usuario actualizado!");
+      setType("exito");
     }
     else{
-      setSaved("error")
+      setTostada("¡Error al actualizar el usuario!");
+      setType("error");
     }
 
     // Subida de imagenes
@@ -71,12 +85,15 @@ export const Configuracion = () => {
         delete uploadData.user.password;
 
         setAuth(uploadData.user);
-        setSaved("saved")
+        setTostada("¡Usuario actualizado!");
+        setType("exito");
       }
       else{
-        setSaved("error")
+        setTostada("¡Error al actualizar el usuario!");
+        setType("error");
       }
     }
+    
   }
 
   const avatarDefault = "../../../public/default-avatar-profile-icon-of-social-media-user-vector.jpg";
@@ -181,8 +198,14 @@ export const Configuracion = () => {
 
         </form>
 
-        {saved === 'saved' && <Tostada width="100" mensaje={"Usuario actualizado"} />}
-        {saved === 'error' && <ToastError width="100" mensaje={"Faltan datos"} />}
+        {tostada && type && (
+          type == "error" ? 
+            <Toast mensaje={tostada} background="#c0131b" type={type} />
+          :
+          ((type == "exito") && 
+            <Toast mensaje={tostada} background="green" type={type} />
+          )
+        )}
         </>
       )
       :(

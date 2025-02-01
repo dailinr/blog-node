@@ -6,6 +6,8 @@ import { Listado } from "./Listado";
 import CrearArticulo from "./CrearArticulo";
 import { useLocation } from "react-router-dom";
 import { useGlobalContext } from '../../helpers/GlobalContext.jsx';
+import { deleteArticle } from "../../helpers/deleteArticle.jsx";
+import Toast from "../modals/Toast.jsx";
 
 const Articulos = ({ enPoint, customPadding, customWidth, customJustify, maxArticulos}) => {
 
@@ -17,6 +19,7 @@ const Articulos = ({ enPoint, customPadding, customWidth, customJustify, maxArti
   const [btnCrear, setBtnCrear] = useState(false);
   const location = useLocation();
   const { refreshKey } = useGlobalContext();
+  const [tostada, setTostada] = useState(null);
 
   const handleBtncrear = () => {
     setBtnCrear(true);
@@ -85,31 +88,11 @@ const Articulos = ({ enPoint, customPadding, customWidth, customJustify, maxArti
   }
 
   const confirmEliminar = async () => {
-
-    const request = await fetch (Global.url + "articulo/" + idEliminar, {
-      method: "DELETE",
-      headers: {
-        "Context-Type": "application/json",
-        "Authorization": localStorage.getItem("token")
-      }
-    });
-
-    let datos = await request.json();
-    
-    if(datos.status === "success"){
-      // guardamos en una lista todos los articulos que no sean el del id eliminado
-      let articulosActualizados = articulos.filter(articulo => articulo._id !== idEliminar);
-
-      setArticulos(articulosActualizados); // actualizamos el estado de articulos
-
-      // conseguirArticulos(1);
-      setModConfirm(false); // cerramos el modal
-      
-      // Mostrar la tostada 
-      setMostrarToast(true);
+    if (idEliminar) {
+      deleteArticle(idEliminar, setArticulos);
     }
+  };
   
-  }
 
   // si la prop tienen un valor limite guardará solo esos articulos, sino guardará todos los articulos
   const articulosLimitados = maxArticulos ? articulos.slice(0, maxArticulos) : articulos;
@@ -134,8 +117,9 @@ const Articulos = ({ enPoint, customPadding, customWidth, customJustify, maxArti
 
               <Listado 
                 key={cards._id} cards={cards} 
-                setIdEliminar={setIdEliminar} confirmEliminar={confirmEliminar}
-                setArticulos={setArticulos}
+                setIdEliminar={setIdEliminar} setArticulos={setArticulos}
+                confirmEliminar={confirmEliminar} 
+                
               /> 
             )))
           )
@@ -156,8 +140,7 @@ const Articulos = ({ enPoint, customPadding, customWidth, customJustify, maxArti
         Crear articulo
       </button>
 
-      {btnCrear && <CrearArticulo setBtnCrear={setBtnCrear} />}
-      
+      {btnCrear && <CrearArticulo setBtnCrear={setBtnCrear} />}      
     </div>
   );
 };

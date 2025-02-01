@@ -5,6 +5,7 @@ import '../../css/ver_articulo.css'
 import '../../css/Inicio.css';
 import { Global } from "../../helpers/Global";
 import ReactTimeAgo from 'react-time-ago';
+import ArticulosLateral from '../layouts/ArticulosLateral';
 
 export const VerArticulo = () => {
   const { id }  = useParams();
@@ -52,31 +53,33 @@ export const VerArticulo = () => {
       </div>
     )
     : (
-      <div className='ver-articulo'>
+      <section className="vista-articulo">
 
-        <section className='contenido-articulo'>
-          <h1>articulo {articulo.titulo}</h1>
+        <ArticulosLateral />
 
-          <span  className='fecha-articulo'>
-            {articulo.fecha ? (
-              <ReactTimeAgo date={new Date(articulo.fecha)} locale="es-ES" />
-            ) : (
-              <span>Fecha no disponible</span>
-            )}
+          <section className='contenido-articulo'>
             
-            <span className='etiqueta'> {articulo.etiqueta} </span> 
-          </span>
 
-          
+            <span  className='fecha-articulo'>
+              {articulo.fecha ? (
+                <ReactTimeAgo date={new Date(articulo.fecha)} locale="es-ES" />
+              ) : (
+                <span>Fecha no disponible</span>
+              )} &nbsp; | &nbsp;
+              
+              <span className='etiqueta'> {articulo.etiqueta} </span> 
+            </span>
 
-          <div className='imagen-articulo'>
-            <img src={urlImagen} alt={articulo.titulo} />
-          </div>
+            <h1>articulo {articulo.titulo}</h1>
 
-          <p className='texto-articulo'>{articulo.contenido}</p>
-        </section>
+            <p className='texto-articulo'>{articulo.contenido}</p>
 
-      </div>
+            <div className='imagen-articulo'>
+              <img src={urlImagen} alt={articulo.titulo} />
+            </div>            
+          </section>
+
+      </section>
     )
   
   )

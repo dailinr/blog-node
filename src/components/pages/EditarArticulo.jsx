@@ -6,13 +6,13 @@ import { useForm } from "../../helpers/hooks/useForm";
 import { PeticionAjax } from "../../helpers/PeticionAjax";
 import { Global } from "../../helpers/Global";
 import { useParams } from "react-router-dom";
-import Tostada from "../modals/Tostada";
-import ToastError from "../modals/ToastError";
+import Toast from "../modals/Toast";
 
 const EditarArticulo = () => {
   
   const { formulario, enviado, cambiado, setFormulario } = useForm({});
-  const [resultado, setResultado] = useState("");
+  const [tostada, setTostada] = useState(null);
+  const [type, setType] = useState(null);
   const [articulo, setArticulo] = useState({});
   const { id }  = useParams();
  
@@ -21,6 +21,17 @@ const EditarArticulo = () => {
     conseguirArticulo();
   }, [])
 
+  useEffect(() => {
+
+    if (tostada) {
+      const timer = setTimeout(() => {
+        setTostada(null);
+        setType(null);
+      }, 3000); // 3 segundos
+
+      return () => clearTimeout(timer);
+    }
+  }, [tostada, type]);
 
   const conseguirArticulo = async () => {
     const url = Global.url + "articulo/"+ id;
@@ -54,18 +65,11 @@ const EditarArticulo = () => {
       "PUT",
       nuevoArticulo
     );
-    
-    if (datos.status === "success") {
-      setResultado("guardado");
-    } else {
-      setResultado("error");
-    }
 
     // Subir la imagen si se ha seleccionado una
     const fileInput = document.querySelector("#file");
 
     if (datos.status === "success" && fileInput.files[0]) {
-      setResultado("guardado");
 
       const formData = new FormData();
       // añadimos la imagen subida al formData
@@ -82,12 +86,24 @@ const EditarArticulo = () => {
 
       const subidaData = await subida.json();
 
+      console.log(subidaData);
+
       if (subidaData.status === "success") {
-        setResultado("guardado");
-        
-      } else {
-        setResultado("error");
+        setTostada("¡Articulo actualizado!");
+        setType("exito");
       }
+      else {
+        setTostada("¡Error al actualizar articulo!");
+        setType("error");
+      }
+    }
+    else if (datos.status === "success") {
+      setTostada("¡Articulo actualizado!");
+      setType("exito");
+    } 
+    else {
+      setTostada("¡Error al actualizar articulo!");
+      setType("error");
     }
   };
 
@@ -144,9 +160,14 @@ const EditarArticulo = () => {
         </div>
       </form> 
 
-      {resultado === 'guardado' && <Tostada width="100" mensaje={"Articulo guardado"} />}
-      {resultado === 'error' && <ToastError width="100" mensaje={"Faltan datos"} />}
-      
+      {tostada && type && (
+        type == "error" ? 
+          <Toast mensaje={tostada} background="#c0131b" type={type} />
+        :
+        ((type == "exito") && 
+          <Toast mensaje={tostada} background="green" type={type} />
+        )
+      )}
     </div>
   );
 }

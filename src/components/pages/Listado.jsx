@@ -2,8 +2,8 @@ import React, { useState, useEffect } from 'react'
 import { Global } from '../../helpers/Global'
 import MenuArticulo from '../modals/MenuArticulo';
 import ModalConfirm from '../modals/ModalConfirm';
-import Tostada from '../modals/Tostada.jsx';
-import { Link, useLocation } from 'react-router-dom';
+import Toast from '../modals/Toast.jsx';
+import { Link } from 'react-router-dom';
 import { getPerfil } from '../../helpers/getPerfil.jsx';
 import useAuth from '../../helpers/hooks/useAuth.jsx';
 import { incrementarVistas } from '../../helpers/incrementarVistas.jsx';
@@ -124,7 +124,7 @@ export const Listado = ( {cards, setArticulos, setIdEliminar, confirmEliminar}) 
         />
       )}
 
-      {mostrarToast && <Tostada mensaje={"Articulo eliminado"} style={{ width: "100px" }} />}
+      {mostrarToast && <Toast mensaje={"Articulo eliminado"} background="green" type="exito" />}
 
     </div>
   );

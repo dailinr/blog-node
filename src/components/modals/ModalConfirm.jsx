@@ -4,8 +4,10 @@ import '../../css/articulos.css'
 const ModalConfirm = ({  confirmEliminar,  setModConfirm }) => {
 
   const handleConfirm = () => {
-    confirmEliminar(); // llamamos a la funcion
-  }
+    if (confirmEliminar) {
+      confirmEliminar();  // Verifica que esta función está definida antes de llamarla
+    }
+  };
 
   const handleCancel = () => {
     setModConfirm(false); // Cierra el modal sin eliminar
@@ -37,11 +39,6 @@ const ModalConfirm = ({  confirmEliminar,  setModConfirm }) => {
 
       </div>
     </div>
-
-    {/* <strong style={{ width: "100px" }}>
-      {mostrarToast && <Tostada mensaje={"Articulo eliminado"} />}
-    </strong> */}
-
     </>
   )
 }

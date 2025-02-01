@@ -1,17 +1,17 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "../../css/crearArticulo.css";
 import { useState } from "react";
 import { useForm } from "../../helpers/hooks/useForm";
 // import { PeticionAjax } from "../../helpers/PeticionAjax";
 import { Global } from "../../helpers/Global";
-import Tostada from "../modals/Tostada";
-import ToastError from "../modals/ToastError";
 import useAuth from "../../helpers/hooks/useAuth";
+import Toast from "../modals/Toast";
 
 const CrearArticulo = ({ setBtnCrear }) => {
   // metodos que se cambiaran conforme el usuario ingrese o envie datos
   const { formulario, enviado, cambiado } = useForm({});
-  const [resultado, setResultado] = useState("no_guardado");
+  const [tostada, setTostada] = useState(null);
+  const [type, setType] = useState(null);
   const {auth} = useAuth();
   const token = localStorage.getItem("token");
 
@@ -19,6 +19,17 @@ const CrearArticulo = ({ setBtnCrear }) => {
     setBtnCrear(false);
   }
 
+  useEffect(() => {
+
+    if (tostada) {
+      const timer = setTimeout(() => {
+        setTostada(null);
+        setType(null);
+      }, 3000); // 3 segundos
+
+      return () => clearTimeout(timer);
+    }
+  }, [tostada, type]);
 
   const guardarArticulo = async (e) => {
     e.preventDefault();
@@ -41,9 +52,12 @@ const CrearArticulo = ({ setBtnCrear }) => {
 
     if (data.status === "success") {
       // si se sube exitosamente la imagen
-      setResultado("guardado");
-    } else {
-      setResultado("error");
+      setTostada("¡Articulo creado!");
+      setType("exito");
+    } 
+    else {
+      setTostada("¡Error al crear articulo!");
+      setType("error");
     }
 
     // Subir la imagen
@@ -67,10 +81,12 @@ const CrearArticulo = ({ setBtnCrear }) => {
       const subidaData = await subida.json();
 
       if (subidaData.status === "success") {
-        setResultado("guardado");
-        cerrarModal();
-      } else {
-        setResultado("error");
+        setTostada("¡Articulo creado!");
+        setType("exito");
+      } 
+      else {
+        setTostada("¡Error al crear articulo!");
+        setType("error");
       }
     }
     
@@ -125,9 +141,15 @@ const CrearArticulo = ({ setBtnCrear }) => {
         </div>
       </form> 
 
-      {resultado === 'guardado' && <Tostada width="100" mensaje={"Articulo guardado"} />}
-      {resultado === 'error' && <ToastError width="100" mensaje={"Faltan datos"} />}
-      
+      {tostada && type && (
+        type == "error" ? 
+          <Toast mensaje={tostada} background="#c0131b" type={type} />
+        :
+        ((type == "exito") && 
+          <Toast mensaje={tostada} background="green" type={type} />
+        )
+      )}
+
     </div>
 
   );

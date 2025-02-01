@@ -5,7 +5,6 @@ import { Global } from '../../helpers/Global';
 import useAuth from '../../helpers/hooks/useAuth';
 import MenuArticulo from '../modals/MenuArticulo';
 import ModalConfirm from '../modals/ModalConfirm';
-import Tostada from '../modals/Tostada';
 import { incrementarVistas } from '../../helpers/incrementarVistas';
 import { Link } from 'react-router-dom';
 import ReactTimeAgo from 'react-time-ago';
@@ -16,7 +15,6 @@ export const ArticulosPerfil = ({articulo, setArticulos, user, seguirUsuario,
     const {auth} = useAuth();
     const [menuArticulo, setMenuArticulo] = useState(false);
     const [modConfirm, setModConfirm] = useState(false);
-    const [mostrarToast, setMostrarToast] = useState(false);
 
     const mostrarMenu = (id) => {
         setMenuArticulo(menuArticulo === id ? !menuArticulo : id);
@@ -118,12 +116,10 @@ export const ArticulosPerfil = ({articulo, setArticulos, user, seguirUsuario,
 
         {modConfirm && (
             <ModalConfirm
-            confirmEliminar={confirmEliminar}
-            setModConfirm={setModConfirm}
+                confirmEliminar={confirmEliminar}
+                setModConfirm={setModConfirm}
             />
         )}
-
-      {mostrarToast && <Tostada mensaje={"Articulo eliminado"} style={{ width: "100px" }} />}
 
 
     </article>

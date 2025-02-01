@@ -10,4 +10,4 @@ start cmd.exe /k "cd C:\Users\Usuario\Downloads\blog-node && npm run dev"
 
 start C:\Users\Usuario\AppData\Local\MongoDBCompass\MongoDBCompass.exe
 
-start C:\Users\Usuario\AppData\Local\Postman\Postman.exe
+@REM start C:\Users\Usuario\AppData\Local\Postman\Postman.exe

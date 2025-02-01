@@ -1,15 +1,27 @@
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import "../../css/login.css"
 import { Link } from 'react-router-dom'
 import { useForm } from '../../helpers/hooks/useForm'
 import { PeticionAjax } from '../../helpers/PeticionAjax'
 import { Global } from '../../helpers/Global'
-import Tostada from '../modals/Tostada'
-import ToastError from '../modals/ToastError'
+import Toast from '../modals/Toast'
 
 const RegistrarCuenta = () => {
     const { formulario, cambiado } = useForm({});
-    const [resultado, setResultado] = useState("");
+    const [tostada, setTostada] = useState(null);
+    const [type, setType] = useState(null);
+
+    useEffect(() => {
+
+        if (tostada) {
+          const timer = setTimeout(() => {
+            setTostada(null);
+            setType(null);
+          }, 3000); // 3 segundos
+    
+          return () => clearTimeout(timer);
+        }
+    }, [tostada, type]);
 
     const saveUser = async (e) => {
         e.preventDefault();
@@ -24,9 +36,12 @@ const RegistrarCuenta = () => {
 
 
         if (datos.status === "success") {
-            setResultado("guardado");
-        } else {
-            setResultado("error");
+            setTostada("¡Usuario registrado!");
+            setType("exito");
+        } 
+        else {
+            setTostada("¡Error al registrar el usuario!");
+            setType("error");
         }
     }
 
@@ -35,9 +50,14 @@ const RegistrarCuenta = () => {
 
     <div className='page-login'>
 
-      {resultado === 'guardado' && <Tostada width="100" mensaje={"Usuario registrado correctamente"} />}
-      {resultado === 'error' && <ToastError width="100" mensaje={"Faltan datos del usuario"} />}
-      
+        {tostada && type && (
+            type == "error" ? 
+                <Toast mensaje={tostada} background="#c0131b" type={type} />
+            :
+            ((type == "exito") && 
+                <Toast mensaje={tostada} background="green" type={type} />
+            )
+        )}
 
         <div className="registrar flex flex-col w-full md:w-1/2 xl:w-2/5 2xl:w-2/5 3xl:w-1/3 mx-auto p-8 md:p-10 md:pt-1 2xl:p-12 3xl:p-14 bg-[#ffffff] rounded-2xl shadow-xl" >
             <div className='flex flex-col mx-auto'>

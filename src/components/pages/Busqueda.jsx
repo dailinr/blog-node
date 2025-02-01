@@ -3,7 +3,6 @@ import { useState, useEffect} from "react";
 import { useParams } from 'react-router-dom';
 import "../../css/articulos.css";
 import { Global } from "../../helpers/Global";
-import { PeticionAjax } from "../../helpers/PeticionAjax";
 import { Listado } from "./Listado";
 import CrearArticulo from './CrearArticulo';
 
@@ -38,7 +37,6 @@ export const Busqueda = () => {
 
     if (datos.status === "success") {
       setArticulos(datos.articulos);
-      console.log("articulos: "+articulos);
     }else{
       setArticulos([]);
     }
