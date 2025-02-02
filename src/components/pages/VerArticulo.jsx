@@ -1,21 +1,55 @@
 import React from 'react'
 import { useState, useEffect } from "react";
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import '../../css/ver_articulo.css'
 import '../../css/Inicio.css';
 import { Global } from "../../helpers/Global";
 import ReactTimeAgo from 'react-time-ago';
 import ArticulosLateral from '../layouts/ArticulosLateral';
+import { getPerfil } from '../../helpers/getPerfil';
 
 export const VerArticulo = () => {
   const { id }  = useParams();
   const [articulo, setArticulo] = useState({});
   const [cargando, setCargando] = useState(true);
+  const [user, setUser] = useState({});
+  const [favoritos, setFavoritos] = useState();
 
   // peticion ajax a la DB para listar todos los articulos
   useEffect(() => {
     conseguirArticulo();
-  }, [])
+    verificarFavorito();
+  }, [id]);
+  
+
+  const verificarFavorito = async () => {
+
+    const url = Global.url + "usuario/favoritos";
+
+    const request = await fetch(url, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": localStorage.getItem("token")
+      }
+    });
+
+    const datos = await request.json();
+
+    if(datos.status === "success"){
+      
+      setFavoritos(datos.favoritos.some((fav) => fav._id == id));
+    }
+    else{
+      console.log("error al conseguir los articulos favoritos");
+    }
+
+  }
+
+  const avatarDefault = "../../../public/default-avatar-profile-icon-of-social-media-user-vector.jpg";
+      
+  let urlIcon = user.image === "default.png" ? 
+  avatarDefault : Global.url + "usuario/avatar/" + user.image;
 
   const conseguirArticulo = async () => {
     const url = Global.url + "articulo/"+ id;
@@ -32,12 +66,58 @@ export const VerArticulo = () => {
 
     if (datos.status === "success") {
       setArticulo(datos.articulo);
-    }else{
+
+      const idPerfil = datos.articulo.user;
+      getPerfil(idPerfil, setUser);
+    }
+    else{
       setArticulo([]);
     }
 
     setCargando(false);
   };
+
+  const agregarFavoritos = async () => {
+    const url = Global.url + "add-favoritos/"+ id;
+
+    const request = await fetch(url, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": localStorage.getItem("token")
+      }
+    });
+
+    const datos = await request.json();
+
+    if(datos.status == "success"){
+      setFavoritos(true);
+    }
+    else{
+      console.log("Error al agregar a favoritos");
+    }
+  }
+
+  const eliminarFavoritos = async () => {
+    const url = Global.url + "eliminar-favs/"+ id;
+
+    const request = await fetch(url, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": localStorage.getItem("token")
+      }
+    });
+
+    const datos = await request.json();
+
+    if(datos.status == "success"){
+      setFavoritos(false);
+    }
+    else{
+      console.log("error al eliminar de favoritos");
+    }
+  }
 
   // Conseguir url de la imagen del articulo
   let urlImagen = articulo.imagen !== "default.png" ?
@@ -57,9 +137,9 @@ export const VerArticulo = () => {
 
         <ArticulosLateral />
 
-          <section className='contenido-articulo'>
-            
-
+        <section className='contenido-articulo'>
+          
+          <div className='info-articulo'>
             <span  className='fecha-articulo'>
               {articulo.fecha ? (
                 <ReactTimeAgo date={new Date(articulo.fecha)} locale="es-ES" />
@@ -70,14 +150,32 @@ export const VerArticulo = () => {
               <span className='etiqueta'> {articulo.etiqueta} </span> 
             </span>
 
-            <h1>articulo {articulo.titulo}</h1>
+            <p className='favoritos'>
+              
+              {favoritos ? ( <>
+                <i className='bx bxs-heart mr-1' onClick={eliminarFavoritos} />
+                Agregado a favoritos </>
+              ):
+              (<>
+                <i className='bx bx-heart mr-1' onClick={agregarFavoritos} />
+                Agregar a favoritos </>
+              )}
 
-            <p className='texto-articulo'>{articulo.contenido}</p>
+              <Link to={"/perfil/"+ user._id} className='icon-user ml-8' width="30px" height="30px" >
+                <img src={urlIcon} alt="icon perfil"  />
+              </Link> 
+            </p>
 
-            <div className='imagen-articulo'>
-              <img src={urlImagen} alt={articulo.titulo} />
-            </div>            
-          </section>
+          </div>
+
+          <h1>{articulo.titulo}</h1>
+
+          <p className='texto-articulo'>{articulo.contenido}</p>
+
+          <div className='imagen-articulo'>
+            <img src={urlImagen} alt={articulo.titulo} />
+          </div>            
+        </section>
 
       </section>
     )

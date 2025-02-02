@@ -69,7 +69,13 @@ const Inicio = () => {
         
       <section className="tendencias">
         <div className="titulo-tendencias">
-          <h3>Articulos {enPoint}</h3>
+
+          <h3>
+            {enPoint == "siguiendo" ? 
+              "Feed seguidos" : 
+              "Articulos populares"  
+            }
+          </h3>
           
           <select onChange={handleSelectChange} value={enPoint}
             className="select select-bordered select-sm w-50 max-w-xs " >

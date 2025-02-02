@@ -107,9 +107,15 @@
 }
 .titulo-card{
   word-spacing: -0.5px;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1; /* Limita a dos líneas */
+  line-clamp: 1; 
+  overflow: hidden;
+  text-overflow: ellipsis; /* pone tres puntos al final */
 }
 .titulo-card .text-lg:hover{
-  color: red !important;
+  text-decoration: underline;
 }
 
 .text-card{
@@ -140,15 +146,14 @@
 }
 
 .icon-card{
-  
   width: 30px;
   height: 30px;
 }
 .icon-card img{
   width: 100%;
   height: 100%;
-}
-.icon-card img{
+  object-fit: cover;  
+  object-position: center;
   border: 1px solid rgba(155, 155, 155, 0.767);
   border-radius: 30px;
   -webkit-border-radius: 30px;
@@ -168,7 +173,6 @@
   font-style: italic;
   font-size: 12px;
   color: rgb(110, 110, 110);
-  margin-top: 2px;
 }
 
 .btn-ver-mas{

@@ -187,7 +187,7 @@ export const PerfilUser = () => {
         <div className='header-perfil'
           style={{ background: `url(${headerDefault}) no-repeat center / cover` }}>
 
-          <div className='avatar-perfil'
+          <div className='avatar-perfil' 
             style={{ background: `url(${urlImagen}) no-repeat center / cover` }}>
 
           </div>

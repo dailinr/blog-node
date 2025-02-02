@@ -91,7 +91,7 @@ const Portada = () => {
               background: `linear-gradient(to top, rgba(0, 0, 0, 0.863), rgba(56, 56, 56, 0.527)), url(${urlImagen}) no-repeat center / cover`
             }}>
 
-              <Link to={"/articulo/"+portadas._id}
+              <Link to={"/articulo/"+portadas._id} 
                 onClick={portadas.user != auth._id ? () => incrementarVistas(portadas._id, setArticulos): null}>
 
                 <div className="contenido-portada">
@@ -106,7 +106,7 @@ const Portada = () => {
 
                   <div className="text-portada">{portadas.contenido}</div>
 
-                  <div className="autor-portada">
+                  <Link to={"/perfil/"+ user._id}  className="autor-portada">
                     <div className="icon-card">
                       <img src={urlIcon} alt="icon autor" />
                     </div>
@@ -122,7 +122,7 @@ const Portada = () => {
                         <span>Fecha no disponible</span>
                       )}
                     </div>
-                  </div>
+                  </Link>
 
                 </div>
 

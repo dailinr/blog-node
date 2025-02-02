@@ -86,8 +86,6 @@ const EditarArticulo = () => {
 
       const subidaData = await subida.json();
 
-      console.log(subidaData);
-
       if (subidaData.status === "success") {
         setTostada("¡Articulo actualizado!");
         setType("exito");

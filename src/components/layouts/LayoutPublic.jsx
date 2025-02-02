@@ -1,5 +1,5 @@
 import React from 'react';
-import { Navigate, Outlet } from 'react-router-dom';
+import { Outlet } from 'react-router-dom';
 import useAuth from '../../helpers/hooks/useAuth';
 import "../../css/animaciones.css";
 

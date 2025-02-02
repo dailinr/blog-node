@@ -3,10 +3,10 @@
     min-height: 100vh;
     /* border: 1px solid rgba(155, 155, 155, 0.767) ; */
     background-color: rgba(219, 218, 218, 0.767);
-    padding-top: 10px;
+    padding-top: 5px;
     display: flex;
     flex-direction: column;
-    row-gap: 15px;
+    row-gap: 8px;
 }
 
 .info-perfil{
@@ -38,7 +38,6 @@
 .avatar-perfil {
     width: 150px;
     height: 150px;
-    background-color: brown;
     border-radius: 50%;
     position: absolute;
     left: 5%; /* Ajusta este valor según lo cerca que quieras el avatar del borde derecho */

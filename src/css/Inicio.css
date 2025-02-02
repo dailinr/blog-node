@@ -56,6 +56,23 @@
 .titulo-portada{
     font-size: 26px;
     font-weight: bold;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2; /* Limita a dos líneas */
+    line-clamp: 2; 
+    overflow: hidden;
+    text-overflow: ellipsis; /* pone tres puntos al final */
+}
+.titulo-portada:hover{
+    text-decoration: underline;
+}
+.text-portada{
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2; /* Limita a dos líneas */
+    line-clamp: 2; 
+    overflow: hidden;
+    text-overflow: ellipsis; /* pone tres puntos al final */
 }
 
 .prev, .next {
@@ -106,7 +123,7 @@
     color: white;
     display: flex;
     flex-direction: column;
-    row-gap: 10px;
+    row-gap: 5px;
     height: 100%;
 }
   
@@ -155,7 +172,9 @@
     margin-left: 10px;
     font-weight: 400;
 }
-
+.nombre-autor:hover{
+    text-decoration: underline;
+}
 .nombre-autor,
 .fecha-edicion{
     color: rgb(224, 221, 221);
@@ -194,6 +213,11 @@
     font-weight: 600;
     justify-content: space-between;
 }
+
+.titulo-tendencias h3{
+    align-self: flex-end;
+}
+
 .titulo-recientes{
     padding-left: 8px;
     padding-bottom: 4px;

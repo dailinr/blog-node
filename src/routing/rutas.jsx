@@ -17,6 +17,7 @@ import { Configuracion } from "../components/pages/Configuracion";
 import { ExplorarUsers } from "../components/pages/ExplorarUsers";
 import { Following } from "../components/pages/Following";
 import { Followers } from "../components/pages/Followers";
+import Favoritos from "../components/pages/Favoritos";
 
 export const Rutas = () => {
 
@@ -48,6 +49,7 @@ export const Rutas = () => {
                 <Route path="explorar-users" element={<ExplorarUsers />} />
                 <Route path="siguiendo/:userId" element={<Following />} />
                 <Route path="seguidores/:userId" element={<Followers />} />
+                <Route path="favoritos" element={<Favoritos />} />
 
             </Route>
 

@@ -82,7 +82,7 @@ export const ArticulosPerfil = ({articulo, setArticulos, user, seguirUsuario,
 
             <section className='art-user'>
                 <div className='icon-user'>
-                    <img src={urlIcon} alt="icon perfil" />
+                    <img src={urlIcon} alt="icon perfil"  />
                 </div> &nbsp;
 
                 <div className="datos-user">
