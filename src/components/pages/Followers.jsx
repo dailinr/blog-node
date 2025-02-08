@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import "../../css/explorar_users.css";
-import { Global } from '../../helpers/Global';
+ ;
 import { UserList } from './UserList';
 import { useParams } from 'react-router-dom';
 import { getPerfil } from '../../helpers/getPerfil';

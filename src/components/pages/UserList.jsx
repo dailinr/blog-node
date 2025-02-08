@@ -1,6 +1,6 @@
 import React from 'react';
 import "../../css/explorar_users.css";
-import { Global } from '../../helpers/Global';
+ ;
 import useAuth from '../../helpers/hooks/useAuth';
 import { Link, useParams} from 'react-router-dom';
 import { guardarNotificacion } from '../../helpers/guardarNotificacion';
@@ -10,7 +10,7 @@ const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 export const UserList = ({users, conseguirUsers, following, 
     setFollowing, more, loading, page, setPage}) => {
     
-    const avatarDefault = "../../../public/default-avatar-profile-icon-of-social-media-user-vector.jpg";
+    const avatarDefault = `${import.meta.env.BASE_URL}default-avatar-profile-icon-of-social-media-user-vector.jpg`;
     const token = localStorage.getItem("token");
     const {auth} = useAuth();
     const params = useParams();

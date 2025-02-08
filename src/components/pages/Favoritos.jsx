@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react'
-import { Global } from '../../helpers/Global';
+ ;
 import { Link } from 'react-router-dom';
 import "../../css/favoritos.css";
 

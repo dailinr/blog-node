@@ -4,7 +4,6 @@ import MenuUser from '../modals/MenuUser';
 import { NavLink } from "react-router-dom";
 import { useNavigate } from 'react-router-dom';
 import useAuth from '../../helpers/hooks/useAuth';
-import { Global } from '../../helpers/Global';
 import { useGlobalContext } from '../../helpers/GlobalContext';
 import { Notificaciones } from '../modals/Notificaciones';
 
@@ -27,7 +26,7 @@ const Header = () => {
         setModales({ menuUsuario: !modales.menuUsuario, notificaciones: false });
     };
 
-    const avatarDefault = "../../../public/default-avatar-profile-icon-of-social-media-user-vector.jpg";
+    const avatarDefault = `${import.meta.env.BASE_URL}default-avatar-profile-icon-of-social-media-user-vector.jpg`;
     let urlImagen =  auth.image === "default.png" ? 
         avatarDefault : BACKEND_URL + "usuario/avatar/" + auth.image;
 

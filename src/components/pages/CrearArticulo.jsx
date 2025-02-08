@@ -3,7 +3,6 @@ import "../../css/crearArticulo.css";
 import { useState } from "react";
 import { useForm } from "../../helpers/hooks/useForm";
 // import { PeticionAjax } from "../../helpers/PeticionAjax";
-import { Global } from "../../helpers/Global";
 import useAuth from "../../helpers/hooks/useAuth";
 import Toast from "../modals/Toast";
 

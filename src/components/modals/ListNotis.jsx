@@ -1,6 +1,6 @@
 import React from 'react';
 import "../../css/notificaciones.css"
-import { Global } from '../../helpers/Global';
+ ;
 import ReactTimeAgo from 'react-time-ago';
 import { NavLink } from 'react-router-dom';
 
@@ -8,7 +8,7 @@ const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 
 export const ListNotis = ({ noti }) => {
     
-    const avatarDefault = "../../../public/default-avatar-profile-icon-of-social-media-user-vector.jpg";
+    const avatarDefault = `${import.meta.env.BASE_URL}default-avatar-profile-icon-of-social-media-user-vector.jpg`;
     let urlIcon = noti.seguidor.image === "default.png" ? 
         avatarDefault : BACKEND_URL + "usuario/avatar/" + noti.seguidor.image;
 

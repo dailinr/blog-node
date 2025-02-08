@@ -3,7 +3,6 @@ import { useState, useEffect } from "react";
 import { Link, useParams } from 'react-router-dom';
 import '../../css/ver_articulo.css'
 import '../../css/Inicio.css';
-import { Global } from "../../helpers/Global";
 import ReactTimeAgo from 'react-time-ago';
 import ArticulosLateral from '../layouts/ArticulosLateral';
 import { getPerfil } from '../../helpers/getPerfil';
@@ -50,7 +49,7 @@ export const VerArticulo = () => {
 
   }
 
-  const avatarDefault = "../../../public/default-avatar-profile-icon-of-social-media-user-vector.jpg";
+  const avatarDefault = `${import.meta.env.BASE_URL}default-avatar-profile-icon-of-social-media-user-vector.jpg`;
       
   let urlIcon = user.image === "default.png" ? 
   avatarDefault : BACKEND_URL + "usuario/avatar/" + user.image;

@@ -3,7 +3,7 @@ import "../../css/login.css"
 import { Link } from 'react-router-dom'
 import { useForm } from '../../helpers/hooks/useForm'
 import { PeticionAjax } from '../../helpers/PeticionAjax'
-import { Global } from '../../helpers/Global'
+ 
 import Toast from '../modals/Toast'
 
 const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;

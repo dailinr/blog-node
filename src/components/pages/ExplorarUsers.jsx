@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import "../../css/explorar_users.css";
-import { Global } from '../../helpers/Global';
+ ;
 import { UserList } from './UserList';
 import { useGlobalContext } from '../../helpers/GlobalContext';
 import CrearArticulo from './CrearArticulo';

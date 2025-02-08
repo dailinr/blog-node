@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import "../../css/config.css";
 import useAuth from '../../helpers/hooks/useAuth';
-import { Global } from '../../helpers/Global';
+ ;
 import { SerializeForm } from '../../helpers/SerializeForm';
 import Toast from '../modals/Toast';
 
@@ -98,7 +98,7 @@ export const Configuracion = () => {
     
   }
 
-  const avatarDefault = "../../../public/default-avatar-profile-icon-of-social-media-user-vector.jpg";
+  const avatarDefault = `${import.meta.env.BASE_URL}default-avatar-profile-icon-of-social-media-user-vector.jpg`;
 
   let urlImagen = auth.image === "default.png" ? 
     avatarDefault : BACKEND_URL + "usuario/avatar/" + auth.image;

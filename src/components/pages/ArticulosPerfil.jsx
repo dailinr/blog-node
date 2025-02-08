@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import "../../css/articulosUser.css";
 import "../../css/explorar_users.css";
-import { Global } from '../../helpers/Global';
+ ;
 import useAuth from '../../helpers/hooks/useAuth';
 import MenuArticulo from '../modals/MenuArticulo';
 import ModalConfirm from '../modals/ModalConfirm';
@@ -28,7 +28,7 @@ export const ArticulosPerfil = ({articulo, setArticulos, user, seguirUsuario,
         setModConfirm(true); // Mostramos el modal de confirmación
     }
 
-    const avatarDefault = "../../../public/default-avatar-profile-icon-of-social-media-user-vector.jpg";
+    const avatarDefault = `${import.meta.env.BASE_URL}default-avatar-profile-icon-of-social-media-user-vector.jpg`;
 
     let urlImagen = articulo.imagen === "default.png" ? 
     articulo.imagen : BACKEND_URL + "ver-imagen/" + articulo.imagen;

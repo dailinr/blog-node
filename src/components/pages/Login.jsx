@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react'
 import "../../css/login.css"
 import { Link, useNavigate } from 'react-router-dom'
 import { useForm } from '../../helpers/hooks/useForm'
-import { Global } from '../../helpers/Global'
+ 
 import useAuth from '../../helpers/hooks/useAuth'
 import Toast from '../modals/Toast'
 
@@ -89,7 +89,7 @@ const Login = () => {
 
         <div className="login flex flex-col w-full md:w-1/2 xl:w-2/5 2xl:w-2/5 3xl:w-1/3 mx-auto p-8 md:p-10 md:pt-1 2xl:p-12 3xl:p-14 bg-[#ffffff] rounded-2xl shadow-xl">
             <div className='flex flex-col mx-auto'>
-                <img src="../../../TecnoPulse-removebg-preview.png" alt="" width="180" />
+                <img src={`${import.meta.env.BASE_URL}TecnoPulse-removebg-preview.png`} alt="" width="180" />
 
             </div>
             <form className="flex flex-col" onSubmit={loginUser}>
@@ -116,7 +116,7 @@ const Login = () => {
 
                 </div>
             </form>
-            <div className="relative flex py-8 items-center">
+            {/* <div className="relative flex py-8 items-center">
                 <div className="flex-grow border-t border-[1px] border-gray-200"></div> <span className="flex-shrink mx-4 font-medium text-gray-500">OR</span> 
                 <div className="flex-grow border-t border-[1px] border-gray-200"></div>
             </div>
@@ -136,7 +136,7 @@ const Login = () => {
 
                     </button>
                 </div>
-            </form>
+            </form> */}
         </div>
     </div>
   )

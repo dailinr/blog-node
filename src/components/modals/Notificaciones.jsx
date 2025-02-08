@@ -1,5 +1,4 @@
 import React, { useEffect, useState} from 'react';
-import { Global } from "../../helpers/Global.jsx";
 import { ListNotis } from './ListNotis.jsx';
 import "../../css/notificaciones.css";
 import { useGlobalContext } from '../../helpers/GlobalContext.jsx';

@@ -6,7 +6,7 @@ import ArticulosLateral from '../layouts/ArticulosLateral.jsx';
 import CrearArticulo from './CrearArticulo.jsx';
 import { useNavigate } from 'react-router-dom'; 
 import useAuth from '../../helpers/hooks/useAuth.jsx';
-import { Global } from '../../helpers/Global.jsx';
+ 
 
 const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 

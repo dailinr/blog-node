@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react'
 import "../../css/perfil_user.css"
-import { Global } from '../../helpers/Global';
+ ;
 import { Link, useParams } from 'react-router-dom';
 import { getPerfil } from '../../helpers/getPerfil';
 import useAuth from '../../helpers/hooks/useAuth';
@@ -165,8 +165,8 @@ export const PerfilUser = () => {
   
   }
 
-  const avatarDefault = "../../../public/default-avatar-profile-icon-of-social-media-user-vector.jpg";
-  const headerDefault = "../../../public/header.jpg";
+  const avatarDefault = `${import.meta.env.BASE_URL}default-avatar-profile-icon-of-social-media-user-vector.jpg`;
+  const headerDefault = `${import.meta.env.BASE_URL}header.jpg`;
 
   let urlImagen = user.image === "default.png" ? 
     avatarDefault : BACKEND_URL + "usuario/avatar/" + user.image;

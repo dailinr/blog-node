@@ -1,7 +1,6 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import "../../css/articulos.css";
-import { Global } from "../../helpers/Global";
 import { Listado } from "./Listado";
 import CrearArticulo from "./CrearArticulo";
 import { useLocation } from "react-router-dom";

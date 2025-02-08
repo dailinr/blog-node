@@ -2,7 +2,6 @@ import React from 'react'
 import { useState, useEffect} from "react";
 import { useParams } from 'react-router-dom';
 import "../../css/articulos.css";
-import { Global } from "../../helpers/Global";
 import { Listado } from "./Listado";
 import CrearArticulo from './CrearArticulo';
 

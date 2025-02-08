@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import "../../css/artic_lateral.css";
 import { Link } from 'react-router-dom';
-import { Global } from '../../helpers/Global.jsx';
+ 
 import { incrementarVistas } from '../../helpers/incrementarVistas.jsx';
 import useAuth from '../../helpers/hooks/useAuth.jsx';
 import ReactTimeAgo from 'react-time-ago';

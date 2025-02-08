@@ -1,4 +1,3 @@
-import { Global } from "./Global";
 const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 
 export const deleteArticle = async (id, setArticulos, setMostrarToast, setModConfirm) => {

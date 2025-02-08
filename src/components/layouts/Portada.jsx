@@ -1,7 +1,6 @@
 // Portada.jsx
 import React, { useEffect, useState } from 'react';
 import '../../css/Inicio.css';
-import { Global } from '../../helpers/Global';
 import { incrementarVistas } from '../../helpers/incrementarVistas';
 import { Link } from 'react-router-dom';
 import useAuth from '../../helpers/hooks/useAuth';
@@ -63,7 +62,7 @@ const Portada = () => {
     setActualSlide((prevSlide) => (prevSlide - 1 + articulos.length) % articulos.length);
   };
 
-  const avatarDefault = "../../../public/default-avatar-profile-icon-of-social-media-user-vector.jpg";
+  const avatarDefault = `${import.meta.env.BASE_URL}default-avatar-profile-icon-of-social-media-user-vector.jpg`;
 
   return (
     

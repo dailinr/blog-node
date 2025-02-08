@@ -1,5 +1,4 @@
 import React, { createContext, useState, useEffect } from 'react';
-import { Global } from './Global';
 
 const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 
