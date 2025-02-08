@@ -7,6 +7,7 @@ import { Global } from "../../helpers/Global";
 import ReactTimeAgo from 'react-time-ago';
 import ArticulosLateral from '../layouts/ArticulosLateral';
 import { getPerfil } from '../../helpers/getPerfil';
+import useAuth from '../../helpers/hooks/useAuth';
 
 export const VerArticulo = () => {
   const { id }  = useParams();
@@ -14,6 +15,7 @@ export const VerArticulo = () => {
   const [cargando, setCargando] = useState(true);
   const [user, setUser] = useState({});
   const [favoritos, setFavoritos] = useState();
+  const {auth} = useAuth();
 
   // peticion ajax a la DB para listar todos los articulos
   useEffect(() => {
@@ -152,13 +154,15 @@ export const VerArticulo = () => {
 
             <p className='favoritos'>
               
-              {favoritos ? ( <>
-                <i className='bx bxs-heart mr-1' onClick={eliminarFavoritos} />
-                Agregado a favoritos </>
-              ):
-              (<>
-                <i className='bx bx-heart mr-1' onClick={agregarFavoritos} />
-                Agregar a favoritos </>
+              {articulo.user !== auth._id && (
+                favoritos ? ( <>
+                  <i className='bx bxs-heart mr-1' onClick={eliminarFavoritos} />
+                  Agregado a favoritos </>
+                ):
+                (<>
+                  <i className='bx bx-heart mr-1' onClick={agregarFavoritos} />
+                  Agregar a favoritos </>
+                )
               )}
 
               <Link to={"/perfil/"+ user._id} className='icon-user ml-8' width="30px" height="30px" >
