@@ -1,12 +1,14 @@
 import { Global } from "./Global";
 
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
+
 export const guardarNotificacion = async (idSeguidor, idUser) => {
     
   let dataFollow = { idUser, idSeguidor }
 
   try {
 
-    const request = await fetch(Global.url + "notificaciones/follows", {
+    const request = await fetch(BACKEND_URL + "notificaciones/follows", {
       method: "POST",
       body: JSON.stringify(dataFollow),
       headers: {

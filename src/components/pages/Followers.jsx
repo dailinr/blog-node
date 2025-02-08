@@ -6,6 +6,8 @@ import { useParams } from 'react-router-dom';
 import { getPerfil } from '../../helpers/getPerfil';
 import CrearArticulo from './CrearArticulo';
 
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
+
 export const Followers = () => {
     const [btnCrear, setBtnCrear] = useState(false);
     const [users, setUsers] = useState([]);
@@ -31,7 +33,7 @@ export const Followers = () => {
         // sacar userId de la url
         const userId = params.userId;
 
-        const request = await fetch(Global.url + "follow/followers/" + userId + "/" + nextPage, {
+        const request = await fetch(BACKEND_URL + "follow/followers/" + userId + "/" + nextPage, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",

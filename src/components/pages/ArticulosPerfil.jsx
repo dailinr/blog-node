@@ -9,6 +9,8 @@ import { incrementarVistas } from '../../helpers/incrementarVistas';
 import { Link } from 'react-router-dom';
 import ReactTimeAgo from 'react-time-ago';
 
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
+
 export const ArticulosPerfil = ({articulo, setArticulos, user, seguirUsuario,
     unfollowUsuario, iFollow, setIdEliminar, confirmEliminar}) => {
 
@@ -29,10 +31,10 @@ export const ArticulosPerfil = ({articulo, setArticulos, user, seguirUsuario,
     const avatarDefault = "../../../public/default-avatar-profile-icon-of-social-media-user-vector.jpg";
 
     let urlImagen = articulo.imagen === "default.png" ? 
-    articulo.imagen : Global.url + "ver-imagen/" + articulo.imagen;
+    articulo.imagen : BACKEND_URL + "ver-imagen/" + articulo.imagen;
 
     let urlIcon = user.image === "default.png" ? 
-    avatarDefault : Global.url + "usuario/avatar/" + user.image;
+    avatarDefault : BACKEND_URL + "usuario/avatar/" + user.image;
     
   return (
 

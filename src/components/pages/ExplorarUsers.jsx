@@ -5,6 +5,8 @@ import { UserList } from './UserList';
 import { useGlobalContext } from '../../helpers/GlobalContext';
 import CrearArticulo from './CrearArticulo';
 
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
+
 export const ExplorarUsers = () => {
     const token = localStorage.getItem("token");
 
@@ -30,7 +32,7 @@ export const ExplorarUsers = () => {
         setLoading(true);
         setUsers([]);
 
-        const request = await fetch(Global.url + "usuario/list/" + nextPage, {
+        const request = await fetch(BACKEND_URL + "usuario/list/" + nextPage, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",

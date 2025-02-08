@@ -9,6 +9,8 @@ import ArticulosLateral from '../layouts/ArticulosLateral';
 import { getPerfil } from '../../helpers/getPerfil';
 import useAuth from '../../helpers/hooks/useAuth';
 
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
+
 export const VerArticulo = () => {
   const { id }  = useParams();
   const [articulo, setArticulo] = useState({});
@@ -26,7 +28,7 @@ export const VerArticulo = () => {
 
   const verificarFavorito = async () => {
 
-    const url = Global.url + "usuario/favoritos";
+    const url = BACKEND_URL + "usuario/favoritos";
 
     const request = await fetch(url, {
       method: "GET",
@@ -51,10 +53,10 @@ export const VerArticulo = () => {
   const avatarDefault = "../../../public/default-avatar-profile-icon-of-social-media-user-vector.jpg";
       
   let urlIcon = user.image === "default.png" ? 
-  avatarDefault : Global.url + "usuario/avatar/" + user.image;
+  avatarDefault : BACKEND_URL + "usuario/avatar/" + user.image;
 
   const conseguirArticulo = async () => {
-    const url = Global.url + "articulo/"+ id;
+    const url = BACKEND_URL + "articulo/"+ id;
 
     const request = await fetch(url, {
       method: "GET",
@@ -80,7 +82,7 @@ export const VerArticulo = () => {
   };
 
   const agregarFavoritos = async () => {
-    const url = Global.url + "add-favoritos/"+ id;
+    const url = BACKEND_URL + "add-favoritos/"+ id;
 
     const request = await fetch(url, {
       method: "POST",
@@ -101,7 +103,7 @@ export const VerArticulo = () => {
   }
 
   const eliminarFavoritos = async () => {
-    const url = Global.url + "eliminar-favs/"+ id;
+    const url = BACKEND_URL + "eliminar-favs/"+ id;
 
     const request = await fetch(url, {
       method: "DELETE",
@@ -123,7 +125,7 @@ export const VerArticulo = () => {
 
   // Conseguir url de la imagen del articulo
   let urlImagen = articulo.imagen !== "default.png" ?
-    Global.url + "ver-imagen/" + articulo.imagen : articulo.imagen;
+    BACKEND_URL + "ver-imagen/" + articulo.imagen : articulo.imagen;
 
 
   return (

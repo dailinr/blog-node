@@ -8,6 +8,8 @@ import { Global } from "../../helpers/Global";
 import { useParams } from "react-router-dom";
 import Toast from "../modals/Toast";
 
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
+
 const EditarArticulo = () => {
   
   const { formulario, enviado, cambiado, setFormulario } = useForm({});
@@ -34,7 +36,7 @@ const EditarArticulo = () => {
   }, [tostada, type]);
 
   const conseguirArticulo = async () => {
-    const url = Global.url + "articulo/"+ id;
+    const url = BACKEND_URL + "articulo/"+ id;
 
     const request = await fetch(url, {
       method: "GET",
@@ -61,7 +63,7 @@ const EditarArticulo = () => {
 
     // Guardar articulo en backend -- parametros: url, metodo ajax, datos a guardar
     const { datos } = await PeticionAjax(
-      Global.url + "articulo/"+id,
+      BACKEND_URL + "articulo/"+id,
       "PUT",
       nuevoArticulo
     );
@@ -76,7 +78,7 @@ const EditarArticulo = () => {
       formData.append("file0", fileInput.files[0]); // se le asigna el archivo con el primero
 
       // nueva peticion ajax para la ruta de subir imagen
-      const subida = await fetch(Global.url + "subir-imagen/" + datos.articulo._id, {
+      const subida = await fetch(BACKEND_URL + "subir-imagen/" + datos.articulo._id, {
         method: "POST",
         body: formData,
         headers: {
@@ -107,7 +109,7 @@ const EditarArticulo = () => {
 
   // Conseguir url de la imagen del articulo
   let urlImagen = articulo.imagen !== "default.png" ?
-  Global.url + "ver-imagen/" + articulo.imagen : articulo.imagen;
+  BACKEND_URL + "ver-imagen/" + articulo.imagen : articulo.imagen;
 
 
   return (

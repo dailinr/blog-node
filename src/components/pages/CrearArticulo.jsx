@@ -7,6 +7,8 @@ import { Global } from "../../helpers/Global";
 import useAuth from "../../helpers/hooks/useAuth";
 import Toast from "../modals/Toast";
 
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
+
 const CrearArticulo = ({ setBtnCrear }) => {
   // metodos que se cambiaran conforme el usuario ingrese o envie datos
   const { formulario, enviado, cambiado } = useForm({});
@@ -39,7 +41,7 @@ const CrearArticulo = ({ setBtnCrear }) => {
     nuevoArticulo.user = auth._id;
 
     // Guardar articulo en backend -- parametros: url, metodo ajax, datos a guardar
-    const request = await fetch(Global.url + "crear", {
+    const request = await fetch(BACKEND_URL + "crear", {
       method: "POST",
       body: JSON.stringify(nuevoArticulo),
       headers: {
@@ -70,7 +72,7 @@ const CrearArticulo = ({ setBtnCrear }) => {
       formData.append("file0", fileInput.files[0]); // se le asigna el archivo con el primero
 
       // nueva peticion ajax para la ruta de subir imagen
-      const subida = await fetch(Global.url + "subir-imagen/" + data.articulo._id, {
+      const subida = await fetch(BACKEND_URL + "subir-imagen/" + data.articulo._id, {
         method: "POST",
         body: formData,
         headers: {

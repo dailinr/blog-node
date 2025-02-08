@@ -6,6 +6,8 @@ import { Global } from '../../helpers/Global'
 import useAuth from '../../helpers/hooks/useAuth'
 import Toast from '../modals/Toast'
 
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
+
 const Login = () => {
     const { formulario, cambiado } = useForm({});
     const navigate = useNavigate(); // Importa y usa useNavigate
@@ -31,7 +33,7 @@ const Login = () => {
 
         let datosUser = formulario;
         try{
-            const url = Global.url + "usuario/login";
+            const url = BACKEND_URL + "usuario/login";
 
             const request = await fetch(url, {
                 method: "POST",

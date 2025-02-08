@@ -6,6 +6,8 @@ import { Global } from "../../helpers/Global";
 import { Listado } from "./Listado";
 import CrearArticulo from './CrearArticulo';
 
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
+
 export const Busqueda = () => {
   
   const [btnCrear, setBtnCrear] = useState(false);
@@ -23,7 +25,7 @@ export const Busqueda = () => {
   }, [params]); // se mantendra actualizado mientras cambiamos los parametros de busqueda
 
   const conseguirArticulos = async () => {
-    const url = Global.url + "buscar/" + params.busqueda;
+    const url = BACKEND_URL + "buscar/" + params.busqueda;
 
     const request = await fetch(url, {
       method: "GET",

@@ -1,8 +1,10 @@
 import { Global } from "./Global";
 
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
+
 export const getPerfil = async(userId, setState) => {
         
-    const request = await fetch(Global.url + "usuario/perfil/"+ userId, {
+    const request = await fetch(BACKEND_URL + "usuario/perfil/"+ userId, {
         method: "GET",
         headers: {
             "Content-Type": "application/json",

@@ -4,6 +4,8 @@ import { ListNotis } from './ListNotis.jsx';
 import "../../css/notificaciones.css";
 import { useGlobalContext } from '../../helpers/GlobalContext.jsx';
 
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
+
 export const Notificaciones = ({ idUser } ) => {
 
   const [notis, setNotis] = useState([]);
@@ -34,7 +36,7 @@ export const Notificaciones = ({ idUser } ) => {
 
     try {
 
-      const request = await fetch(Global.url + "notificaciones/mostrar/"+ idUser +"/"+nextPage, {
+      const request = await fetch(BACKEND_URL + "notificaciones/mostrar/"+ idUser +"/"+nextPage, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",

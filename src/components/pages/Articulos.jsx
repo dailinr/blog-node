@@ -9,6 +9,8 @@ import { useGlobalContext } from '../../helpers/GlobalContext.jsx';
 import { deleteArticle } from "../../helpers/deleteArticle.jsx";
 import Toast from "../modals/Toast.jsx";
 
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
+
 const Articulos = ({ enPoint, customPadding, customWidth, customJustify, maxArticulos}) => {
 
   const [articulos, setArticulos] = useState([]);
@@ -47,10 +49,10 @@ const Articulos = ({ enPoint, customPadding, customWidth, customJustify, maxArti
     switch(enPoint) {
       
       case "siguiendo":
-        url = Global.url + "feed/" + nextPage;
+        url = BACKEND_URL + "feed/" + nextPage;
         break;
       case "populares":
-        url = Global.url + "mas-vistos/";
+        url = BACKEND_URL + "mas-vistos/";
         break;
     
       default:
@@ -58,9 +60,9 @@ const Articulos = ({ enPoint, customPadding, customWidth, customJustify, maxArti
     } 
 
     if (location.pathname.includes("articulos")) {
-      url = Global.url + "listar/" + nextPage;
+      url = BACKEND_URL + "listar/" + nextPage;
     } else if (location.pathname.includes("feed")) {
-      url = Global.url + "feed/" + nextPage;
+      url = BACKEND_URL + "feed/" + nextPage;
     }
 
     const request = await fetch(url, {

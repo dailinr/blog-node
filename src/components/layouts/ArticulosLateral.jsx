@@ -7,6 +7,8 @@ import useAuth from '../../helpers/hooks/useAuth.jsx';
 import ReactTimeAgo from 'react-time-ago';
 import { useGlobalContext } from '../../helpers/GlobalContext.jsx';
 
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
+
 const ArticulosLateral = () => {
     
   const {auth} = useAuth();
@@ -25,7 +27,7 @@ const ArticulosLateral = () => {
   const conseguirArticulos = async () => {
     
     setArticulos([]);
-    const url = Global.url + "listar";
+    const url = BACKEND_URL + "listar";
 
     const request = await fetch(url, {
       method: "GET",
@@ -64,7 +66,7 @@ const ArticulosLateral = () => {
       articulos.slice(0, 10).map((articulo) => {
 
         let urlImagen = articulo.imagen !== "default.png"  ?
-        Global.url + "ver-imagen/" + articulo.imagen : articulo.imagen;
+        BACKEND_URL + "ver-imagen/" + articulo.imagen : articulo.imagen;
             
         return(
 

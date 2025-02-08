@@ -1,6 +1,8 @@
 import React, { createContext, useState, useEffect } from 'react';
 import { Global } from './Global';
 
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
+
 const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
@@ -33,7 +35,7 @@ export const AuthProvider = ({ children }) => {
             const userId = userObj.id;
 
             // Peticion ajax al backend que compruebe el token 
-            const request = await fetch( Global.url + "usuario/perfil/" + userId, {
+            const request = await fetch( BACKEND_URL + "usuario/perfil/" + userId, {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json",
@@ -50,7 +52,7 @@ export const AuthProvider = ({ children }) => {
             }
 
             // ------ Peticion para los contadores -----
-            const requestCounters = await fetch( Global.url + "usuario/counters/" + userId, {
+            const requestCounters = await fetch( BACKEND_URL + "usuario/counters/" + userId, {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json",

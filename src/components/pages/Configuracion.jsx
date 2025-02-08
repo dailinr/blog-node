@@ -5,6 +5,8 @@ import { Global } from '../../helpers/Global';
 import { SerializeForm } from '../../helpers/SerializeForm';
 import Toast from '../modals/Toast';
 
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
+
 export const Configuracion = () => {
 
   const {auth, setAuth} = useAuth();
@@ -38,7 +40,7 @@ export const Configuracion = () => {
     delete newDataUser.file0; // borramos el campo de la imagen
 
     // Actualizar usuario en la base de datos
-    const request = await fetch(Global.url + "usuario/update", {
+    const request = await fetch(BACKEND_URL + "usuario/update", {
       method: "PUT",
       body: JSON.stringify(newDataUser),
       headers: {
@@ -71,7 +73,7 @@ export const Configuracion = () => {
       formData.append("file0", fileInput.files[0]);
 
       // Peticion para enviar el fichero
-      const uploadRequest = await fetch(Global.url + "usuario/upload", {
+      const uploadRequest = await fetch(BACKEND_URL + "usuario/upload", {
         method: "POST",
         body: formData,
         headers: {
@@ -99,7 +101,7 @@ export const Configuracion = () => {
   const avatarDefault = "../../../public/default-avatar-profile-icon-of-social-media-user-vector.jpg";
 
   let urlImagen = auth.image === "default.png" ? 
-    avatarDefault : Global.url + "usuario/avatar/" + auth.image;
+    avatarDefault : BACKEND_URL + "usuario/avatar/" + auth.image;
 
   return (
     <div className='page-confi'>

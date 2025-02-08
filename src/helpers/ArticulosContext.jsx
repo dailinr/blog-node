@@ -1,6 +1,7 @@
 import React, { createContext, useState, useEffect } from 'react';
 import { Global } from './Global';
-import { PeticionAjax } from './PeticionAjax';
+
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 
 export const ArticulosContext = createContext();
 
@@ -13,7 +14,7 @@ export const ArticulosProvider = ({ children }) => {
 
     const conseguirArticulos = async () => {
         
-        const request = await fetch(Global.url + "listar", {
+        const request = await fetch(BACKEND_URL + "listar", {
             method: "GET",
             headers: {
               "Content-Type": "application/json",

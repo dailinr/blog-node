@@ -8,6 +8,7 @@ import { Global } from '../../helpers/Global';
 import { useGlobalContext } from '../../helpers/GlobalContext';
 import { Notificaciones } from '../modals/Notificaciones';
 
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 
 const Header = () => {
     
@@ -28,7 +29,7 @@ const Header = () => {
 
     const avatarDefault = "../../../public/default-avatar-profile-icon-of-social-media-user-vector.jpg";
     let urlImagen =  auth.image === "default.png" ? 
-        avatarDefault : Global.url + "usuario/avatar/" + auth.image;
+        avatarDefault : BACKEND_URL + "usuario/avatar/" + auth.image;
 
     const hacerBusqueda = (e) => {
         e.preventDefault();

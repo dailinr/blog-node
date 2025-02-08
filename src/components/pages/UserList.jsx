@@ -5,6 +5,8 @@ import useAuth from '../../helpers/hooks/useAuth';
 import { Link, useParams} from 'react-router-dom';
 import { guardarNotificacion } from '../../helpers/guardarNotificacion';
 
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
+
 export const UserList = ({users, conseguirUsers, following, 
     setFollowing, more, loading, page, setPage}) => {
     
@@ -22,7 +24,7 @@ export const UserList = ({users, conseguirUsers, following,
 
     const seguirUsuario = async(userId) => {
         
-        const request = await fetch( Global.url + "follow/save", {
+        const request = await fetch( BACKEND_URL + "follow/save", {
             method: "POST",
             body: JSON.stringify({followed: userId}),
             headers: {
@@ -43,7 +45,7 @@ export const UserList = ({users, conseguirUsers, following,
 
     const unfollowUsuario = async(userId) => {
 
-        const request = await fetch( Global.url + "follow/unfollow/" + userId,{
+        const request = await fetch( BACKEND_URL + "follow/unfollow/" + userId,{
             method: "DELETE",
             headers: {
                 "Content-Type": "application/json",
@@ -74,7 +76,7 @@ export const UserList = ({users, conseguirUsers, following,
                 <div key={user._id} className='row-user'>
 
                     <div className='pfp-user'>
-                        <img src={user.image === "default.png" ? avatarDefault : Global.url + "usuario/avatar/" + user.image}  alt="foto de perfil" />
+                        <img src={user.image === "default.png" ? avatarDefault : BACKEND_URL + "usuario/avatar/" + user.image}  alt="foto de perfil" />
                     </div>
 
                     <div className="info-user">

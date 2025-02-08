@@ -8,6 +8,7 @@ import { useNavigate } from 'react-router-dom';
 import useAuth from '../../helpers/hooks/useAuth.jsx';
 import { Global } from '../../helpers/Global.jsx';
 
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 
 const Inicio = () => {
   const [btnCrear, setBtnCrear] = useState(false);
@@ -29,7 +30,7 @@ const Inicio = () => {
 
   const getCounters = async() => {
 
-    const request = await fetch(Global.url + "usuario/counters/" + auth._id, {
+    const request = await fetch(BACKEND_URL + "usuario/counters/" + auth._id, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",

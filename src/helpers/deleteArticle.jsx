@@ -1,8 +1,9 @@
 import { Global } from "./Global";
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 
 export const deleteArticle = async (id, setArticulos, setMostrarToast, setModConfirm) => {
   try {
-    const response = await fetch(Global.url + "articulo/" + id, {
+    const response = await fetch(BACKEND_URL + "articulo/" + id, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",

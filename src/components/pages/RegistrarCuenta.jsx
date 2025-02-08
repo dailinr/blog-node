@@ -6,6 +6,8 @@ import { PeticionAjax } from '../../helpers/PeticionAjax'
 import { Global } from '../../helpers/Global'
 import Toast from '../modals/Toast'
 
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
+
 const RegistrarCuenta = () => {
     const { formulario, cambiado } = useForm({});
     const [tostada, setTostada] = useState(null);
@@ -30,7 +32,7 @@ const RegistrarCuenta = () => {
         let newUser = formulario;
 
         // Llamar al helper PeticionAjax para hacer la petición al backend
-        const url = Global.url + "usuario/registrar";
+        const url = BACKEND_URL + "usuario/registrar";
 
         const { datos } = await PeticionAjax(url, "POST", newUser);
 

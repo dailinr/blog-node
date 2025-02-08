@@ -9,6 +9,8 @@ import { guardarNotificacion } from '../../helpers/guardarNotificacion';
 import { useGlobalContext } from '../../helpers/GlobalContext';
 import CrearArticulo from './CrearArticulo';
 
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
+
 export const PerfilUser = () => {
   const [btnCrear, setBtnCrear] = useState(false);
   const [user, setUser] = useState({});
@@ -57,7 +59,7 @@ export const PerfilUser = () => {
 
   const getCounters = async() => {
 
-    const request = await fetch(Global.url + "usuario/counters/" + params.id, {
+    const request = await fetch(BACKEND_URL + "usuario/counters/" + params.id, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -80,7 +82,7 @@ export const PerfilUser = () => {
 
     setArticulos([]);
     
-    const request = await fetch(Global.url + "articulos-usuario/" + params.id + "/" + nextPage, {
+    const request = await fetch(BACKEND_URL + "articulos-usuario/" + params.id + "/" + nextPage, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -104,7 +106,7 @@ export const PerfilUser = () => {
 
   const seguirUsuario = async(userId) => {
     
-    const request = await fetch( Global.url + "follow/save", {
+    const request = await fetch( BACKEND_URL + "follow/save", {
       method: "POST",
       body: JSON.stringify({followed: userId}),
       headers: {
@@ -125,7 +127,7 @@ export const PerfilUser = () => {
 
   const unfollowUsuario = async(userId) => {
 
-    const request = await fetch( Global.url + "follow/unfollow/" + userId,{
+    const request = await fetch( BACKEND_URL + "follow/unfollow/" + userId,{
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
@@ -142,7 +144,7 @@ export const PerfilUser = () => {
 
   const confirmEliminar = async () => {
 
-    const request = await fetch (Global.url + "articulo/" + idEliminar, {
+    const request = await fetch (BACKEND_URL + "articulo/" + idEliminar, {
       method: "DELETE",
       headers: {
         "Context-Type": "application/json",
@@ -167,7 +169,7 @@ export const PerfilUser = () => {
   const headerDefault = "../../../public/header.jpg";
 
   let urlImagen = user.image === "default.png" ? 
-    avatarDefault : Global.url + "usuario/avatar/" + user.image;
+    avatarDefault : BACKEND_URL + "usuario/avatar/" + user.image;
 
     if (loading) {
       return (

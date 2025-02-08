@@ -10,6 +10,8 @@ import { incrementarVistas } from '../../helpers/incrementarVistas.jsx';
 import ReactTimeAgo from 'react-time-ago';
 import { useGlobalContext } from '../../helpers/GlobalContext.jsx';
 
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
+
 export const Listado = ( {cards, setArticulos, setIdEliminar, confirmEliminar}) => {
 
   const [menuArticulo, setMenuArticulo] = useState(false);
@@ -41,12 +43,12 @@ export const Listado = ( {cards, setArticulos, setIdEliminar, confirmEliminar}) 
 
   // Condicion para saber el articulo se le ha asignado una imagen
   let urlImagen = cards.imagen !== "default.png"  ?
-  Global.url + "ver-imagen/" + cards.imagen : cards.imagen;
+  BACKEND_URL + "ver-imagen/" + cards.imagen : cards.imagen;
 
   const avatarDefault = "../../../public/default-avatar-profile-icon-of-social-media-user-vector.jpg";
   
   let urlIcon = user.image === "default.png" ? 
-  avatarDefault : Global.url + "usuario/avatar/" + user.image;
+  avatarDefault : BACKEND_URL + "usuario/avatar/" + user.image;
   
   
   return (

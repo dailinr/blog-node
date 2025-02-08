@@ -3,6 +3,8 @@ import { Global } from '../../helpers/Global';
 import { Link } from 'react-router-dom';
 import "../../css/favoritos.css";
 
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
+
 const Favoritos = () => {
     const [favoritos, setFavoritos] = useState([]);
     const [cargando, setCargando] = useState(true);
@@ -13,7 +15,7 @@ const Favoritos = () => {
 
     const conseguirFavoritos = async () => {
 
-        const url = Global.url + "usuario/favoritos";
+        const url = BACKEND_URL + "usuario/favoritos";
 
         const request = await fetch(url, {
             method: "GET",
@@ -55,7 +57,7 @@ const Favoritos = () => {
                 <div key={favorito._id} className='row-favs'>
 
                     <div className='img-favs' >
-                        <img src={favorito.imagen !== "default.png" ?  Global.url + "ver-imagen/" + favorito.imagen : null}  alt="foto de perfil" />
+                        <img src={favorito.imagen !== "default.png" ?  BACKEND_URL + "ver-imagen/" + favorito.imagen : null}  alt="foto de perfil" />
                     </div>
 
                     <div className='info-favs' >

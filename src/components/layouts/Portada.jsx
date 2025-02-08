@@ -8,6 +8,8 @@ import useAuth from '../../helpers/hooks/useAuth';
 import ReactTimeAgo from 'react-time-ago';
 import { useGlobalContext } from '../../helpers/GlobalContext.jsx';
 
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
+
 const Portada = () => {
   const [actualSlide, setActualSlide] = useState(0);
   const [articulos, setArticulos] = useState([]);
@@ -27,7 +29,7 @@ const Portada = () => {
 
     setArticulos([]);
 
-    const request = await fetch(Global.url + "mas-vistos", {
+    const request = await fetch(BACKEND_URL + "mas-vistos", {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -79,12 +81,12 @@ const Portada = () => {
         articulos.map((portadas) => {
 
           let urlImagen = portadas.imagen !== "default.png"  ?
-          Global.url + "ver-imagen/" + portadas.imagen : portadas.imagen;
+          BACKEND_URL + "ver-imagen/" + portadas.imagen : portadas.imagen;
 
           let user = portadas.user;
 
           let urlIcon = user.image === "default.png" ? 
-          avatarDefault : Global.url + "usuario/avatar/" + user.image;
+          avatarDefault : BACKEND_URL + "usuario/avatar/" + user.image;
           
           return(
             <div key={portadas._id} className="portada" style={{

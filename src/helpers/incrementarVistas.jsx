@@ -1,8 +1,10 @@
 import { Global } from './Global';
 
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
+
 export const incrementarVistas = async(idArticulo, setArticulos) => {
     
-    let url = Global.url + "ver/" + idArticulo;
+    let url = BACKEND_URL + "ver/" + idArticulo;
 
     const request = await fetch(url, {
       method: "GET",
