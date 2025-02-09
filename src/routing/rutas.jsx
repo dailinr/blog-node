@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Routes, Route, Navigate, useNavigate } from "react-router-dom";
+import { Routes, Route, useNavigate, useLocation } from "react-router-dom";
 import Inicio  from "../components/pages/Inicio";
 import Articulos from "../components/pages/Articulos";
 import CrearArticulo from "../components/pages/CrearArticulo";
@@ -21,13 +21,18 @@ import Favoritos from "../components/pages/Favoritos";
 
 export const Rutas = () => {
     const navigate = useNavigate();
-
+    const location = useLocation();
+    
     useEffect(() => {
-      const token = localStorage.getItem("token");
-      if (!token) {
+        const token = localStorage.getItem("token");
+
+        // Permitir acceso sin autenticación solo a estas rutas
+        const rutasPublicas = ["/usuario/login", "/usuario/registrar-cuenta"];
+
+        if (!token && !rutasPublicas.includes(location.pathname)) {
         navigate("/usuario/login");
-      }
-    }, [navigate]);
+        }
+    }, [navigate, location]);
 
     return(
 
