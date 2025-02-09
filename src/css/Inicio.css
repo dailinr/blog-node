@@ -165,7 +165,7 @@
     -moz-border-radius: 25px;
     -ms-border-radius: 25px;
     -o-border-radius: 25px;
-    background: url(../../../public/icon-perfil.jpg) no-repeat center;
+    /* background: url(../../../public/icon-perfil.jpg) no-repeat center; */
     background-size: cover;
 }
 .nombre-autor{

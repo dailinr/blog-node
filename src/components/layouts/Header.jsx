@@ -48,7 +48,8 @@ const Header = () => {
   return (
     <div className='header '>    
     
-        <div className='logo'>
+        <div className='logo' 
+            style={{ background: `url(${import.meta.env.BASE_URL}TecnoPulse-removebg-preview.png) no-repeat center / cover`, width: '180px', heigth: '60px'}} >
             <div className='image-logo'></div>
         </div>
 

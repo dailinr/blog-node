@@ -9,7 +9,7 @@
     /* background-color: #F3F3F3;  */
 }
 
-.logo{
+/* .logo{
     width: 180px;
 }
 .image-logo{
@@ -20,7 +20,7 @@
     background-size: cover;
     background-position: center;
     image-rendering: -webkit-optimize-contrast;
-}
+} */
 .iconos{
     display: flex;
     column-gap: 15px;
