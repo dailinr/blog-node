@@ -1,5 +1,5 @@
-import React from "react";
-import { Routes, Route, Navigate} from "react-router-dom";
+import React, { useEffect } from "react";
+import { Routes, Route, Navigate, useNavigate } from "react-router-dom";
 import Inicio  from "../components/pages/Inicio";
 import Articulos from "../components/pages/Articulos";
 import CrearArticulo from "../components/pages/CrearArticulo";
@@ -20,6 +20,14 @@ import { Followers } from "../components/pages/Followers";
 import Favoritos from "../components/pages/Favoritos";
 
 export const Rutas = () => {
+    const navigate = useNavigate();
+
+    useEffect(() => {
+      const token = localStorage.getItem("token");
+      if (!token) {
+        navigate("/usuario/login");
+      }
+    }, [navigate]);
 
     return(
 
