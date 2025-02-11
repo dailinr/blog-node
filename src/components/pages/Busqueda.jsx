@@ -29,11 +29,11 @@ export const Busqueda = () => {
     const request = await fetch(url, {
       method: "GET",
       headers: {
-        "Context-Type": "application/json",
+        "Content-Type": "application/json",
         "Authorization": localStorage.getItem("token")
       }
     });
-
+    
     const datos = await request.json();
 
     if (datos.status === "success") {

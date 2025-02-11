@@ -24,7 +24,7 @@ export const Listado = ( {cards, setArticulos, setIdEliminar, confirmEliminar}) 
   const {auth} = useAuth();
 
   useEffect(() => {
-    getPerfil(cards.user._id, setUser);
+    getPerfil(cards.user._id || cards.user, setUser);
   }, []);
 
   const mostrarMenu = (id) => {

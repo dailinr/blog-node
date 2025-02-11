@@ -158,16 +158,16 @@ export const VerArticulo = () => {
               {articulo.user !== auth._id && (
                 favoritos ? ( <>
                   <i className='bx bxs-heart mr-1' onClick={eliminarFavoritos} />
-                  Agregado a favoritos </>
+                  <div className="title-favs">Agregado a favoritos</div> </> 
                 ):
                 (<>
                   <i className='bx bx-heart mr-1' onClick={agregarFavoritos} />
-                  Agregar a favoritos </>
+                  <div className="title-favs">Agregar a favoritos</div> </>
                 )
               )}
 
-              <Link to={"/perfil/"+ user._id} className='icon-user ml-8' width="30px" height="30px" >
-                <img src={urlIcon} alt="icon perfil"  />
+              <Link to={"/perfil/"+ user._id} className='icon-user' style={{ marginLeft: '18px'}}>
+                <img  src={urlIcon} alt="icon perfil"  />
               </Link> 
             </p>
 

@@ -147,7 +147,7 @@ export const PerfilUser = () => {
     const request = await fetch (BACKEND_URL + "articulo/" + idEliminar, {
       method: "DELETE",
       headers: {
-        "Context-Type": "application/json",
+        "Content-Type": "application/json",
         "Authorization": localStorage.getItem("token")
       }
     });
