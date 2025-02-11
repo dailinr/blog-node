@@ -28,3 +28,43 @@
   grid-area: cuerpo;
   width: 100%;
 }
+
+@media (max-width: 800px) {
+
+  .content-users, .info-perfil, .post-perfil,
+  .form-update, .formulario{
+    width: 94% !important;
+  }
+  .recientes, .art-lateral{
+    display: none;
+  }
+  .Inicio{
+    grid-template-columns: 1fr !important;
+    grid-template-areas:
+      "portada"
+      "tendencias" !important;
+    padding: 30px !important;
+  }
+
+  .vista-articulo{
+    grid-template-columns: 1fr !important;
+    grid-template-areas: "articulo" !important;
+    padding: 10px 15px !important;
+  }
+  .content-articulos{
+    justify-content: center !important;
+  }
+  .content-articulos .card{
+    max-width: 100% !important;
+  }
+
+  .Articulos{
+    padding: 30px 40px !important;
+  }
+
+  .post-perfil .art-image{
+    width: 100px !important;
+    height: auto !important;
+  }
+  
+}

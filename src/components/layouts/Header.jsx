@@ -14,6 +14,7 @@ const Header = () => {
     const [buscar, setBuscar] = useState("");
     const navegar = useNavigate();
     const { auth } = useAuth();
+    const [menuOpen, setMenuOpen] = useState(false); // Estado para manejar el collapse
     const { refreshPage, modales, setModales } = useGlobalContext();
 
     const abrirModalNotificaciones = (e) => {
@@ -77,6 +78,21 @@ const Header = () => {
             </li>
         </ul>
 
+        {/* Menú hamburguesa para pantallas pequeñas */}
+        <div className="pos-f-t">
+            <button className="menu-toggle" onClick={() => setMenuOpen(!menuOpen)}>
+                ☰
+            </button>
+            <div className={`menu-collapse ${menuOpen ? "open" : ""}`}>
+                <ul>
+                    <li><NavLink to="/inicio">Inicio</NavLink></li>
+                    <li><NavLink to="/feed">Siguiendo</NavLink></li>
+                    <li><NavLink to="/articulos">Artículos</NavLink></li>
+                    <li><NavLink to="/explorar-users">Explorar usuarios</NavLink></li>
+                </ul>
+            </div>
+        </div>
+
         <div className="iconos">
             {/* <div className="icon-buscar">
                 <i className='bx bx-search-alt'></i>
@@ -88,7 +104,7 @@ const Header = () => {
 
             <label className="input search input-bordered flex items-center gap-2">
                 <input  onChange={(e) => hacerBusqueda(e)}
-                    type="text" id="search_field" className="grow" placeholder="Buscar articulo" 
+                    type="text" id="search_field" className="grow input-search" placeholder="Buscar articulo" 
                 />
 
                 <svg

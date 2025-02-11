@@ -65,7 +65,6 @@ const Login = () => {
             }
 
             const datos = await request.json();
-            console.log(datos);
             
             if(datos.status === "success"){
                 // Persistir los datos en el localstorage - guardar una sesion

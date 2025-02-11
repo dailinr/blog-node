@@ -159,3 +159,84 @@
 .iconos > div, .iconos-izq .bx{
     cursor: pointer;
 }
+
+/* Para pantallas mayores a 800px, oculta `pos-f-t` y muestra `navegacion` */
+@media (min-width: 801px) {
+    .pos-f-t {
+        display: none;
+    }
+    .navegacion {
+        display: flex;
+    }
+}
+
+/* Para pantallas menores o iguales a 800px, oculta `navegacion` y muestra `pos-f-t` */
+@media (max-width: 800px) {
+    .header{
+        width: 100%;
+        padding: 0 20px 0 10px;
+        
+    }
+    .pos-f-t {
+       display: block;
+        
+    }
+    .logo{
+        display: none;
+    }
+    
+    .navegacion {
+        display: none;
+    }
+    .input-search{
+        max-width: 120px;
+    }
+}
+
+/* Estilos para el menú hamburguesa */
+.menu-toggle {
+    background: none;
+    border: none;
+    font-size: 25px;
+    cursor: pointer;
+    padding: 10px;
+}
+
+.menu-collapse {
+    display: none;
+    background: #333;
+    background-color: #000000d0;
+    color: white;
+    position: absolute;
+    top: 60px;
+    left: 0;
+    width: 100%;
+    /* height: auto; */
+    z-index: 80009999;
+    padding: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.menu-collapse.open {
+    display: block;
+}
+
+.menu-collapse ul {
+    list-style: none;
+    padding: 0;
+}
+
+.menu-collapse ul li {
+    padding: 10px;
+    border-bottom: 1px solid #444;
+}
+
+.menu-collapse ul li a {
+    color: white;
+    text-decoration: none;
+    display: block;
+}
+
+.menu-collapse ul li:hover {
+    background: #444;
+}
