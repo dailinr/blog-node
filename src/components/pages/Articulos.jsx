@@ -99,7 +99,7 @@ const Articulos = ({ enPoint, customPadding, customWidth, customJustify, maxArti
   const articulosLimitados = maxArticulos ? articulos.slice(0, maxArticulos) : articulos;
 
   return ( 
-    <div className="Articulos page " 
+    <div className="Articulos page" 
       style={{ padding: customPadding, width: customWidth, justifyContent: customJustify }}>
         
       <div className="content-articulos">

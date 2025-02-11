@@ -71,7 +71,7 @@ export const Notificaciones = ({ idUser } ) => {
     <div className='notis' onClick={handleClickInside}>
 
       {cargando ? (
-        <div className="page-cargando">
+        <div className="noti-cargando">
           <h1 className='cerrar-texto'>Cargando</h1>
           <span className="loader-out" />
         </div>

@@ -5,6 +5,12 @@
   text-align: center;
   align-content: center;
 }
+.noti-cargando{
+  background-color: #fdfdfd;
+  height: 380px;
+  text-align: center;
+  align-content: center;
+}
 .loader {
   position: relative;
   font-size: 28px;
