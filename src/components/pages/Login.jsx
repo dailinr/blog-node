@@ -17,6 +17,20 @@ const Login = () => {
     const {auth, loading, authUser } = useAuth();
 
     useEffect(() => {
+        
+        if (auth?.id && !loading) {  // Asegura que auth tiene datos antes de redirigir
+            
+            setTostada("¡Usuario logeado!");
+            setType("exito");
+            
+            // Esperar un breve tiempo antes de redirigir
+            setTimeout(() => {
+                navigate("/inicio");
+            }, 1000);
+        }
+    }, [auth, loading]);
+
+    useEffect(() => {
 
         if (tostada) {
           const timer = setTimeout(() => {
@@ -50,10 +64,6 @@ const Login = () => {
             const datos = await request.json();
             
             if(datos.status === "success"){
-
-                setTostada("¡Usuario logeado!");
-                setType("exito");
-
                 // Persistir los datos en el localstorage - guardar una sesion
                 localStorage.setItem("token", datos.token);
                 localStorage.setItem("user", JSON.stringify(datos.user)); 
@@ -64,7 +74,7 @@ const Login = () => {
                 // console.log("Estado actual de auth:", auth);
                 // console.log("Estado actual de loading:", loading);
 
-                if(auth && !loading) navigate("/inicio");
+                
             }
         }
         catch(error){
