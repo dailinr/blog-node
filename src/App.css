@@ -92,8 +92,41 @@
     bottom: -50px !important; /* Mitad de la altura del avatar */
   }
 
+  .editar-perfil, .seguir-perfil{
+    bottom: -50px !important;
+  }
+
   .data-user{
     margin-top: 60px !important;
+  }
+
+  .editar-icon{
+    width: 100px !important;
+    height: 100px !important; 
+  }
+
+  .text-icon p{
+    display: none !important; 
+  }
+
+  .editar-icon input{
+    font-size: 65% !important;
+    width: 100% !important;
+  }
+
+  .portada{
+    padding: 30px !important;
+  }
+
+  .titulo-portada{
+    font-size: 22px !important;
+  }
+
+  .next{
+    right: 10px !important;
+  }
+  .prev{
+    left: 10px !important; 
   }
 
 }

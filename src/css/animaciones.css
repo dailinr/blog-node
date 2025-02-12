@@ -7,7 +7,7 @@
 }
 .noti-cargando{
   background-color: #fdfdfd;
-  height: 380px;
+  height: auto;
   text-align: center;
   align-content: center;
 }

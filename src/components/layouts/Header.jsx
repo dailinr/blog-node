@@ -19,13 +19,18 @@ const Header = () => {
 
     const abrirModalNotificaciones = (e) => {
         e.stopPropagation(); // Evita el cierre al hacer clic dentro del modal
-        setModales({ notificaciones: !modales.notificaciones, menuUsuario: false });
+        setModales({ notificaciones: !modales.notificaciones, menuUsuario: false , menuToggle: false});
     };
 
     const abrirModalUsuario = (e) => {
         e.stopPropagation(); // Evita el cierre al hacer clic dentro del modal
-        setModales({ menuUsuario: !modales.menuUsuario, notificaciones: false });
+        setModales({ menuUsuario: !modales.menuUsuario, notificaciones: false, menuToggle: false});
     };
+
+    const abrirMenuToggle = (e) => {
+        e.stopPropagation();
+        setModales({ menuToggle: !modales.menuToggle, notificaciones: false, menuUsuario: false});
+    }
 
     const avatarDefault = `${import.meta.env.BASE_URL}default-avatar-profile-icon-of-social-media-user-vector.jpg`;
     let urlImagen =  auth.image === "default.png" ? 
@@ -80,10 +85,10 @@ const Header = () => {
 
         {/* Menú hamburguesa para pantallas pequeñas */}
         <div className="pos-f-t">
-            <button className="menu-toggle" onClick={() => setMenuOpen(!menuOpen)}>
+            <button className="menu-toggle" onClick={abrirMenuToggle}>
                 ☰
             </button>
-            <div className={`menu-collapse ${menuOpen ? "open" : ""}`}>
+            <div className={`menu-collapse ${modales.menuToggle ? "open" : ""}`}>
                 <ul>
                     <li><NavLink to="/inicio">Inicio</NavLink></li>
                     <li><NavLink to="/feed">Siguiendo</NavLink></li>
