@@ -18,7 +18,7 @@ const Inicio = () => {
   const [counters, setCounters] = useState({});
 
   useEffect(() => {
-    getCounters();
+    if(auth) getCounters();
   }, []);
 
   useEffect(() => {

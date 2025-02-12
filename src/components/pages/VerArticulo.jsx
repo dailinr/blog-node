@@ -20,8 +20,11 @@ export const VerArticulo = () => {
 
   // peticion ajax a la DB para listar todos los articulos
   useEffect(() => {
-    conseguirArticulo();
-    verificarFavorito();
+    
+    if(auth){
+      conseguirArticulo();
+      verificarFavorito();
+    }
   }, [id]);
   
 

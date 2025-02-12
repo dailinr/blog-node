@@ -32,7 +32,7 @@ const Portada = () => {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-        "Authorization": localStorage.getItem("token")
+        // "Authorization": localStorage.getItem("token")
       }
     });
 
@@ -93,7 +93,7 @@ const Portada = () => {
             }}>
 
               <Link to={"/articulo/"+portadas._id} 
-                onClick={portadas.user != auth._id ? () => incrementarVistas(portadas._id, setArticulos): null}>
+                onClick={auth && (portadas.user != auth._id ? () => incrementarVistas(portadas._id, setArticulos): null)}>
 
                 <div className="contenido-portada">
 

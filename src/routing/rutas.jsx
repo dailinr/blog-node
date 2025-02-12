@@ -18,6 +18,7 @@ import { ExplorarUsers } from "../components/pages/ExplorarUsers";
 import { Following } from "../components/pages/Following";
 import { Followers } from "../components/pages/Followers";
 import Favoritos from "../components/pages/Favoritos";
+import InicioNoAuth from "../components/pages/InicioNoAuth";
 
 export const Rutas = () => {
     const navigate = useNavigate();
@@ -27,10 +28,10 @@ export const Rutas = () => {
         const token = localStorage.getItem("token");
 
         // Permitir acceso sin autenticación solo a estas rutas
-        const rutasPublicas = ["/usuario/login", "/usuario/registrar-cuenta"];
+        const rutasPublicas = ["/usuario/login", "/usuario/registrar-cuenta", "/home"];
 
         if (!token && !rutasPublicas.includes(location.pathname)) {
-        navigate("/usuario/login");
+            navigate("/usuario/login");
         }
     }, [navigate, location]);
 
@@ -48,7 +49,8 @@ export const Rutas = () => {
 
             <Route path="/" element={<PrivateLayout />} >
                 
-                <Route index element={ <Inicio/> } />
+                <Route index element={ <InicioNoAuth/> } />
+                <Route path="home" element={ <InicioNoAuth/> } />
                 <Route path="inicio" element={ <Inicio /> } />
                 <Route path="feed" element={ <Articulos /> } />
                 <Route path="articulos" element={ <Articulos /> } />

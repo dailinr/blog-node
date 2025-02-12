@@ -12,7 +12,7 @@ export const Notificaciones = ({ idUser } ) => {
   const { refreshKey } = useGlobalContext();
   const [more, setMore] = useState(true);
   const [page, setPage] = useState(1);
-  
+
   useEffect(() => {
     conseguirNotis();
   }, []);

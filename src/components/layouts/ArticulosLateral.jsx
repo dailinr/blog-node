@@ -33,7 +33,7 @@ const ArticulosLateral = () => {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-        "Authorization": localStorage.getItem("token")
+        // "Authorization": localStorage.getItem("token")
       }
     });
 
@@ -84,7 +84,7 @@ const ArticulosLateral = () => {
               <div className='titulo-lat'>
                   
                 <Link to={"/articulo/"+articulo._id}
-                  onClick={articulo.user._id != auth._id ? () => incrementarVistas(articulo._id, setArticulos): null}>
+                  onClick={auth && (articulo.user._id != auth._id ? () => incrementarVistas(articulo._id, setArticulos): null)}>
                   <h5>{articulo.titulo} </h5>
                 </Link>
                   

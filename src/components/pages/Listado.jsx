@@ -70,20 +70,20 @@ export const Listado = ( {cards, setArticulos, setIdEliminar, confirmEliminar}) 
 
       <div className="contenido-card">
 
-        {auth._id === user._id &&
+        {auth && (auth._id === user._id &&
           <i className='bx bx-dots-vertical-rounded' onClick={() => mostrarMenu(cards._id)} >
             {menuArticulo === cards._id && 
               <MenuArticulo idArticulo={cards._id} eliminar={eliminar} clase={"menuArticulo"} />
             } 
           </i>
-        }
+        )}
 
         <div className="time-update"></div>
         
         <div className="titulo-card">
           
           <Link to={"/articulo/"+cards._id} className="text-lg font-bold text-gray-800"
-            onClick={cards.user._id != auth._id ? () => incrementarVistas(cards._id, setArticulos): null} >
+            onClick={auth && (cards.user._id != auth._id ? () => incrementarVistas(cards._id, setArticulos): null)} >
             {cards.titulo}
           </Link>
         </div>
@@ -112,7 +112,7 @@ export const Listado = ( {cards, setArticulos, setIdEliminar, confirmEliminar}) 
           </div>
 
           <Link to={"/articulo/"+cards._id} className='btn btn-ver-mas btn-save'
-            onClick={cards.user._id != auth._id ? () => incrementarVistas(cards._id, setArticulos): null} > 
+            onClick={auth && (cards.user._id != auth._id ? () => incrementarVistas(cards._id, setArticulos): null)} > 
             leer 
           </Link>
 

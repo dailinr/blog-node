@@ -14,7 +14,6 @@ const Header = () => {
     const [buscar, setBuscar] = useState("");
     const navegar = useNavigate();
     const { auth } = useAuth();
-    const [menuOpen, setMenuOpen] = useState(false); // Estado para manejar el collapse
     const { refreshPage, modales, setModales } = useGlobalContext();
 
     const abrirModalNotificaciones = (e) => {
@@ -33,8 +32,14 @@ const Header = () => {
     }
 
     const avatarDefault = `${import.meta.env.BASE_URL}default-avatar-profile-icon-of-social-media-user-vector.jpg`;
-    let urlImagen =  auth.image === "default.png" ? 
+    let urlImagen
+    if(!auth){
+        urlImagen = avatarDefault;
+    }
+    else{
+        urlImagen =  auth.image  === "default.png" ? 
         avatarDefault : BACKEND_URL + "usuario/avatar/" + auth.image;
+    }
 
     const hacerBusqueda = (e) => {
         e.preventDefault();
@@ -128,7 +133,11 @@ const Header = () => {
             
                 <i className='bx bxs-bell'></i>
                 
-                {modales.notificaciones && <Notificaciones idUser={auth._id} /> }
+                {auth ? (
+                   modales.notificaciones && <Notificaciones idUser={auth._id} /> 
+                ):
+                    navegar("/usuario/login")
+                }
             </div>
             
             <div className='icon-perfil' onClick={abrirModalUsuario}

@@ -3,6 +3,7 @@ import "../../css/crearArticulo.css";
 import { useState } from "react";
 import { useForm } from "../../helpers/hooks/useForm";
 // import { PeticionAjax } from "../../helpers/PeticionAjax";
+import { useNavigate } from "react-router-dom";
 import useAuth from "../../helpers/hooks/useAuth";
 import Toast from "../modals/Toast";
 
@@ -15,10 +16,17 @@ const CrearArticulo = ({ setBtnCrear }) => {
   const [type, setType] = useState(null);
   const {auth} = useAuth();
   const token = localStorage.getItem("token");
+  const navigate = useNavigate();
 
   const cerrarModal = () => {
     setBtnCrear(false);
   }
+  
+  useEffect(() => {
+    if(!auth){
+      navigate("/usuario/login");
+    }
+  }, []);
 
   useEffect(() => {
 
@@ -98,6 +106,8 @@ const CrearArticulo = ({ setBtnCrear }) => {
 
 
   return (
+    auth && (
+
     <div className="form-overlay" >
       
       {/* <pre>{JSON.stringify(formulario)}</pre> */}
@@ -152,6 +162,7 @@ const CrearArticulo = ({ setBtnCrear }) => {
       )}
 
     </div>
+    )
 
   );
 };

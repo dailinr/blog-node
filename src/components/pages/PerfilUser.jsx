@@ -30,9 +30,11 @@ export const PerfilUser = () => {
 
   useEffect(() => {
 
-    getDataUser();
-    getCounters();
-    getArticulos(page);
+    if(auth){
+      getDataUser();
+      getCounters();
+      getArticulos(page);
+    }
 
   }, [params.id, refreshKey, page]);
 
