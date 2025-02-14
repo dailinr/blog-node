@@ -31,7 +31,7 @@ export const Rutas = () => {
         const rutasPublicas = ["/usuario/login", "/usuario/registrar-cuenta", "/home"];
 
         if (!token && !rutasPublicas.includes(location.pathname)) {
-            navigate("/usuario/login");
+            navigate("/usuario/home");
         }
     }, [navigate, location]);
 
