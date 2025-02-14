@@ -30,8 +30,14 @@ export const Rutas = () => {
         // Permitir acceso sin autenticación solo a estas rutas
         const rutasPublicas = ["/usuario/login", "/usuario/registrar-cuenta", "/home"];
 
+        // Redirigir siempre a /home cuando la URL es "/"
+        if (location.pathname === "/") {
+            navigate("/home", { replace: true });
+            return;
+        }
+
         if (!token && !rutasPublicas.includes(location.pathname)) {
-            navigate("/home");
+            navigate("/usuario/login");
         }
     }, [navigate, location]);
 
