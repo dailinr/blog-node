@@ -31,7 +31,7 @@ export const ArticulosPerfil = ({articulo, setArticulos, user, seguirUsuario,
     const avatarDefault = `${import.meta.env.BASE_URL}default-avatar-profile-icon-of-social-media-user-vector.jpg`;
 
     let urlImagen = articulo.imagen === "default.png" ? 
-    articulo.imagen : BACKEND_URL + "ver-imagen/" + articulo.imagen;
+    articulo.imagen : BACKEND_URL + "ver-imagen/" + articulo._id;
 
     let urlIcon = user.image === "default.png" ? 
     avatarDefault : BACKEND_URL + "usuario/avatar/" + user.image;

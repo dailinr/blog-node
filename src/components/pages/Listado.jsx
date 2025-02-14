@@ -43,7 +43,7 @@ export const Listado = ( {cards, setArticulos, setIdEliminar, confirmEliminar}) 
 
   // Condicion para saber el articulo se le ha asignado una imagen
   let urlImagen = cards.imagen !== "default.png"  ?
-  BACKEND_URL + "ver-imagen/" + cards.imagen : cards.imagen;
+  BACKEND_URL + "ver-imagen/" + cards._id : cards.imagen;
 
   const avatarDefault = `${import.meta.env.BASE_URL}default-avatar-profile-icon-of-social-media-user-vector.jpg`;
   

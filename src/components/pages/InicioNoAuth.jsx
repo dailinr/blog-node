@@ -10,20 +10,20 @@ import { useNavigate, Link, useLocation } from 'react-router-dom';
 const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 
 const InicioNoAuth = () => {
-    const [btnCrear, setBtnCrear] = useState(false);
-    const navigate = useNavigate();
-    const location = useLocation();
+  const [btnCrear, setBtnCrear] = useState(false);
+  const navigate = useNavigate();
+  const location = useLocation();
 
-    useEffect(() => {
-        const token = localStorage.getItem("token");
+  useEffect(() => {
+    const token = localStorage.getItem("token");
 
-        // Permitir acceso sin autenticación solo a estas rutas
-        const rutasPublicas = ["/usuario/login", "/usuario/registrar-cuenta", "/home"];
+    // Permitir acceso sin autenticación solo a estas rutas
+    const rutasPublicas = ["/usuario/login", "/usuario/registrar-cuenta", "/home"];
 
-        if (!token && !rutasPublicas.includes(location.pathname)) {
-            navigate("/usuario/login");
-        }
-    }, [navigate, location]);
+    if (!token && !rutasPublicas.includes(location.pathname)) {
+      navigate("/usuario/login");
+    }
+  }, [navigate, location]);
 
 
   return (

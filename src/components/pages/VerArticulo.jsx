@@ -127,7 +127,7 @@ export const VerArticulo = () => {
 
   // Conseguir url de la imagen del articulo
   let urlImagen = articulo.imagen !== "default.png" ?
-    BACKEND_URL + "ver-imagen/" + articulo.imagen : articulo.imagen;
+    BACKEND_URL + "ver-imagen/" + articulo._id : articulo.imagen;
 
 
   return (

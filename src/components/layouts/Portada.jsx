@@ -80,7 +80,7 @@ const Portada = () => {
         articulos.map((portadas) => {
 
           let urlImagen = portadas.imagen !== "default.png"  ?
-          BACKEND_URL + "ver-imagen/" + portadas.imagen : portadas.imagen;
+          BACKEND_URL + "ver-imagen/" + portadas._id : portadas.imagen;
 
           let user = portadas.user;
 
