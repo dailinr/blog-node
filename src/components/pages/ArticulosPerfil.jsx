@@ -34,7 +34,7 @@ export const ArticulosPerfil = ({articulo, setArticulos, user, seguirUsuario,
     articulo.imagen : BACKEND_URL + "ver-imagen/" + articulo._id;
 
     let urlIcon = user.image === "default.png" ? 
-    avatarDefault : BACKEND_URL + "usuario/avatar/" + user.image;
+    avatarDefault : BACKEND_URL + "usuario/avatar/" + user._id;
     
   return (
 

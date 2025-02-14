@@ -101,7 +101,7 @@ export const Configuracion = () => {
   const avatarDefault = `${import.meta.env.BASE_URL}default-avatar-profile-icon-of-social-media-user-vector.jpg`;
 
   let urlImagen = auth.image === "default.png" ? 
-    avatarDefault : BACKEND_URL + "usuario/avatar/" + auth.image;
+    avatarDefault : BACKEND_URL + "usuario/avatar/" + auth._id;
 
   return (
     <div className='page-confi'>

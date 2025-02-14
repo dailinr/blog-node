@@ -48,7 +48,7 @@ export const Listado = ( {cards, setArticulos, setIdEliminar, confirmEliminar}) 
   const avatarDefault = `${import.meta.env.BASE_URL}default-avatar-profile-icon-of-social-media-user-vector.jpg`;
   
   let urlIcon = user.image === "default.png" ? 
-  avatarDefault : BACKEND_URL + "usuario/avatar/" + user.image;
+  avatarDefault : BACKEND_URL + "usuario/avatar/" + user._id;
   
   
   return (

@@ -38,7 +38,7 @@ const Header = () => {
     }
     else{
         urlImagen =  auth.image  === "default.png" ? 
-        avatarDefault : BACKEND_URL + "usuario/avatar/" + auth.image;
+        avatarDefault : BACKEND_URL + "usuario/avatar/" + auth._id;
     }
 
     const hacerBusqueda = (e) => {

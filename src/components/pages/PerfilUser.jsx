@@ -171,7 +171,7 @@ export const PerfilUser = () => {
   const headerDefault = `${import.meta.env.BASE_URL}header.jpg`;
 
   let urlImagen = user.image === "default.png" ? 
-    avatarDefault : BACKEND_URL + "usuario/avatar/" + user.image;
+    avatarDefault : BACKEND_URL + "usuario/avatar/" + user._id;
 
     if (loading) {
       return (

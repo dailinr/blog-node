@@ -85,7 +85,7 @@ const Portada = () => {
           let user = portadas.user;
 
           let urlIcon = user.image === "default.png" ? 
-          avatarDefault : BACKEND_URL + "usuario/avatar/" + user.image;
+          avatarDefault : BACKEND_URL + "usuario/avatar/" + user._id;
           
           return(
             <div key={portadas._id} className="portada" style={{

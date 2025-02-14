@@ -76,7 +76,7 @@ export const UserList = ({users, conseguirUsers, following,
                 <div key={user._id} className='row-user'>
 
                     <div className='pfp-user'>
-                        <img src={user.image === "default.png" ? avatarDefault : BACKEND_URL + "usuario/avatar/" + user.image}  alt="foto de perfil" />
+                        <img src={user.image === "default.png" ? avatarDefault : BACKEND_URL + "usuario/avatar/" + user._id}  alt="foto de perfil" />
                     </div>
 
                     <div className="info-user">

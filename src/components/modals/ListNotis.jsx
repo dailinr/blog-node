@@ -10,7 +10,7 @@ export const ListNotis = ({ noti }) => {
     
     const avatarDefault = `${import.meta.env.BASE_URL}default-avatar-profile-icon-of-social-media-user-vector.jpg`;
     let urlIcon = noti.seguidor.image === "default.png" ? 
-        avatarDefault : BACKEND_URL + "usuario/avatar/" + noti.seguidor.image;
+        avatarDefault : BACKEND_URL + "usuario/avatar/" + noti.seguidor._id;
 
   return (
     
