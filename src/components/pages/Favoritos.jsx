@@ -57,7 +57,7 @@ const Favoritos = () => {
                 <div key={favorito._id} className='row-favs'>
 
                     <div className='img-favs' >
-                        <img src={favorito.imagen !== "default.png" ?  BACKEND_URL + "ver-imagen/" + favorito.imagen : null}  alt="foto de perfil" />
+                        <img src={favorito.imagen !== "default.png" ?  BACKEND_URL + "ver-imagen/" + favorito._id : null}  alt="foto articulo" />
                     </div>
 
                     <div className='info-favs' >
